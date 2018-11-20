@@ -9,6 +9,7 @@ import { PaperComponent } from './paper/paper.component';
 import { PaperListComponent } from './paper-list/paper-list.component';
 import { StudentNavComponent } from './student-nav/student-nav.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
+import { LoginComponent } from './login/login.component';
 
 import { DataserviceService } from "./dataservice.service";
 
@@ -18,7 +19,8 @@ import { DataserviceService } from "./dataservice.service";
     DashboardComponent,
     PaperComponent,
     PaperListComponent,
-    StudentNavComponent
+    StudentNavComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

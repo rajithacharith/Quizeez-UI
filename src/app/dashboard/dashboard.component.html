@@ -1,6 +1,8 @@
 <app-student-nav></app-student-nav>
 
 
+
+
 <div class="container main">
   <div class="row">
     <ol class="breadcrumb">
@@ -23,7 +25,7 @@
         <div class="panel panel-teal panel-widget border-right">
           <div class="row no-padding"><em class=""></em>
             <div class="large">120</div>
-            <div class="text-muted">New Papers</div>
+            <div class="text-muted">New Papers {{Papers?.subject}}</div> <!-- if an error occurs remove the variabl-->
           </div>
         </div>
       </div>
@@ -59,26 +61,30 @@
     <div class="col-md-12 container">
         <div class="panel panel-widget border-right" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;">
           <div class="container">
-              <div class="row" style="margin-left: 10%">
-                <div class="col-sm-2 offset-sm-1">
+              <div class="row" style='margin-left:10%'>
+                  <div class="col-sm-3">
+                      <div class="form-group">
+                          <label>Stream</label>
+                          <select class="form-control" *ngIf="paperSet">
+                            <option *ngFor="let paper of paperSet" >{{paper.stream}}</option>
+                          </select>
+                        </div>
+                  </div>
+                <div class="col-sm-3">
+
                     <div class="form-group">
                         <label>Subjects</label>
-                        <select class="form-control">
-                          <option>Option 1</option>
-                          <option>Option 2</option>
-                          <option>Option 3</option>
-                          <option>Option 4</option>
+                        <select class="form-control" *ngIf="paperSet">
+                          <option *ngFor = "let paper of filterByStream()">{{paper.subject}}</option>
+                          
                         </select>
                       </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label>Year</label>
-                        <select class="form-control">
-                          <option>Option 1</option>
-                          <option>Option 2</option>
-                          <option>Option 3</option>
-                          <option>Option 4</option>
+                        <select class="form-control" *ngIf="paperSet">
+                          <option *ngFor="let paper of paperSet">{{paper.year}}</option>
                         </select>
                       </div>
                 </div>
@@ -95,12 +101,10 @@
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
-                        <label>Lession</label>
-                        <select class="form-control">
-                          <option>Option 1</option>
-                          <option>Option 2</option>
-                          <option>Option 3</option>
-                          <option>Option 4</option>
+                        <label>Lesson</label>
+                        <select class="form-control" *ngIf="paperSet">
+                          <option *ngFor="let paper of paperSet">{{paperSet.lesson}}</option>
+            
                         </select>
                       </div>
                 </div>
@@ -150,27 +154,27 @@
         </div>
       </div>
     </div>
+   
+    
 
     <div class="col-md-6">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-              Recomended Papers
-            </div>
-            <div class="panel-body" style="padding:4%; margin:5px">
-                <div class="form-group">
-										<label>Multiple Selects</label>
-										<select multiple class="form-control">
-											<option>Option 1</option>
-											<option>Option 2</option>
-											<option>Option 3</option>
-                      <option>Option 4</option>
-                      <option>Option 4</option>
-										</select>
-									</div>
-									<button type="submit" class="btn btn-primary">Submit Button</button>
-            </div>
-        </div>
-    </div>
+      <div class="panel panel-default">
+          <div class="panel-heading">
+            New Papers
+          </div>
+          <div class="panel-body" style="padding:4%; margin:5px">
+              <div class="form-group">
+                  <label>Multiple Selects</label>
+                  <select multiple class="form-control" *ngIf="paperSet">
+                      <option *ngFor = "let paper of paperSet">
+                        {{paper.subject}} {{paper.timeDuration}} {{paper.year}}
+                      </option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit Button</button>
+          </div>
+      </div>
+  </div>
   </div><!--/.row-->
 
 

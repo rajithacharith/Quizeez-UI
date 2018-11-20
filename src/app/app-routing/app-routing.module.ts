@@ -4,7 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import {DashboardComponent} from '../dashboard/dashboard.component';
 import {PaperComponent} from '../paper/paper.component';
 import {PaperListComponent} from '../paper-list/paper-list.component';
-import { from } from 'rxjs';
+import {LoginComponent} from '../login/login.component';
+import {  } from 'rxjs';
 
 const appRoutes: Routes = [
   {
@@ -22,6 +23,10 @@ const appRoutes: Routes = [
   {
     path: 'paper-list',
     component: PaperListComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   }
 ];
 

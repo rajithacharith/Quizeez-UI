@@ -7,6 +7,7 @@ import { PaperComponent } from './paper/paper.component';
 import { PaperListComponent } from './paper-list/paper-list.component';
 import { StudentNavComponent } from './student-nav/student-nav.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import {AppRoutingModule} from './app-routing/app-routing.module';
     DashboardComponent,
     PaperComponent,
     PaperListComponent,
-    StudentNavComponent
+    StudentNavComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

@@ -10,9 +10,10 @@ import { DataserviceService } from "../dataservice.service";
 export class DashboardComponent implements OnInit {
 
   public paperSet : any;
-
+  public selectedStream : string ;
   constructor( private dataService : DataserviceService) { 
 
+    
     this.dataService.getPapers().subscribe((paper) => {
       console.log(paper);
       this.paperSet = paper;
@@ -23,10 +24,15 @@ export class DashboardComponent implements OnInit {
     });
 
   }
+
+    filterByStream(){
+      return this.paperSet.filter((item) => {
+        return item.stream=="A/L";
+      });
+    }
   
   ngOnInit() {
 
-    
   }
 
 }

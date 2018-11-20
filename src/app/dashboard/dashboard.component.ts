@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
     this.dataService.getQuestions().subscribe((question) => {
       console.log(question);
     });
+    
 
   }
 

@@ -1,6 +1,9 @@
 <app-student-nav></app-student-nav>
 
 
+<div *ngFor="let paper of paperSet">
+  <p>{{paper.subject}}</p>
+</div>
 <div class="container main">
   <div class="row">
     <ol class="breadcrumb">

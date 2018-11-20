@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { PaperComponent } from './paper/paper.component';
 import { PaperListComponent } from './paper-list/paper-list.component';
 import { StudentNavComponent } from './student-nav/student-nav.component';
+import {AppRoutingModule} from './app-routing/app-routing.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { StudentNavComponent } from './student-nav/student-nav.component';
     StudentNavComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

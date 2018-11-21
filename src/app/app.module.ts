@@ -13,6 +13,7 @@ import {AppRoutingModule} from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component';
 
 import { DataserviceService } from "./dataservice.service";
+import { SharedserviceService } from './services/sharedservice.service';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,7 @@ import { DataserviceService } from "./dataservice.service";
     AppRoutingModule
 
   ],
-  providers: [DataserviceService],
+  providers: [DataserviceService, SharedserviceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

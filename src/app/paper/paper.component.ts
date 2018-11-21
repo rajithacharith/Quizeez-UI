@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataserviceService } from "../dataservice.service";
+import { DataserviceService } from '../dataservice.service';
 import { SharedserviceService } from '../services/sharedservice.service';
 @Component({
   selector: 'app-paper',
@@ -7,7 +7,7 @@ import { SharedserviceService } from '../services/sharedservice.service';
   styleUrls: ['./paper.component.css']
 })
 export class PaperComponent implements OnInit {
-  message : string;
+
   public paperSet :any;
   public stream : string ;
   public year : number ;
@@ -22,8 +22,13 @@ export class PaperComponent implements OnInit {
   selectedValue :string ;
 
   studentAnswers =  [] ;
+<<<<<<< HEAD
   correctAnswerSet = [];
 
+=======
+
+  message : any;
+>>>>>>> 75e8d4fe25548a375cb9045ef0b85cf68efc0c12
   constructor( private dataService : DataserviceService, private shared : SharedserviceService ) {
 
     this.stream = "A/L";
@@ -32,14 +37,6 @@ export class PaperComponent implements OnInit {
     this.paperID = 1;
     this.questionID = 101;
 
-    this.dataService.filterPaperByAll(this.stream,this.subject,this.year).subscribe((paper) => {
-      this.paperSet = paper;
-      console.log(paper);
-    });
-
-    this.dataService.getAnswers().subscribe((answers) => {
-      this.answers=answers;
-    });
 
     this.dataService.getQuestionFilterByPaperID(this.paperID).subscribe((item)=>{
       this.questionSet = item;
@@ -51,6 +48,7 @@ export class PaperComponent implements OnInit {
       console.log("answerset");
       console.log(this.answerSet);
     });
+
 
   }
 
@@ -71,6 +69,7 @@ export class PaperComponent implements OnInit {
     
     this.studentAnswers.push(answerObject);
     console.log(this.studentAnswers);
+
 
   }
   checkpaper(arr_correctans:string[]){
@@ -97,9 +96,28 @@ export class PaperComponent implements OnInit {
 
   
   ngOnInit() {
-    this.stream = this.shared.getStream();
-    this.year = this.shared.getYear();
-    this.subject = this.shared.getSubject();
+    this.shared.currentMessage.subscribe(message => this.message = message);
+    console.log(this.message[0].stream);
+    this.stream = this.message[0].stream;
+    this.year = this.message[0].year;
+    this.subject = this.message[0].subject;
+    this.paperID = this.message[0].paperID;
+
+    console.log(this.stream , this.year, this.subject, this.paperID);
+
+    this.dataService.filterPaperByAll(this.stream,this.subject,this.year).subscribe((paper) => {
+      this.paperSet = paper;
+      //console.log(paper);
+    });
+
+    this.dataService.getAnswers().subscribe((answers) => {
+      this.answers=answers;
+    });
+
+    this.dataService.getQuestionFilterByPaperID(this.paperID).subscribe((item)=>{
+      this.questionSet = item;
+    });
+
   }
 
 }

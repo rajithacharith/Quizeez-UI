@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
   selectedYear : number ;
   selectedLesson : string ;
   
-  constructor( private dataService : DataserviceService) { 
+  constructor( private dataService : DataserviceService, private shared: SharedserviceService) { 
 
     
 
@@ -50,7 +50,7 @@ export class DashboardComponent implements OnInit {
 
 
 
-  ngOnInit() {
+ 
 
 
     selectedSubjectEventHandler(event : any,selectedStream : string){

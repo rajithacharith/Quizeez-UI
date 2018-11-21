@@ -33,16 +33,6 @@ export class PaperComponent implements OnInit {
     this.questionID = 101;
 
 
-    this.dataService.getQuestionFilterByPaperID(this.paperID).subscribe((item)=>{
-      this.questionSet = item;
-      console.log("the questions are");
-      console.log(this.questionSet);
-    });
-    this.dataService.getQuestionFilterByQuestionID(this.questionID).subscribe((ans)=>{
-      this.answerSet = ans;
-      console.log("answerset");
-      console.log(this.answerSet);
-    });
 
 
   }

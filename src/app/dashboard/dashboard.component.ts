@@ -10,9 +10,14 @@ import { DataserviceService } from "../dataservice.service";
 export class DashboardComponent implements OnInit {
 
   public paperSet : any;
-  public selectedStream : string ;
+  selectedStream : string ;
+  selectedSubject : string ;
+  selectedYear : number ;
+  selectedLesson : string ;
+  
   constructor( private dataService : DataserviceService) { 
 
+    
     
     this.dataService.getPapers().subscribe((paper) => {
       console.log(paper);
@@ -32,8 +37,27 @@ export class DashboardComponent implements OnInit {
       });
     }
   
-  ngOnInit() {
+    selectedStreamEventHandler(event : any){
+      this.selectedStream=event.target.value;
+      console.log(this.selectedStream);
+    }
 
+    selectedSubjectEventHandler(event : any){
+      this.selectedSubject=event.target.value;
+      console.log(this.selectedSubject);
+    }
+
+    selectedYearEventHandler(event : any){
+      this.selectedYear=event.target.value;
+      console.log(this.selectedYear);
+    }
+    selectedLessonEventHandler(event : any){
+      this.selectedLesson=event.target.value;
+      console.log(this.selectedLesson);
+    }
+
+  ngOnInit() {
+    console.log(this.selectedStream);
   }
 
 }

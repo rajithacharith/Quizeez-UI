@@ -65,8 +65,8 @@
                   <div class="col-sm-3">
                       <div class="form-group">
                           <label>Stream</label>
-                          <select class="form-control" *ngIf="paperSet">
-                            <option *ngFor="let paper of paperSet" >{{paper.stream}}</option>
+                          <select class="form-control" *ngIf="paperSet" [(ngModel)]="selectedStream" (change)="selectedStreamEventHandler($event)">
+                            <option *ngFor="let paper of paperSet" [value]="paper.stream" >{{paper.stream}}</option>
                           </select>
                         </div>
                   </div>
@@ -74,25 +74,24 @@
 
                     <div class="form-group">
                         <label>Subjects</label>
-                        <select class="form-control" *ngIf="paperSet">
-                          <option *ngFor = "let paper of filterByStream()">{{paper.subject}}</option>
-                          
+                        <select class="form-control" *ngIf="paperSet" [(ngModel)]="selectedSubject" (change)="selectedSubjectEventHandler($event)">
+                          <option *ngFor = "let paper of filterByStream()" [value]="paper.subject">{{paper.subject}}</option> 
                         </select>
                       </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label>Year</label>
-                        <select class="form-control" *ngIf="paperSet">
-                          <option *ngFor="let paper of paperSet">{{paper.year}}</option>
+                        <select class="form-control" *ngIf="paperSet" [(ngModel)]="selectedSubject" (change)="selectedYearEventHandler($event)">
+                          <option *ngFor="let paper of paperSet" [value]="paper.year">{{paper.year}}</option>
                         </select>
                       </div>
                 </div>
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label>Lesson</label>
-                        <select class="form-control" *ngIf="paperSet">
-                          <option *ngFor="let paper of paperSet">{{paperSet.lesson}}</option>
+                        <select class="form-control" *ngIf="paperSet" [(ngModel)]="selectedSubject" (change)="selectedLessonEventHandler($event)">
+                          <option *ngFor="let paper of paperSet" [value]="paper.lesson">{{paperSet.lesson}}</option>
             
                         </select>
                       </div>

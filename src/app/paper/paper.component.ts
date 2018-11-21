@@ -14,10 +14,11 @@ export class PaperComponent implements OnInit {
   public subject : string ;
 
   public answers : any;
+  public questionID : any;
 
   public paperID: number;
   public questionSet: any;
-
+  public answerSet : any;
   selectedValue :string ;
 
   studentAnswers =  [] ;
@@ -29,7 +30,19 @@ export class PaperComponent implements OnInit {
     this.year=2000;
     this.subject="Physics";
     this.paperID = 1;
+    this.questionID = 101;
 
+
+    this.dataService.getQuestionFilterByPaperID(this.paperID).subscribe((item)=>{
+      this.questionSet = item;
+      console.log("the questions are");
+      console.log(this.questionSet);
+    });
+    this.dataService.getQuestionFilterByQuestionID(this.questionID).subscribe((ans)=>{
+      this.answerSet = ans;
+      console.log("answerset");
+      console.log(this.answerSet);
+    });
 
 
   }
@@ -48,14 +61,14 @@ export class PaperComponent implements OnInit {
 
 
   }
-  checkpaper(arr_stuans:string[],arr_correctans:string[]){
+  checkpaper(arr_correctans:string[]){
       
       //var arr_stuans:string[] = new Array("1","2","3","4");
       //var arr_correctans:string[] = new Array("1","3","4","4");
       var markedans = [];
       
-      for(var i = 0;i<arr_stuans.length;i++) { 
-        if(arr_stuans[i]==arr_correctans[i]){
+      for(var i = 0;i<this.studentAnswers.length;i++) { 
+        if(this.studentAnswers[i]==arr_correctans[i]){
             markedans.push(true);
         }
         else{

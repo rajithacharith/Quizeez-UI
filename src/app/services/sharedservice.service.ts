@@ -1,17 +1,27 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedserviceService {
-  private messageSource = new BehaviorSubject('default message');
-  currentMessage = this.messageSource.asObservable();
+  public stream: string;
+  public subject: string;
+  public year: number;
+  public lesson: string;
+
+
 
   constructor() { }
 
-  changeMessage(message:string){
-    this.messageSource.next(message);
-  }
+  setStream(stream:string){ this.stream = stream; }
+  setSubject(subject:string){ this.subject = subject; }
+  setYear(year:number){ this.year = year; }
+  setLesson(lesson:string){ this.lesson = lesson; }
+
+  getStream(){ return this.stream;}
+  getSubject(){ return this.subject;}
+  getYear(){ return this.year;}
+  getLesson(){ return this.lesson;}
 }

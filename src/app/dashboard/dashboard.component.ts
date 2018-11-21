@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DataserviceService } from "../dataservice.service";
+import { DataserviceService } from '../dataservice.service';
 import { SharedserviceService } from '../services/sharedservice.service';
 @Component({
   selector: 'app-dashboard',
@@ -36,8 +36,17 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
 
   }
-  newMessage() {
-    this.shared.changeMessage("Data given");
+  setStream(message:string){
+    this.shared.setStream(message);
+  }
+  setYear(message:number){
+    this.shared.setYear(message);
+  }
+  setSubject(message:string){
+    this.shared.setSubject(message);
+  }
+  setLession(message:string){
+    this.shared.setLesson(message);
   }
 
 }

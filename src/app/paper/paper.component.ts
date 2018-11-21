@@ -59,7 +59,9 @@ export class PaperComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.shared.currentMessage.subscribe(message => this.message = message);
+    this.stream = this.shared.getStream();
+    this.year = this.shared.getYear();
+    this.subject = this.shared.getSubject();
   }
 
 }

@@ -22,7 +22,7 @@ export class PaperComponent implements OnInit {
   selectedValue :string ;
 
   studentAnswers =  [] ;
-
+  correctAnswerSet = [];
 
   constructor( private dataService : DataserviceService, private shared : SharedserviceService ) {
 
@@ -54,7 +54,13 @@ export class PaperComponent implements OnInit {
 
   }
 
+  createCorrectAnsArr(){
+    for(var i = 0;i<this.answerSet.length;i++){
+      this.correctAnswerSet.push(this.answerSet[4]);
+    }
+    
 
+  }
   radioChangeHandle(event : any,questionIndex:number,answerIndex : number){
 
     const answerObject = {
@@ -88,6 +94,7 @@ export class PaperComponent implements OnInit {
       var mark = markedans
       return markedans;
   }
+
   
   ngOnInit() {
     this.stream = this.shared.getStream();

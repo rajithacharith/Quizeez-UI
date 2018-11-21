@@ -19,7 +19,7 @@
     </div>
   </div><!--/.row-->
 
-  <div class="panel panel-container">
+  <div class="shadow panel panel-container" style="border-style: solid; border-width: 3px; border-color: aqua;">
     <div class="row">
       <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
         <div class="panel panel-teal panel-widget border-right">
@@ -57,16 +57,20 @@
   </div>
 
   <!-- Form for Subject Selection -->
-  <div class="row">
-    <div class="col-md-12 container">
-        <div class="panel panel-widget border-right" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;">
+  <div class="row" >
+    <div class="col-md-12 container" style="">
+        <div class="panel panel-widget border-right" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;border-style: solid; border-width: 3px; border-color: aqua;">
           <div class="container">
-              <div class="row" style='margin-left:10%'>
+              <div class="row" style='margin-left:2%'>
                   <div class="col-sm-3">
                       <div class="form-group">
                           <label>Stream</label>
                           <select class="form-control" *ngIf="paperSet" [(ngModel)]="selectedStream" (change)="selectedStreamEventHandler($event)">
-                            <option *ngFor="let paper of paperSet" [value]="paper.stream" >{{paper.stream}}</option>
+                            <!--<option *ngFor="let paper of paperSet" [value]="paper.stream" >{{paper.stream}}</option> 
+                              hardcoded O/L and A/L instead of this
+                            -->
+                            <option value="O/L" (change)="selectedStreamEventHandler($event)">O/L</option>
+                            <option value="A/L" (change)="selectedStreamEventHandler($event)">A/L</option>
                           </select>
                         </div>
                   </div>
@@ -108,7 +112,7 @@
   <!-- Form for subject Selection -->
   <div class="row">
     <div class="col-md-6">
-      <div class="panel panel-default">
+      <div class="panel panel-default" style="border-style: solid; border-width: 3px; border-color: aqua;">
         <div class="panel-heading">
           Site Traffic Overview
           <ul class="pull-right panel-settings panel-button-tab-right">
@@ -146,7 +150,7 @@
 
 
     <div class="col-md-6">
-      <div class="panel panel-default">
+      <div class="panel panel-default" style="border-style: solid; border-width: 3px; border-color: skyblue;">
           <div class="panel-heading">
             New Papers
           </div>

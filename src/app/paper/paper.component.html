@@ -1,7 +1,6 @@
 <app-student-nav></app-student-nav>
 
 
-
 <div class="container main">
   <div class="row">
     <ol class="breadcrumb">
@@ -43,12 +42,13 @@
 <div class = "col-md-3">
   <div class="radio" *ngFor="let answer of singleQuestion.answers; let i=index">
       <label>
-        <input type="radio" name="optionsRadios" id="optionsRadios2" value="{{answer}}" (change)="radioChangeHandle($event,q,i)">{{answer}}
+        <input type="radio" name="optionsRadio{{singleQuestion.questionID}}"  value="{{answer}}" (change)="radioChangeHandle($event,q,i)">{{answer}}
       </label>
     </div>
   </div>
 
 
 </div>
+<button type="button" class="btn btn-md btn-primary" (click)="checkpaper()">Submit</button>
 
 

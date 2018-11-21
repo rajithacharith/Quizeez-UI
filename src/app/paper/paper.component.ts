@@ -60,7 +60,28 @@ export class PaperComponent implements OnInit {
     console.log(this.studentAnswers);
 
   }
-
+  checkpaper(arr_stuans:string[],arr_correctans:string[]){
+      
+      //var arr_stuans:string[] = new Array("1","2","3","4");
+      //var arr_correctans:string[] = new Array("1","3","4","4");
+      var markedans = [];
+      
+      for(var i = 0;i<arr_stuans.length;i++) { 
+        if(arr_stuans[i]==arr_correctans[i]){
+            markedans.push(true);
+        }
+        else{
+          markedans.push(false);
+        }
+          
+        
+          
+      }  
+      console.log(markedans);
+      var mark = markedans
+      return markedans;
+  }
+  
   ngOnInit() {
     this.stream = this.shared.getStream();
     this.year = this.shared.getYear();

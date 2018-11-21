@@ -94,7 +94,14 @@ export class DataserviceService {
 
     return this.http.post(`${this.url}/answers`,answ);
   }
-
+  updateAnswers(studentID : number,paperID : number,questionResult : Object){
+    const answ = {
+      studentID : studentID,
+      paperID : paperID,
+      questionResult:questionResult
+    }
+    return this.http.post(`${this.url}/answers/update?filter[where][studentID]=${studentID}&filter[where][paperID]=${paperID}`,answ);
+  }
 
 
 

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { DataserviceService } from "../dataservice.service";
-
+import { SharedserviceService } from '../services/sharedservice.service';
 @Component({
   selector: 'app-paper',
   templateUrl: './paper.component.html',
   styleUrls: ['./paper.component.css']
 })
 export class PaperComponent implements OnInit {
-
+  message : string;
   public paperSet :any;
   public stream : string ;
   public year : number ;
@@ -19,12 +19,11 @@ export class PaperComponent implements OnInit {
   public questionSet: any;
 
   selectedValue :string ;
+
   studentAnswers =  [] ;
 
-   
-   
 
-  constructor( private dataService : DataserviceService) { 
+  constructor( private dataService : DataserviceService, private shared : SharedserviceService ) {
 
     this.stream = "A/L";
     this.year=2000;
@@ -48,9 +47,9 @@ export class PaperComponent implements OnInit {
 
   }
 
-  
+
   radioChangeHandle(event : any,questionIndex:number,answerIndex : number){
-    
+
     const answerObject = {
       questionNumber : questionIndex,
       answerNumber : answerIndex,
@@ -63,6 +62,9 @@ export class PaperComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.stream = this.shared.getStream();
+    this.year = this.shared.getYear();
+    this.subject = this.shared.getSubject();
   }
 
 }

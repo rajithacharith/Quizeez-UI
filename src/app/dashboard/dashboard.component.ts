@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataserviceService } from "../dataservice.service";
-
+import { DataserviceService } from '../dataservice.service';
+import { SharedserviceService } from '../services/sharedservice.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -8,6 +8,7 @@ import { DataserviceService } from "../dataservice.service";
 })
 
 export class DashboardComponent implements OnInit {
+
 
   paperSet : any;
   subjectSet: any;
@@ -22,7 +23,7 @@ export class DashboardComponent implements OnInit {
   constructor( private dataService : DataserviceService) { 
 
     
-    
+
     this.dataService.getPapers().subscribe((paper) => {
       console.log(paper);
       this.paperSet = paper;
@@ -31,7 +32,9 @@ export class DashboardComponent implements OnInit {
     this.dataService.getQuestions().subscribe((question) => {
       console.log(question);
     });
+
     */
+
 
   }
 
@@ -44,6 +47,11 @@ export class DashboardComponent implements OnInit {
       });
 
     }
+
+
+
+  ngOnInit() {
+
 
     selectedSubjectEventHandler(event : any,selectedStream : string){
       this.selectedSubject=event.target.value;
@@ -72,6 +80,18 @@ export class DashboardComponent implements OnInit {
     */
 
   ngOnInit() {
+  }
+  setStream(message:string){
+    this.shared.setStream(message);
+  }
+  setYear(message:number){
+    this.shared.setYear(message);
+  }
+  setSubject(message:string){
+    this.shared.setSubject(message);
+  }
+  setLession(message:string){
+    this.shared.setLesson(message);
   }
 
 }

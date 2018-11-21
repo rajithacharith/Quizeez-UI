@@ -18,6 +18,9 @@ export class PaperComponent implements OnInit {
   public paperID: number;
   public questionSet: any;
 
+  selectedValue :string ;
+  studentAnswers : object [] = [] ; 
+
   constructor( private dataService : DataserviceService) { 
 
     this.stream = "A/L";
@@ -43,6 +46,17 @@ export class PaperComponent implements OnInit {
   }
 
   
+  radioChangeHandle(event : any,questionIndex:number,answerIndex : number){
+    
+    const answerObject = {
+      questionNumber : questionIndex,
+      answerNumber : answerIndex,
+      answerValue : event.target.value
+    }
+    this.studentAnswers.push(answerObject);
+    console.log(this.studentAnswers);
+
+  }
 
   ngOnInit() {
   }

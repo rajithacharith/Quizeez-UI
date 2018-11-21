@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-
+import { BehaviorSubject } from 'rxjs';
 
 
 @Injectable({
@@ -12,12 +12,20 @@ export class SharedserviceService {
   public lesson: string;
 
 
+  private messageSource = new BehaviorSubject('default message');
+  currentMessage = this.messageSource.asObservable();
+
 
   constructor() { }
 
-  setStream(stream:string){ this.stream = stream; }
-  setSubject(subject:string){ this.subject = subject; }
-  setYear(year:number){ this.year = year; }
+  changeMessage(message: any) {
+    this.messageSource.next(message)
+    console.log('added message');
+  }
+
+  setStream(stream: string){ this.stream = stream; console.log('stream set'); }
+  setSubject(subject: string){ this.subject = subject; console.log('stream set'); }
+  setYear(year:number){ this.year = year; console.log('stream set'); }
   setLesson(lesson:string){ this.lesson = lesson; }
 
   getStream(){ return this.stream;}

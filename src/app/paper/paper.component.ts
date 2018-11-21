@@ -55,6 +55,10 @@ export class PaperComponent implements OnInit {
       answerNumber : answerIndex,
       answerValue : event.target.value
     }
+
+    for (let answer of this.studentAnswers){
+      console.log(answer.answerValue);
+    }
     
     this.studentAnswers.push(answerObject);
     console.log(this.studentAnswers);

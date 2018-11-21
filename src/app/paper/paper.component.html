@@ -40,9 +40,9 @@
     </div>
   </div>
   <div class = "row" >
-    <div class = "col-md-3">
+    <div class = "col-sm-3">
       <div class="radio" *ngFor="let answer of singleQuestion.answers; let i=index">
-        <label>
+        <label class="col-md-3">
           <input type="radio" name="optionsRadio{{singleQuestion.questionID}}"  value="{{answer}}" (change)="radioChangeHandle($event,q,i)">{{answer}}
         </label>
       </div>

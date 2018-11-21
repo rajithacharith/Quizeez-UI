@@ -32,6 +32,11 @@ export class DataserviceService {
     return this.http.get(`${this.url}/papers?filter[where][year]=${year}`);
   }
 
+  /*get paper filtered by the selected 'lesson' */
+  filterPaperByLesson(lesson : string){
+    return this.http.get(`${this.url}/papers?filter[where][lesson]=${lesson}`);
+  }
+
   /*get paper filtered by the selected 'subject' */
   filterPaperBySubject(subject : string){
     return this.http.get(`${this.url}/papers?filter[where][subject]=${subject}`);

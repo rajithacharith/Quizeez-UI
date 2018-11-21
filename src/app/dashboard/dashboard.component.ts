@@ -9,7 +9,11 @@ import { DataserviceService } from "../dataservice.service";
 
 export class DashboardComponent implements OnInit {
 
-  public paperSet : any;
+  paperSet : any;
+  subjectSet: any;
+  yearSet : any;
+  LessonSet : any;
+
   selectedStream : string ;
   selectedSubject : string ;
   selectedYear : number ;
@@ -23,41 +27,51 @@ export class DashboardComponent implements OnInit {
       console.log(paper);
       this.paperSet = paper;
     });
-
+    /*
     this.dataService.getQuestions().subscribe((question) => {
       console.log(question);
     });
-    
+    */
 
   }
 
-    filterByStream(){
-      return this.paperSet.filter((item) => {
-        return item.stream=="A/L";
-      });
-    }
   
-    selectedStreamEventHandler(event : any){
+    selectedStreamEventHandler(event : any,selectedStream : any){
       this.selectedStream=event.target.value;
-      console.log(this.selectedStream);
+
+      this.dataService.filterPaperByStream(this.selectedStream).subscribe((paper)=>{
+        this.subjectSet= paper;
+      });
+
     }
 
-    selectedSubjectEventHandler(event : any){
+    selectedSubjectEventHandler(event : any,selectedStream : string){
       this.selectedSubject=event.target.value;
-      console.log(this.selectedSubject);
+
+      this.dataService.filterPaperBySubject(this.selectedSubject).subscribe((paper)=>{
+        this.yearSet= paper;
+      });
     }
 
     selectedYearEventHandler(event : any){
       this.selectedYear=event.target.value;
-      console.log(this.selectedYear);
+
+      this.dataService.filterPaperByYear(this.selectedYear).subscribe((paper)=>{
+        this.yearSet= paper;
+      });
     }
+    /*
     selectedLessonEventHandler(event : any){
       this.selectedLesson=event.target.value;
       console.log(this.selectedLesson);
+
+      this.dataService.filterPaperByLesson(this.selectedLesson).subscribe((paper)=>{
+        this.paperSet= paper;
+      });
     }
+    */
 
   ngOnInit() {
-    console.log(this.selectedStream);
   }
 
 }

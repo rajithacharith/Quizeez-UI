@@ -19,7 +19,10 @@ export class PaperComponent implements OnInit {
   public questionSet: any;
 
   selectedValue :string ;
-  studentAnswers : object [] = [] ; 
+  studentAnswers =  [] ;
+
+   
+   
 
   constructor( private dataService : DataserviceService) { 
 
@@ -53,8 +56,9 @@ export class PaperComponent implements OnInit {
       answerNumber : answerIndex,
       answerValue : event.target.value
     }
-    this.studentAnswers.push(answerObject);
-    console.log(this.studentAnswers);
+    
+    
+    console.log(answerObject);
 
   }
 

@@ -102,8 +102,11 @@ export class DashboardComponent implements OnInit {
   } */
   changeMessage(message: any){
     this.shared.changeMessage(message);
-    this.router.navigateByUrl('/paper');
     console.log(message);
   }
+  submitHandler() {
 
+    this.router.navigateByUrl('/paper');
+    console.log("Palayan yakoo");
+  }
 }

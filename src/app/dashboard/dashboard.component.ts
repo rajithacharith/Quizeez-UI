@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataserviceService } from "../dataservice.service";
-
+import { SharedserviceService } from '../services/sharedservice.service';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -11,9 +11,9 @@ export class DashboardComponent implements OnInit {
 
   public paperSet : any;
   public selectedStream : string ;
-  constructor( private dataService : DataserviceService) { 
+  constructor( private dataService : DataserviceService, private shared : SharedserviceService) {
 
-    
+
     this.dataService.getPapers().subscribe((paper) => {
       console.log(paper);
       this.paperSet = paper;
@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
     this.dataService.getQuestions().subscribe((question) => {
       console.log(question);
     });
-    
+
 
   }
 
@@ -31,9 +31,13 @@ export class DashboardComponent implements OnInit {
         return item.stream=="A/L";
       });
     }
-  
+
+
   ngOnInit() {
 
+  }
+  newMessage() {
+    this.shared.changeMessage("Data given");
   }
 
 }

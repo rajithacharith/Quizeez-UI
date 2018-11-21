@@ -6,13 +6,14 @@ import {  HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class DataserviceService {
-  
+
   url = 'http://localhost:3000/api';
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient) {
   }
 
   /*get all the papers that have been uploaded so far */
   getPapers(){
+
     return this.http.get(`${this.url}/papers`);
   }
 
@@ -20,8 +21,8 @@ export class DataserviceService {
   getPaperByID(id : number){
     return this.http.get(`${this.url}/papers/${id}`);
   }
-  
-  
+
+
   /*get paper filtered by the selected 'stream' */
   filterPaperByStream(stream : string){
     return this.http.get(`${this.url}/papers?filter[where][stream]=${stream}`);
@@ -54,7 +55,7 @@ export class DataserviceService {
 
   /*add a question to the paper */
   addQuestion(paperID : number,questionID: number,question :string,answers : string [],correctAnswer : number){
-    
+
     const ques = {
       paperID : paperID,
       questionID : questionID,
@@ -71,7 +72,7 @@ export class DataserviceService {
     return this.http.get(`${this.url}/questions?filter[where][paperID]=${paperID}`);
   }
 
-   
+
   /*get all answers given by all students */
   getAnswers(){
     return this.http.get(`${this.url}/answers`);

@@ -1,11 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { DataserviceService } from '../dataservice.service';
 import { SharedserviceService } from '../services/sharedservice.service';
+import { CountdownModule } from 'ngx-countdown';
+import { NgModel } from '@angular/forms';
+
 @Component({
   selector: 'app-paper',
   templateUrl: './paper.component.html',
   styleUrls: ['./paper.component.css']
 })
+
+
+
 export class PaperComponent implements OnInit {
   private storageName = 'paperDetails';
   public paperSet :any;
@@ -85,6 +91,10 @@ export class PaperComponent implements OnInit {
       'paperID': this.paperID
     }
     localStorage.setItem(this.storageName, JSON.stringify(details));
+  }
+
+  finishPaper(){
+    console.log('time out');
   }
   ngOnInit() {
     this.shared.currentMessage.subscribe(message => this.message = message);

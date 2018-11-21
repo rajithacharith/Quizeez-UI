@@ -12,8 +12,9 @@ import { StudentNavComponent } from './student-nav/student-nav.component';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import { LoginComponent } from './login/login.component';
 
-import { DataserviceService } from "./dataservice.service";
+import { DataserviceService } from './dataservice.service';
 import { SharedserviceService } from './services/sharedservice.service';
+import { CountdownModule } from 'ngx-countdown';
 
 @NgModule({
   declarations: [
@@ -28,8 +29,8 @@ import { SharedserviceService } from './services/sharedservice.service';
     BrowserModule,
     HttpClientModule,
     FormsModule,
-    AppRoutingModule
-
+    AppRoutingModule,
+    CountdownModule
   ],
   providers: [DataserviceService, SharedserviceService],
   bootstrap: [AppComponent]

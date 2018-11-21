@@ -84,7 +84,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.shared.currentMessage.subscribe(message => this.message = message)
   }
-  /*setStream(message: string) {
+  /* setStream(message: string) {
     this.shared.setStream(message);
     console.log(message);
   }
@@ -105,6 +105,8 @@ export class DashboardComponent implements OnInit {
     console.log(message);
   }
   submitHandler() {
+
     this.router.navigateByUrl('/paper');
+
   }
 }

@@ -14,28 +14,23 @@ export class PaperComponent implements OnInit {
   public subject : string ;
 
   public answers : any;
-  public questionID : any;
-
+  //public questionID : any;
+  public studentID : number;
   public paperID: number;
   public questionSet: any;
   public answerSet : any;
   selectedValue :string ;
 
   studentAnswers =  [] ;
-<<<<<<< HEAD
   correctAnswerSet = [];
-
-=======
+  markedans = [];
 
   message : any;
->>>>>>> 75e8d4fe25548a375cb9045ef0b85cf68efc0c12
   constructor( private dataService : DataserviceService, private shared : SharedserviceService ) {
 
-    this.stream = "A/L";
-    this.year=2000;
-    this.subject="Physics";
-    this.paperID = 1;
-    this.questionID = 101;
+    
+    this.studentID = 160292;
+    //this.questionID = 101;
 
 
     this.dataService.getQuestionFilterByPaperID(this.paperID).subscribe((item)=>{
@@ -43,20 +38,15 @@ export class PaperComponent implements OnInit {
       console.log("the questions are");
       console.log(this.questionSet);
     });
-    this.dataService.getQuestionFilterByQuestionID(this.questionID).subscribe((ans)=>{
-      this.answerSet = ans;
-      console.log("answerset");
-      console.log(this.answerSet);
-    });
-
-
+    
   }
 
   createCorrectAnsArr(){
-    for(var i = 0;i<this.answerSet.length;i++){
-      this.correctAnswerSet.push(this.answerSet[4]);
+    for(var i = 0;i<this.questionSet.length;i++){
+      this.correctAnswerSet.push(this.questionSet[i].correctAnswer);
     }
-    
+    console.log("correct answers")
+    console.log(this.correctAnswerSet)
 
   }
   radioChangeHandle(event : any,questionIndex:number,answerIndex : number){
@@ -72,26 +62,32 @@ export class PaperComponent implements OnInit {
 
 
   }
-  checkpaper(arr_correctans:string[]){
-      
+  checkpaper(){
+      this.createCorrectAnsArr();
       //var arr_stuans:string[] = new Array("1","2","3","4");
       //var arr_correctans:string[] = new Array("1","3","4","4");
-      var markedans = [];
       
+      console.log(this.studentAnswers)
       for(var i = 0;i<this.studentAnswers.length;i++) { 
-        if(this.studentAnswers[i]==arr_correctans[i]){
-            markedans.push(true);
+        if(this.studentAnswers[i].answerNumber==this.correctAnswerSet[i]){
+            this.markedans.push(true);
         }
         else{
-          markedans.push(false);
+          this.markedans.push(false);
         }
           
         
           
       }  
-      console.log(markedans);
-      var mark = markedans
-      return markedans;
+      console.log(this.markedans);
+      var mark = this.markedans
+
+      this.dataService.storeMarkedAnswers(this.studentID,this.paperID,this.markedans).subscribe(()=>{
+        console.log("Item recorded!")
+      });
+
+      
+      return this.markedans;
   }
 
   

@@ -32,14 +32,6 @@ export class PaperComponent implements OnInit {
   message : any;
   constructor( private dataService : DataserviceService, private shared : SharedserviceService ) {
 
-    this.stream = "A/L";
-    this.year=2000;
-    this.subject="Physics";
-    this.paperID = 1;
-    this.questionID = 101;
-
-
-
 
   }
 
@@ -52,14 +44,32 @@ export class PaperComponent implements OnInit {
       answerValue : event.target.value
     }
 
-    for (let answer of this.studentAnswers){
-      console.log(answer.answerValue);
+    /*there is a big issue with loops here.can be resolved by removing duplicate elements after splicing */
+    if(this.studentAnswers.length != 0){
+        const result = this.studentAnswers.filter(studentAnswer => studentAnswer.questionNumber=questionIndex);
+        console.log('Special log here answers');
+        console.log(result);
+      // for (let answer of this.studentAnswers){
+      //   console.log(answer.questionNumber,answerObject.questionNumber);
+      //   if(answer.questionNumber===answerObject.questionNumber){
+      //     console.log("equal");
+      //     this.studentAnswers.splice(this.studentAnswers.indexOf(answer),1);
+      //     this.studentAnswers.push(answerObject);
+      //     break;
+      //   }
+      //   else{
+      //     console.log("not equal");
+      //     //this.studentAnswers.push(answerObject);
+      //     //break;
+      //   }
+      //   this.studentAnswers.push(answerObject);
+      // }
     }
 
-    this.studentAnswers.push(answerObject);
+    else{
+      this.studentAnswers.push(answerObject);
+    }
     console.log(this.studentAnswers);
-
-
   }
   checkpaper(arr_correctans:string[]){
 

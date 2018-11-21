@@ -43,7 +43,7 @@ export class DashboardComponent implements OnInit {
 
     selectedStreamEventHandler(event : any,selectedStream : any){
       this.selectedStream=event.target.value;
-      // this.setStream(this.selectedStream);
+      console.log((this.selectedStream));
       this.dataService.filterPaperByStream(this.selectedStream).subscribe((paper)=>{
         this.subjectSet= paper;
       });

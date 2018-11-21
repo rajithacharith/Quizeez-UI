@@ -105,8 +105,6 @@ export class DashboardComponent implements OnInit {
     console.log(message);
   }
   submitHandler() {
-
     this.router.navigateByUrl('/paper');
-    console.log("Palayan yakoo");
   }
 }

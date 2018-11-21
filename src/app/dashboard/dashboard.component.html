@@ -74,8 +74,8 @@
 
                     <div class="form-group">
                         <label>Subjects</label>
-                        <select class="form-control" *ngIf="paperSet" [(ngModel)]="selectedSubject" (change)="selectedSubjectEventHandler($event,selectedStream)">
-                          <option *ngFor = "let paper of subjectSet" [value]="paper.subject">{{paper.subject}}</option> 
+                        <select class="form-control" *ngIf="paperSet" [(ngModel)]="selectedSubject" (change)="selectedSubjectEventHandler($event,selectedSubject)">
+                          <option *ngFor = "let paper of subjectSet" [value]="paper.subject">{{paper.subject}}</option>
                         </select>
                       </div>
                 </div>
@@ -92,12 +92,12 @@
                         <label>Lesson</label>
                         <select class="form-control" *ngIf="paperSet" [(ngModel)]="selectedSubject" (change)="selectedLessonEventHandler($event)">
                           <option *ngFor="let paper of lessonSet" [value]="paper.lesson">{{paper.lesson}}</option>
-            
+
                         </select>
                       </div>
                 </div>
                 <div class="col-sm-3" style="padding:2%">
-                    <button type="button" class="btn btn-md btn-primary">Search</button>
+                    <button type="button" class="btn btn-md btn-primary" (click)='submitHandler()'>Search</button>
                 </div>
               </div>
             </div>
@@ -142,8 +142,8 @@
         </div>
       </div>
     </div>
-   
-    
+
+
 
     <div class="col-md-6">
       <div class="panel panel-default">

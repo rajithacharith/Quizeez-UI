@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import { DataserviceService } from '../dataservice.service';
 import { SharedserviceService } from '../services/sharedservice.service';
 @Component({
@@ -19,10 +21,10 @@ export class DashboardComponent implements OnInit {
   selectedSubject : string ;
   selectedYear : number ;
   selectedLesson : string ;
-  
-  constructor( private dataService : DataserviceService, private shared: SharedserviceService) { 
+  message:any;
+  constructor( private dataService : DataserviceService, private shared: SharedserviceService,private router:Router) {
 
-    
+
 
     this.dataService.getPapers().subscribe((paper) => {
       console.log(paper);
@@ -38,10 +40,10 @@ export class DashboardComponent implements OnInit {
 
   }
 
-  
+
     selectedStreamEventHandler(event : any,selectedStream : any){
       this.selectedStream=event.target.value;
-
+      // this.setStream(this.selectedStream);
       this.dataService.filterPaperByStream(this.selectedStream).subscribe((paper)=>{
         this.subjectSet= paper;
       });
@@ -50,22 +52,22 @@ export class DashboardComponent implements OnInit {
 
 
 
- 
 
 
-    selectedSubjectEventHandler(event : any,selectedStream : string){
+
+    selectedSubjectEventHandler(event : any, selectedSubject : string){
       this.selectedSubject=event.target.value;
-
-      this.dataService.filterPaperBySubject(this.selectedSubject).subscribe((paper)=>{
+      // this.setSubject(selectedSubject);
+      this.dataService.filterPaperBySubject(selectedSubject).subscribe((paper)=>{
         this.yearSet= paper;
       });
     }
 
-    selectedYearEventHandler(event : any){
-      this.selectedYear=event.target.value;
+    selectedYearEventHandler(event: any, selectedYear: number) {
+      this.selectedYear = event.target.value;
 
-      this.dataService.filterPaperByYear(this.selectedYear).subscribe((paper)=>{
-        this.yearSet= paper;
+      this.dataService.filterPaperByYear(selectedYear).subscribe((paper) => {
+        this.changeMessage(this.yearSet);
       });
     }
     /*
@@ -80,18 +82,31 @@ export class DashboardComponent implements OnInit {
     */
 
   ngOnInit() {
+    this.shared.currentMessage.subscribe(message => this.message = message)
   }
-  setStream(message:string){
+  /* setStream(message: string) {
     this.shared.setStream(message);
+    console.log(message);
   }
-  setYear(message:number){
+  setYear(message: number) {
     this.shared.setYear(message);
+    console.log(message);
   }
-  setSubject(message:string){
+  setSubject(message: string) {
     this.shared.setSubject(message);
+    console.log(message);
   }
-  setLession(message:string){
+  setLession(message: string) {
     this.shared.setLesson(message);
+    console.log(message);
+  } */
+  changeMessage(message: any){
+    this.shared.changeMessage(message);
+    console.log(message);
   }
+  submitHandler() {
 
+    this.router.navigateByUrl('/paper');
+    console.log("Palayan yakoo");
+  }
 }

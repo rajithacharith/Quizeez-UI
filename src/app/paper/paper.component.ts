@@ -14,21 +14,43 @@ export class PaperComponent implements OnInit {
   public subject : string ;
 
   public answers : any;
-  public questionID : any;
-
+  //public questionID : any;
+  public studentID : number;
   public paperID: number;
   public questionSet: any;
   public answerSet : any;
   selectedValue :string ;
 
   studentAnswers =  [] ;
+  correctAnswerSet = [];
+  markedans = [];
 
   message : any;
   constructor( private dataService : DataserviceService, private shared : SharedserviceService ) {
 
+
+    
+    this.studentID = 160292;
+    //this.questionID = 101;
+
+
+    this.dataService.getQuestionFilterByPaperID(this.paperID).subscribe((item)=>{
+      this.questionSet = item;
+      console.log("the questions are");
+      console.log(this.questionSet);
+    });
+    
+
   }
 
+  createCorrectAnsArr(){
+    for(var i = 0;i<this.questionSet.length;i++){
+      this.correctAnswerSet.push(this.questionSet[i].correctAnswer);
+    }
+    console.log("correct answers")
+    console.log(this.correctAnswerSet)
 
+  }
   radioChangeHandle(event : any,questionIndex:number,answerIndex : number){
 
     const answerObject = {
@@ -67,27 +89,34 @@ export class PaperComponent implements OnInit {
 
 
   }
-  checkpaper(arr_correctans:string[]){
-      
+  checkpaper(){
+      this.createCorrectAnsArr();
       //var arr_stuans:string[] = new Array("1","2","3","4");
       //var arr_correctans:string[] = new Array("1","3","4","4");
-      var markedans = [];
       
+      console.log(this.studentAnswers)
       for(var i = 0;i<this.studentAnswers.length;i++) { 
-        if(this.studentAnswers[i]==arr_correctans[i]){
-            markedans.push(true);
+        if(this.studentAnswers[i].answerNumber==this.correctAnswerSet[i]){
+            this.markedans.push(true);
         }
         else{
-          markedans.push(false);
+          this.markedans.push(false);
         }
           
         
           
       }  
-      console.log(markedans);
-      var mark = markedans
-      return markedans;
+      console.log(this.markedans);
+      var mark = this.markedans
+
+      this.dataService.storeMarkedAnswers(this.studentID,this.paperID,this.markedans).subscribe(()=>{
+        console.log("Item recorded!")
+      });
+
+      
+      return this.markedans;
   }
+
   
   ngOnInit() {
     this.shared.currentMessage.subscribe(message => this.message = message);

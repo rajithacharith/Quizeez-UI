@@ -77,9 +77,9 @@ export class DataserviceService {
     return this.http.get(`${this.url}/questions?filter[where][paperID]=${paperID}`);
   }
   /**get the questions in a given paper filtered by questionID*/
-  getQuestionFilterByQuestionID(questionID : number){
+  /* getQuestionFilterByQuestionID(questionID : number){
     return this.http.get(`${this.url}/questions?filter[where][questionID]=${questionID}`);
-  } 
+  }  */
   /*get all answers given by all students */
   getAnswers(){
     return this.http.get(`${this.url}/answers`);
@@ -105,7 +105,14 @@ export class DataserviceService {
     return this.http.post(`${this.url}/answers/update?filter[where][studentID]=${studentID}&filter[where][paperID]=${paperID}`,answ);
   }
 
-
+  storeMarkedAnswers(studentID : number,paperID : number,markedAnswers : boolean[]){
+    const ans = {
+      studentID : studentID,
+      paperID : paperID,
+      markedAnswers : markedAnswers
+    }
+    return this.http.post(`${this.url}/studentResults`,ans);
+  }
 
 
 

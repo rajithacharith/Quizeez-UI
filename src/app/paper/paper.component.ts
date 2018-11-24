@@ -27,6 +27,8 @@ export class PaperComponent implements OnInit {
   public answerSet : any;
   selectedValue :string ;
 
+  showSpinner : boolean = true ;
+
   studentAnswers =  [] ;
 
   message : any;
@@ -107,7 +109,9 @@ export class PaperComponent implements OnInit {
     console.log('time out');
   }
   ngOnInit() {
-    this.shared.currentMessage.subscribe(message => this.message = message);
+    this.shared.currentMessage.subscribe(message => {
+      this.message = message;
+    });
     console.log(this.message[0].stream);
     this.stream = this.message[0].stream;
     this.year = this.message[0].year;
@@ -119,15 +123,16 @@ export class PaperComponent implements OnInit {
 
     this.dataService.filterPaperByAll(this.stream,this.subject,this.year).subscribe((paper) => {
       this.paperSet = paper;
-      //console.log(paper);
+      this.showSpinner = false;
+      console.log(paper);
     });
 
     this.dataService.getAnswers().subscribe((answers) => {
       this.answers=answers;
     });
 
-    this.dataService.getQuestionFilterByPaperID(this.paperID).subscribe((item)=>{
-      this.questionSet = item;
+    this.dataService.getQuestionFilterByPaperID(this.paperID).subscribe((question)=>{
+      this.questionSet = question;
     });
     this.setPaperDetails();
 

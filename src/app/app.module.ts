@@ -16,6 +16,7 @@ import { DataserviceService } from './dataservice.service';
 import { SharedserviceService } from './services/sharedservice.service';
 import { CountdownModule } from 'ngx-countdown';
 import { LoadingSpinComponent } from './ui/loading-spin/loading-spin.component';
+import { ReviewComponent } from './review/review.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { LoadingSpinComponent } from './ui/loading-spin/loading-spin.component';
     PaperListComponent,
     StudentNavComponent,
     LoginComponent,
-    LoadingSpinComponent
+    LoadingSpinComponent,
+    ReviewComponent
   ],
   imports: [
     BrowserModule,

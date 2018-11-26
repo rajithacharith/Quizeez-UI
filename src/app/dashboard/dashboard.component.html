@@ -111,10 +111,10 @@
   </div>
   <!-- Form for subject Selection -->
   <div class="row">
-    <div class="col-md-6">
+    <div class="container">
       <div class="panel panel-default" style="border-style: solid; border-width: 3px; border-color: #1aa3ff;">
         <div class="panel-heading">
-          Site Traffic Overview
+          Overall Paper Marks
           <ul class="pull-right panel-settings panel-button-tab-right">
             <li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
               <em class="fa fa-cogs"></em>
@@ -146,27 +146,36 @@
         </div>
       </div>
     </div>
-
-
-
-    <div class="col-md-6">
-      <div class="panel panel-default" style="border-style: solid; border-width: 3px; border-color: #1aa3ff;">
-          <div class="panel-heading">
-            New Papers
-          </div>
-          <div class="panel-body" style="padding:4%; margin:5px">
-              <div class="form-group">
-                  <label>Multiple Selects</label>
-                  <select multiple class="form-control" *ngIf="paperSet">
-                      <option *ngFor = "let paper of paperSet">
-                        {{paper.subject}} {{paper.timeDuration}} {{paper.year}}
-                      </option>
-                  </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit Button</button>
-          </div>
-      </div>
   </div>
-  </div><!--/.row-->
+
+  <div class="panel panel-container" style="border-style: solid; border-width: 3px; border-color: #1aa3ff;">
+      <div class="row">
+        <div class="col-xs-6 col-md-6">
+          <div class="panel panel-widget border-right">
+            <div class="row no-padding">
+                <div class="col-lg-2" style="text-align: center">2012</div>
+                <div class="col-lg-2" style="text-align: center">Physics</div>
+                <div class="col-lg-2" style="text-align: center">50%</div><!-- if an error occurs remove the variabl-->
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-md-6">
+          <div class="panel panel-widget border-right">
+            <div class="row no-padding">
+              <div class="col-lg-2">2015</div>
+              <div class="col-lg-2">Chemistry</div>
+              <div class="col-lg-2">20%</div>
+            </div>
+          </div>
+        </div>
+      </div><!--/.row-->
+    </div>
+
+
+
+</div>
+
+
+
 
 

@@ -1,0 +1,80 @@
+<app-student-nav></app-student-nav>
+
+
+<div class="container main">
+  <div class="row">
+    <ol class="breadcrumb">
+      <li><a href="#">
+        <em class="fa fa-home"></em>
+      </a></li>
+      <li class="active">Papers</li>
+      </ol>
+      </div><!--/.row-->
+<div class="panel panel-container">
+<div class="row">
+<div class="col-xs-6">
+<div class="panel panel-teal panel-widget border-right">
+<div class="row no-padding"><em class=""></em>
+  <div class="large">{{year}} {{stream}}</div>
+  <div class="text-muted">{{subject}}</div>
+</div>
+</div>
+</div>
+<div class="col-xs-6">
+<div class="panel panel-teal panel-widget border-right">
+<div class="row no-padding"><em class=""></em>
+  <!-- <countdown class="large" [config]="{leftTime:  10}" (finished)="finishPaper()">$!m!:$!s!</countdown> -->
+  <!-- <div class="large">1:15:00</div>
+  <div class="text-muted">Remaining</div> -->
+</div>
+</div>
+</div>
+
+</div><!--/.row-->
+</div>
+
+<div class="panel panel-container" style="text-align: left; padding: 10px; border-radius: 10px;">
+  <div class="row" >
+    <div class="col-md-12">
+      <!-- <label for="">{{singleQuestion.question}}</label> -->
+      <label for="">Dummy question?</label>
+    </div>
+  </div>
+  <div class = "row" >
+    <div class="col-sm-8">
+        Correct answer : Correct Answer
+
+    </div>
+    <div class='col-sm-4' style="color: green">
+        Correct
+    </div>
+
+
+  </div>
+</div>
+
+<div class="panel panel-container" style="text-align: left; padding: 10px; border-radius: 10px;">
+    <div class="row" >
+      <div class="col-md-12">
+        <!-- <label for="">{{singleQuestion.question}}</label> -->
+        <label for="">Dummy question?</label>
+      </div>
+    </div>
+    <div class = "row" >
+      <div class="col-sm-8">
+          Correct answer : Correct Answer
+
+      </div>
+      <div class='col-sm-4' style="color: red">
+          Wrong
+      </div>
+
+
+    </div>
+  </div>
+<div class='row'>
+  <button type="button" class="btn btn-md btn-primary">Submit</button>
+</div>
+
+
+

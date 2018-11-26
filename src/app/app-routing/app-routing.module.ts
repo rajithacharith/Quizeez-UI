@@ -5,6 +5,7 @@ import {DashboardComponent} from '../dashboard/dashboard.component';
 import {PaperComponent} from '../paper/paper.component';
 import {PaperListComponent} from '../paper-list/paper-list.component';
 import {LoginComponent} from '../login/login.component';
+import {ReviewComponent} from '../review/review.component';
 import {  } from 'rxjs';
 
 const appRoutes: Routes = [
@@ -27,6 +28,10 @@ const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'review',
+    component: ReviewComponent
   }
 ];
 

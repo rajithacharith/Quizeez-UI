@@ -46,11 +46,19 @@ export class PaperComponent implements OnInit {
       answerValue : event.target.value
     }
 
+
     /*there is a big issue with loops here.can be resolved by removing duplicate elements after splicing */
     if(this.studentAnswers.length != 0){
-        const result = this.studentAnswers.filter(studentAnswer => studentAnswer.questionNumber=questionIndex);
-        console.log('Special log here answers');
-        console.log(result);
+
+      //charith code
+
+        // const result = this.studentAnswers.filter(studentAnswer => studentAnswer.questionNumber=questionIndex);
+        // console.log('Special log here answers');
+        // console.log(result);
+
+      //kalana old code
+      
+      
       // for (let answer of this.studentAnswers){
       //   console.log(answer.questionNumber,answerObject.questionNumber);
       //   if(answer.questionNumber===answerObject.questionNumber){
@@ -66,9 +74,25 @@ export class PaperComponent implements OnInit {
       //   }
       //   this.studentAnswers.push(answerObject);
       // }
+      this.studentAnswers.some((answer)=>{
+        console.log(answer.questionNumber,answer.answerNumber,answerObject.questionNumber,answerObject.answerNumber) ;
+        if (answer.questionNumber==answerObject.questionNumber){
+         
+          console.log("removed",this.studentAnswers.splice(this.studentAnswers.indexOf(answer),1));
+          console.log("added",this.studentAnswers.push(answerObject));
+          return true;
+        }
+        else{
+        console.log("else 1");
+        this.studentAnswers.push(answerObject);
+        return true;
+        }
+        
+      });
     }
 
     else{
+      console.log("else 2");
       this.studentAnswers.push(answerObject);
     }
     console.log(this.studentAnswers);
@@ -91,7 +115,7 @@ export class PaperComponent implements OnInit {
 
       }
       console.log(markedans);
-      var mark = markedans
+      var mark = markedans;
       return markedans;
   }
 

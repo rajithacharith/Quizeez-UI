@@ -7,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewComponent implements OnInit {
 
-  constructor() { }
+  result : boolean [] = [true,false,true,true,false,false,false,true];
+  year : number =2000;
+  stream : string = "A/L";
+  subject : string = "Physics";
 
+  constructor() { }
+    
   ngOnInit() {
   }
 

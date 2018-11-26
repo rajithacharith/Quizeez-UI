@@ -73,6 +73,7 @@ export class PaperComponent implements OnInit {
     }
     console.log(this.studentAnswers);
   }
+  
   checkpaper(arr_correctans:string[]){
 
       //var arr_stuans:string[] = new Array("1","2","3","4");

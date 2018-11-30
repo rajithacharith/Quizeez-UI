@@ -1,9 +1,12 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
+
 import { HttpClientModule } from '@angular/common/http';
+
 import { FormsModule } from "@angular/forms";
 import { StorageServiceModule } from "angular-webstorage-service";
+
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -18,7 +21,11 @@ import { SharedserviceService } from './services/sharedservice.service';
 import { CountdownModule } from 'ngx-countdown';
 import { LoadingSpinComponent } from './ui/loading-spin/loading-spin.component';
 import { ReviewComponent } from './review/review.component';
+
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
+
 import { RegisterPageComponent } from './register-page/register-page.component';
+
 
 
 @NgModule({
@@ -31,8 +38,9 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     LoginComponent,
     LoadingSpinComponent,
     ReviewComponent,
+    AdminDashboardComponent
+
     RegisterPageComponent,
-   
   ],
   imports: [
     BrowserModule,

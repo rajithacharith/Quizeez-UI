@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from "@angular/forms";
+import { StorageServiceModule } from "angular-webstorage-service";
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
@@ -17,6 +18,8 @@ import { SharedserviceService } from './services/sharedservice.service';
 import { CountdownModule } from 'ngx-countdown';
 import { LoadingSpinComponent } from './ui/loading-spin/loading-spin.component';
 import { ReviewComponent } from './review/review.component';
+import { RegisterPageComponent } from './register-page/register-page.component';
+
 
 @NgModule({
   declarations: [
@@ -27,14 +30,17 @@ import { ReviewComponent } from './review/review.component';
     StudentNavComponent,
     LoginComponent,
     LoadingSpinComponent,
-    ReviewComponent
+    ReviewComponent,
+    RegisterPageComponent,
+   
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    CountdownModule
+    CountdownModule,
+    StorageServiceModule
   ],
   providers: [DataserviceService, SharedserviceService],
   bootstrap: [AppComponent]

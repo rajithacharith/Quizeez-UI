@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DataserviceService } from '../dataservice.service';
@@ -14,7 +14,7 @@ import { SharedserviceService } from '../services/sharedservice.service';
 
 export class DashboardComponent implements OnInit {
 
-
+  studentID : any;
   paperSet : any;
   subjectSet: any;
   yearSet : any;
@@ -33,8 +33,11 @@ export class DashboardComponent implements OnInit {
   yearDisabled : boolean = true ; 
   searchButtonDisable : boolean = true;
   constructor( private dataService : DataserviceService, private shared: SharedserviceService,private router:Router) {
+    console.log(sessionStorage.getItem("userID"));
 
   }
+
+
     selectedStreamEventHandler(event : any,selectedStream : any){
       this.selectedStream=event.target.value;
       console.log((this.selectedStream));
@@ -74,6 +77,7 @@ export class DashboardComponent implements OnInit {
     
 
   ngOnInit() {
+    console.log(sessionStorage.getItem("userID"));
     this.shared.currentMessage.subscribe(message => {
       this.message = message;
     });

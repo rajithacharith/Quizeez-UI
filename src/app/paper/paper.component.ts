@@ -21,7 +21,7 @@ export class PaperComponent implements OnInit {
   public subject : string ;
 
   public answers : any;
-  public studentID : number;
+  public studentID : any;
   public paperID: number;
   public questionSet: any;
   public answerSet : any;
@@ -33,7 +33,7 @@ export class PaperComponent implements OnInit {
   message : any;
   constructor( private dataService : DataserviceService, private shared : SharedserviceService ,private router:Router) {
 
-    this.studentID = 160292;
+    this.studentID = sessionStorage.getItem("userID");
     
 
     this.dataService.getQuestionFilterByPaperID(this.paperID).subscribe((item)=>{
@@ -64,7 +64,7 @@ export class PaperComponent implements OnInit {
     }
 
     this.studentAnswers[answerObject.questionNumber] = answerObject.answerNumber;
-    console.log('ans:',this.studentAnswers)
+    console.log('ans:',this.studentAnswers);
     
     
 
@@ -97,7 +97,8 @@ export class PaperComponent implements OnInit {
         questionSet : this.questionSet,
         year : this.year,
         stream : this.stream,
-        subject : this.subject
+        subject : this.subject,
+        studentID :this.studentID
       } 
       console.log(submitDetailsObject);
       this.changeMessage(submitDetailsObject);

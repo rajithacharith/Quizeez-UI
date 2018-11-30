@@ -1,0 +1,20 @@
+
+<div class="container" style="padding:5%; margin-top:5%">
+  <div class="panel panel-container" style='width:60%; margin-left: 23%; border-radius: 10px'>
+    <div class="wrapper" style='padding: 1%'>
+        <form class="form-signin" name="registerForm">
+
+          <h2 class="form-signin-heading" style='text-align: center;'>Register</h2>
+          <input type="text" class="form-control" name="email" [(ngModel)]="email" placeholder="Email Address" required="" autofocus="" />
+          <span *ngIf="registerForm.email.$touched && registerForm.email.$invalid">Please enter </span>
+          
+          <input type="password" class="form-control" name="password" [(ngModel)]="password" placeholder="Enter your Password" required minlength="6"/>
+
+          <input type="password" class="form-control" name="verifyPassword" [(ngModel)]="password" placeholder=" Please enter your password again to verify" required/>
+
+          <button class="btn btn-lg btn-primary" type="submit"  style='margin-left:40%; margin-bottom: 5%'>Login</button>
+        </form>
+    </div>
+   
+  </div>
+</div>

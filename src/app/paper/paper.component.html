@@ -43,7 +43,7 @@
 <div class = "col-md-3">
   <div class="radio" *ngFor="let answer of singleQuestion.answers; let i=index">
       <label>
-        <input type="radio" [(ngModel)]="studentAnswers" name="optionsRadio{{singleQuestion.questionID}}" value="{{answer}}" (change)="radioChangeHandle($event,q,i)">{{answer}}
+        <input type="radio" name="optionsRadio{{singleQuestion.questionID}}" value="{{answer}}" (change)="radioChangeHandle($event,q,i)">{{answer}}
       </label>
   </div>
 </div>

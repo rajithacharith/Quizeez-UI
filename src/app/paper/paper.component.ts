@@ -27,8 +27,8 @@ export class PaperComponent implements OnInit {
   public questionSet: any;
   public answerSet: any;
   selectedValue: string ;
-  public studentAnswers: {};
-  public answerArr: {};
+
+  public studentAnswers: any;
 
   correctAnswerSet = [];
   markedans = [];
@@ -41,7 +41,7 @@ export class PaperComponent implements OnInit {
   message: any;
   constructor( private dataService : DataserviceService, private shared : SharedserviceService ) {
 
-
+    this.studentAnswers = {};
 
 
     this.studentID = 160292;

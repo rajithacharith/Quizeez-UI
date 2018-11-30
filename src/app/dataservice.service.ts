@@ -121,9 +121,14 @@ export class DataserviceService {
     return this.http.post(`${this.url}/Users/login`,access);
   }
 
+
+  userLogout(accessToken : string){
+    return this.http.post(`${this.url}/Users/logout`,accessToken);
+
   /* Add paper as a object */
   addPaper(paper: any) {
     return this.http.post(`${this.url}/papers`, paper);
+
   }
 
 

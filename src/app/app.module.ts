@@ -18,6 +18,7 @@ import { SharedserviceService } from './services/sharedservice.service';
 import { CountdownModule } from 'ngx-countdown';
 import { LoadingSpinComponent } from './ui/loading-spin/loading-spin.component';
 import { ReviewComponent } from './review/review.component';
+import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { ReviewComponent } from './review/review.component';
     StudentNavComponent,
     LoginComponent,
     LoadingSpinComponent,
-    ReviewComponent
+    ReviewComponent,
+    AdminDashboardComponent
   ],
   imports: [
     BrowserModule,

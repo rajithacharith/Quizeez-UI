@@ -3,6 +3,7 @@ import { DataserviceService } from '../dataservice.service';
 import { SharedserviceService } from '../services/sharedservice.service';
 import { CountdownModule } from 'ngx-countdown';
 import { NgModel } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-paper',
@@ -20,31 +21,20 @@ export class PaperComponent implements OnInit {
   public subject : string ;
 
   public answers : any;
-  //public questionID : any;
   public studentID : number;
   public paperID: number;
   public questionSet: any;
   public answerSet : any;
   selectedValue :string ;
-
-
-  
   correctAnswerSet = [];
   markedans = [];
-
   showSpinner : boolean = true ;
-
-  
-
   studentAnswers = {};
   message : any;
-  constructor( private dataService : DataserviceService, private shared : SharedserviceService ) {
+  constructor( private dataService : DataserviceService, private shared : SharedserviceService ,private router:Router) {
 
-
-
-    
     this.studentID = 160292;
-    //this.questionID = 101;
+    
 
     this.dataService.getQuestionFilterByPaperID(this.paperID).subscribe((item)=>{
       this.questionSet = item;
@@ -61,7 +51,7 @@ export class PaperComponent implements OnInit {
       this.correctAnswerSet.push(this.questionSet[i].correctAnswer);
     }
     console.log("correct answers")
-    console.log(this.correctAnswerSet)
+    console.log(this.correctAnswerSet);
 
   }
   
@@ -96,14 +86,22 @@ export class PaperComponent implements OnInit {
       console.log("marked answers")
       console.log(this.markedans);
       console.log(this.correctAnswerSet)
-      var mark = this.markedans
+      var mark = this.markedans;
 
       this.dataService.storeMarkedAnswers(this.studentID,this.paperID,this.markedans).subscribe(()=>{
         console.log("Item recorded!")
       });
 
-      
-      return this.markedans;
+      const submitDetailsObject = {
+        questionResults : this.markedans,
+        questionSet : this.questionSet,
+        year : this.year,
+        stream : this.stream,
+        subject : this.subject
+      } 
+      console.log(submitDetailsObject);
+      this.changeMessage(submitDetailsObject);
+      this.router.navigateByUrl('/review');
     }
 
   setPaperDetails(){
@@ -118,6 +116,11 @@ export class PaperComponent implements OnInit {
 
   finishPaper(){
     console.log('time out');
+  }
+
+  changeMessage(message: any){
+    this.shared.changeMessage(message);
+    console.log(message);
   }
 
   ngOnInit() {

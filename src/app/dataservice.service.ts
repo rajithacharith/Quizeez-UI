@@ -114,6 +114,8 @@ export class DataserviceService {
     return this.http.post(`${this.url}/studentResults`,ans);
   }
 
-
+  getChartData(){
+    return this.http.get(`${this.url}/marks`);
+  }
 
 }

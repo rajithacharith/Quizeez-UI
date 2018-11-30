@@ -17,7 +17,7 @@ import { SharedserviceService } from './services/sharedservice.service';
 import { CountdownModule } from 'ngx-countdown';
 import { LoadingSpinComponent } from './ui/loading-spin/loading-spin.component';
 import { ReviewComponent } from './review/review.component';
-
+import { ChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +34,8 @@ import { ReviewComponent } from './review/review.component';
     HttpClientModule,
     FormsModule,
     AppRoutingModule,
-    CountdownModule
+    CountdownModule,
+    ChartsModule
   ],
   providers: [DataserviceService, SharedserviceService],
   bootstrap: [AppComponent]

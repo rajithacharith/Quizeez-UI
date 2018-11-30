@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DataserviceService } from '../dataservice.service';
 import { SharedserviceService } from '../services/sharedservice.service';
-
+import { Chart } from 'chart.js';
+import { flattenStyles } from '@angular/platform-browser/src/dom/dom_renderer';
 
 
 @Component({
@@ -13,6 +14,8 @@ import { SharedserviceService } from '../services/sharedservice.service';
 })
 
 export class DashboardComponent implements OnInit {
+  lineChart: any;
+  public chartData: any;
 
 
   paperSet : any;
@@ -29,6 +32,9 @@ export class DashboardComponent implements OnInit {
   subjectDisabled : boolean = true;
   yearDisabled : boolean = true ; 
   searchButtonDisable : boolean = true;
+
+  years = [];
+  studentMarks = [];
   constructor( private dataService : DataserviceService, private shared: SharedserviceService,private router:Router) {
 
 
@@ -39,13 +45,17 @@ export class DashboardComponent implements OnInit {
       this.paperSet = paper;
       
     });
-    /*
-    this.dataService.getQuestions().subscribe((question) => {
-      console.log(question);
+    this.dataService.getChartData().subscribe((item) => {
+      this.chartData = item;
+      console.log('arr',this.chartData);
+      for(var i = 0;i<this.chartData.length;i++){
+        
+        this.studentMarks.push(this.chartData[i].marks);
+        this.years.push(this.chartData[i].year)
+      }
+      console.log("hvhj",this.studentMarks);
     });
-
-    */
-
+    
 
   }
 
@@ -101,6 +111,35 @@ export class DashboardComponent implements OnInit {
       this.message = message;
       
     });
+    
+    this.lineChart = new Chart('lineChart',{
+      type: 'line',
+      data: {
+        labels: this.years,
+        datasets: [{
+          label: 'Number of items',
+          data: this.studentMarks,
+          fill: true,
+          lineTension: 0.2,
+          borderColor:"blue",
+          borderWidth:1
+        }]
+      },
+      options: {
+        title:{
+          text:"Line Chart",
+          display:true
+        },
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+    console.log("fuck you ng")
   }
   /* setStream(message: string) {
     this.shared.setStream(message);

@@ -19,7 +19,7 @@
     </div>
   </div><!--/.row-->
 
-  <div class="shadow panel panel-container" style="border-style: solid; border-width: 3px; border-color: aqua;">
+  <div class="panel panel-container" style="border-style: solid; border-width: 3px; border-color: #1aa3ff;">
     <div class="row">
       <div class="col-xs-6 col-md-3 col-lg-3 no-padding">
         <div class="panel panel-teal panel-widget border-right">
@@ -59,13 +59,13 @@
   <!-- Form for Subject Selection -->
   <div class="row" >
     <div class="col-md-12 container" style="">
-        <div class="panel panel-widget border-right" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;border-style: solid; border-width: 3px; border-color: aqua;">
+        <div class="panel panel-widget border-right" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;border-style: solid; border-width: 3px; border-color: #1aa3ff;">
           <div class="container">
               <div class="row" style='margin-left:2%'>
                   <div class="col-sm-3">
                       <div class="form-group">
                           <label>Stream</label>
-                          <select class="form-control" *ngIf="paperSet" [(ngModel)]="selectedStream" (change)="selectedStreamEventHandler($event)">
+                          <select class="form-control" [(ngModel)]="selectedStream" (change)="selectedStreamEventHandler($event)">
                             <!--<option *ngFor="let paper of paperSet" [value]="paper.stream" >{{paper.stream}}</option> 
                               hardcoded O/L and A/L instead of this
                             -->
@@ -75,18 +75,19 @@
                         </div>
                   </div>
                 <div class="col-sm-3">
-
+                
                     <div class="form-group">
                         <label>Subjects</label>
-                        <select class="form-control" *ngIf="paperSet" [(ngModel)]="selectedSubject" (change)="selectedSubjectEventHandler($event,selectedSubject)">
+                        <select class="form-control"  [disabled]="subjectDisabled" [(ngModel)]="selectedSubject" (change)="selectedSubjectEventHandler($event,selectedSubject)">
                           <option *ngFor = "let paper of subjectSet" [value]="paper.subject">{{paper.subject}}</option>
                         </select>
                       </div>
                 </div>
+                
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label>Year</label>
-                        <select class="form-control" *ngIf="paperSet" [(ngModel)]="selectedYear" (change)="selectedYearEventHandler($event)">
+                        <select class="form-control" [disabled]="yearDisabled" [(ngModel)]="selectedYear" (change)="selectedYearEventHandler($event)">
                           <option *ngFor="let paper of yearSet" [value]="paper.year">{{paper.year}}</option>
                         </select>
                       </div>
@@ -94,14 +95,13 @@
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label>Lesson</label>
-                        <select class="form-control" *ngIf="paperSet" [(ngModel)]="selectedSubject" (change)="selectedLessonEventHandler($event)">
+                        <select class="form-control" [disabled]="true" [(ngModel)]="selectedSubject" (change)="selectedLessonEventHandler($event)">
                           <option *ngFor="let paper of lessonSet" [value]="paper.lesson">{{paper.lesson}}</option>
-
                         </select>
                       </div>
                 </div>
                 <div class="col-sm-3" style="padding:2%">
-                    <button type="button" class="btn btn-md btn-primary" (click)='submitHandler()'>Search</button>
+                    <button type="button" class="btn btn-md btn-primary" [disabled]="searchButtonDisable" (click)='submitHandler()'>Search</button>
                 </div>
               </div>
             </div>
@@ -111,10 +111,10 @@
   </div>
   <!-- Form for subject Selection -->
   <div class="row">
-    <div class="col-md-6">
-      <div class="panel panel-default" style="border-style: solid; border-width: 3px; border-color: aqua;">
+    <div class="container">
+      <div class="panel panel-default" style="border-style: solid; border-width: 3px; border-color: #1aa3ff;">
         <div class="panel-heading">
-          Site Traffic Overview
+          Overall Paper Marks
           <ul class="pull-right panel-settings panel-button-tab-right">
             <li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
               <em class="fa fa-cogs"></em>
@@ -146,27 +146,36 @@
         </div>
       </div>
     </div>
-
-
-
-    <div class="col-md-6">
-      <div class="panel panel-default" style="border-style: solid; border-width: 3px; border-color: skyblue;">
-          <div class="panel-heading">
-            New Papers
-          </div>
-          <div class="panel-body" style="padding:4%; margin:5px">
-              <div class="form-group">
-                  <label>Multiple Selects</label>
-                  <select multiple class="form-control" *ngIf="paperSet">
-                      <option *ngFor = "let paper of paperSet">
-                        {{paper.subject}} {{paper.timeDuration}} {{paper.year}}
-                      </option>
-                  </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Submit Button</button>
-          </div>
-      </div>
   </div>
-  </div><!--/.row-->
+
+  <div class="panel panel-container" style="border-style: solid; border-width: 3px; border-color: #1aa3ff;">
+      <div class="row">
+        <div class="col-xs-6 col-md-6">
+          <div class="panel panel-widget border-right">
+            <div class="row no-padding">
+                <div class="col-lg-2" style="text-align: center">2012</div>
+                <div class="col-lg-2" style="text-align: center">Physics</div>
+                <div class="col-lg-2" style="text-align: center">50%</div><!-- if an error occurs remove the variabl-->
+            </div>
+          </div>
+        </div>
+        <div class="col-xs-6 col-md-6">
+          <div class="panel panel-widget border-right">
+            <div class="row no-padding">
+              <div class="col-lg-2">2015</div>
+              <div class="col-lg-2">Chemistry</div>
+              <div class="col-lg-2">20%</div>
+            </div>
+          </div>
+        </div>
+      </div><!--/.row-->
+    </div>
+
+
+
+</div>
+
+
+
 
 

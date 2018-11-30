@@ -3,6 +3,9 @@ import { Router } from '@angular/router';
 
 import { DataserviceService } from '../dataservice.service';
 import { SharedserviceService } from '../services/sharedservice.service';
+
+
+
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -22,13 +25,19 @@ export class DashboardComponent implements OnInit {
   selectedYear : number ;
   selectedLesson : string ;
   message:any;
+
+  subjectDisabled : boolean = true;
+  yearDisabled : boolean = true ; 
+  searchButtonDisable : boolean = true;
   constructor( private dataService : DataserviceService, private shared: SharedserviceService,private router:Router) {
 
 
 
     this.dataService.getPapers().subscribe((paper) => {
+      
       console.log(paper);
       this.paperSet = paper;
+      
     });
     /*
     this.dataService.getQuestions().subscribe((question) => {
@@ -46,6 +55,8 @@ export class DashboardComponent implements OnInit {
       console.log((this.selectedStream));
       this.dataService.filterPaperByStream(this.selectedStream).subscribe((paper)=>{
         this.subjectSet= paper;
+        this.subjectDisabled = false;
+        console.log("sibject enabled");
       });
 
     }
@@ -60,6 +71,9 @@ export class DashboardComponent implements OnInit {
       // this.setSubject(selectedSubject);
       this.dataService.filterPaperBySubject(selectedSubject).subscribe((paper)=>{
         this.yearSet= paper;
+        this.yearDisabled = false;
+        console.log("year enabled");
+        
       });
     }
 
@@ -68,6 +82,7 @@ export class DashboardComponent implements OnInit {
 
       this.dataService.filterPaperByYear(selectedYear).subscribe((paper) => {
         this.changeMessage(this.yearSet);
+        this.searchButtonDisable=false;
       });
     }
     /*
@@ -82,7 +97,10 @@ export class DashboardComponent implements OnInit {
     */
 
   ngOnInit() {
-    this.shared.currentMessage.subscribe(message => this.message = message)
+    this.shared.currentMessage.subscribe(message => {
+      this.message = message;
+      
+    });
   }
   /* setStream(message: string) {
     this.shared.setStream(message);
@@ -105,6 +123,8 @@ export class DashboardComponent implements OnInit {
     console.log(message);
   }
   submitHandler() {
+
     this.router.navigateByUrl('/paper');
+
   }
 }

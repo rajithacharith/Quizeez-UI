@@ -1,13 +1,19 @@
 import { Component, OnInit } from '@angular/core';
 import { DataserviceService } from '../dataservice.service';
 import { SharedserviceService } from '../services/sharedservice.service';
+import { CountdownModule } from 'ngx-countdown';
+import { NgModel } from '@angular/forms';
+
 @Component({
   selector: 'app-paper',
   templateUrl: './paper.component.html',
   styleUrls: ['./paper.component.css']
 })
-export class PaperComponent implements OnInit {
 
+
+
+export class PaperComponent implements OnInit {
+  private storageName = 'paperDetails';
   public paperSet :any;
   public stream : string ;
   public year : number ;
@@ -21,13 +27,20 @@ export class PaperComponent implements OnInit {
   public answerSet : any;
   selectedValue :string ;
 
+
   
   correctAnswerSet = [];
   markedans = [];
 
+  showSpinner : boolean = true ;
+
+  studentAnswers =  [] ;
+
+
   studentAnswers = {};
   message : any;
   constructor( private dataService : DataserviceService, private shared : SharedserviceService ) {
+
 
 
     
@@ -40,6 +53,7 @@ export class PaperComponent implements OnInit {
       console.log(this.questionSet);
     });
     
+
 
   }
 
@@ -59,6 +73,7 @@ export class PaperComponent implements OnInit {
       answerNumber : answerIndex,
       answerValue : event.target.value
     }
+
     this.studentAnswers[answerObject.questionNumber] = answerObject.answerNumber;
     console.log('ans:',this.studentAnswers)
     
@@ -74,10 +89,25 @@ export class PaperComponent implements OnInit {
       for(var i = 0;i<this.correctAnswerSet.length;i++) { 
         if(this.studentAnswers[i]==this.correctAnswerSet[i]){
             this.markedans.push(true);
+
+
+    
+  }
+  
+  checkpaper(arr_correctans:string[]){
+
+      
+      var markedans = [];
+
+      for(var i = 0;i<this.studentAnswers.length;i++) {
+        if(this.studentAnswers[i]==arr_correctans[i]){
+            markedans.push(true);
+
         }
         else{
           this.markedans.push(false);
         }
+
           
         
           
@@ -96,28 +126,57 @@ export class PaperComponent implements OnInit {
   }
 
   
+
+
+
+
+      }
+      console.log(markedans);
+      var mark = markedans
+      return markedans;
+  }
+
+  setPaperDetails(){
+    let details = {
+      'stream' : this.stream,
+      'year': this.year ,
+      'subject': this.subject,
+      'paperID': this.paperID
+    }
+    localStorage.setItem(this.storageName, JSON.stringify(details));
+  }
+
+  finishPaper(){
+    console.log('time out');
+  }
+
   ngOnInit() {
-    this.shared.currentMessage.subscribe(message => this.message = message);
+    this.shared.currentMessage.subscribe(message => {
+      this.message = message;
+    });
     console.log(this.message[0].stream);
     this.stream = this.message[0].stream;
     this.year = this.message[0].year;
     this.subject = this.message[0].subject;
     this.paperID = this.message[0].paperID;
-
+    // this above part should be avoided in order to maintain the local storage data even after the refresh
+    // when we refresh the page these above lines are executed and all local variables become null.
     console.log(this.stream , this.year, this.subject, this.paperID);
 
     this.dataService.filterPaperByAll(this.stream,this.subject,this.year).subscribe((paper) => {
       this.paperSet = paper;
-      //console.log(paper);
+      this.showSpinner = false;
+      console.log(paper);
     });
 
     this.dataService.getAnswers().subscribe((answers) => {
       this.answers=answers;
     });
 
-    this.dataService.getQuestionFilterByPaperID(this.paperID).subscribe((item)=>{
-      this.questionSet = item;
+    this.dataService.getQuestionFilterByPaperID(this.paperID).subscribe((question)=>{
+      this.questionSet = question;
     });
+    this.setPaperDetails();
 
   }
 

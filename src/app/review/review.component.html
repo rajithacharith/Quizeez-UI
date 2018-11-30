@@ -24,7 +24,7 @@
 <div class="panel panel-teal panel-widget border-right">
 <div class="row no-padding"><em class=""></em>
   
-  <div class="large">Marks</div>
+  <div class="large">Answers</div>
  
 </div>
 </div>
@@ -33,20 +33,20 @@
 </div><!--/.row-->
 </div>
 
-<div class="panel panel-container" *ngFor="let answer of result;let i = index;" style="text-align: left; padding: 10px; border-radius: 10px;">
+<div class="panel panel-container" *ngFor="let result of questionResults;let i = index;" style="text-align: left; padding: 10px; border-radius: 10px;">
   <div class="row" >
     <div class="col-md-12">
    
-      <label for="">{{i+1}} - Dummy question?</label>
+      <label for="">{{i+1}} - {{questionSet[i].question}}</label>
     </div>
   </div>
   <div class = "row" >
     <div class="col-sm-8"> 
-        Correct answer : This is the Correct Answer
+        Correct answer : {{questionSet[i].answers[questionSet[i].correctAnswer]}}
     </div>
     <div class="container">
-      <span class="glyphicon glyphicon-ok" style="color: green" *ngIf="answer"></span>
-      <span class="glyphicon glyphicon-remove" style="color: red" *ngIf="!answer"></span>
+      <span class="glyphicon glyphicon-ok" style="color: green" *ngIf="result"></span>
+      <span class="glyphicon glyphicon-remove" style="color: red" *ngIf="!result"></span>
     </div>
 
   
@@ -58,7 +58,7 @@
 
 
 <div class='row text-center'>
-  <button type="button" class="btn btn-md btn-primary" href="http://localhost:4200">Go to Home</button>
+  <button type="button" class="btn btn-md btn-primary" (click)="submitAnswers()">Go to Home</button>
 </div>
 
 

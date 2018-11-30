@@ -39,12 +39,7 @@ export class DashboardComponent implements OnInit {
       this.paperSet = paper;
       
     });
-    /*
-    this.dataService.getQuestions().subscribe((question) => {
-      console.log(question);
-    });
-
-    */
+    
 
 
   }
@@ -56,7 +51,7 @@ export class DashboardComponent implements OnInit {
       this.dataService.filterPaperByStream(this.selectedStream).subscribe((paper)=>{
         this.subjectSet= paper;
         this.subjectDisabled = false;
-        console.log("sibject enabled");
+        console.log("subject enabled");
       });
 
     }
@@ -68,7 +63,6 @@ export class DashboardComponent implements OnInit {
 
     selectedSubjectEventHandler(event : any, selectedSubject : string){
       this.selectedSubject=event.target.value;
-      // this.setSubject(selectedSubject);
       this.dataService.filterPaperBySubject(selectedSubject).subscribe((paper)=>{
         this.yearSet= paper;
         this.yearDisabled = false;
@@ -85,16 +79,7 @@ export class DashboardComponent implements OnInit {
         this.searchButtonDisable=false;
       });
     }
-    /*
-    selectedLessonEventHandler(event : any){
-      this.selectedLesson=event.target.value;
-      console.log(this.selectedLesson);
-
-      this.dataService.filterPaperByLesson(this.selectedLesson).subscribe((paper)=>{
-        this.paperSet= paper;
-      });
-    }
-    */
+    
 
   ngOnInit() {
     this.shared.currentMessage.subscribe(message => {
@@ -102,22 +87,7 @@ export class DashboardComponent implements OnInit {
       
     });
   }
-  /* setStream(message: string) {
-    this.shared.setStream(message);
-    console.log(message);
-  }
-  setYear(message: number) {
-    this.shared.setYear(message);
-    console.log(message);
-  }
-  setSubject(message: string) {
-    this.shared.setSubject(message);
-    console.log(message);
-  }
-  setLession(message: string) {
-    this.shared.setLesson(message);
-    console.log(message);
-  } */
+  
   changeMessage(message: any){
     this.shared.changeMessage(message);
     console.log(message);

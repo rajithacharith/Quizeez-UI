@@ -6,7 +6,10 @@ import {PaperComponent} from '../paper/paper.component';
 import {PaperListComponent} from '../paper-list/paper-list.component';
 import {LoginComponent} from '../login/login.component';
 import {ReviewComponent} from '../review/review.component';
+
 import {AdminDashboardComponent} from '../admin-dashboard/admin-dashboard.component';
+
+import { RegisterPageComponent } from "../register-page/register-page.component";
 
 import {  } from 'rxjs';
 
@@ -38,6 +41,10 @@ const appRoutes: Routes = [
   {
     path: 'review',
     component: ReviewComponent
+  },
+  {
+    path: 'register',
+    component : RegisterPageComponent
   }
 ];
 

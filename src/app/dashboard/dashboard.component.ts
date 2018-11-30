@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DataserviceService } from '../dataservice.service';
@@ -14,38 +14,26 @@ import { SharedserviceService } from '../services/sharedservice.service';
 
 export class DashboardComponent implements OnInit {
 
-
+  studentID : any;
   paperSet : any;
   subjectSet: any;
   yearSet : any;
-  LessonSet : any;
+  LanguageSet : any;
 
   selectedStream : string ;
+  selectedLanguage: string ;
   selectedSubject : string ;
   selectedYear : number ;
-  selectedLesson : string ;
+  
   message:any;
+  
 
+  LanguageDisabled : boolean = true ;
   subjectDisabled : boolean = true;
   yearDisabled : boolean = true ; 
   searchButtonDisable : boolean = true;
   constructor( private dataService : DataserviceService, private shared: SharedserviceService,private router:Router) {
-
-
-
-    this.dataService.getPapers().subscribe((paper) => {
-      
-      console.log(paper);
-      this.paperSet = paper;
-      
-    });
-    /*
-    this.dataService.getQuestions().subscribe((question) => {
-      console.log(question);
-    });
-
-    */
-
+    console.log(sessionStorage.getItem("userID"));
 
   }
 
@@ -53,22 +41,23 @@ export class DashboardComponent implements OnInit {
     selectedStreamEventHandler(event : any,selectedStream : any){
       this.selectedStream=event.target.value;
       console.log((this.selectedStream));
-      this.dataService.filterPaperByStream(this.selectedStream).subscribe((paper)=>{
+      this.LanguageDisabled = false;
+
+    }
+
+    selectedLanguageEventHandler(event : any,selectedLanguage : any){
+      this.selectedLanguage=event.target.value;
+      console.log((this.selectedLanguage));
+      this.dataService.filterPaperByStreamAndLanguage(this.selectedStream,this.selectedLanguage).subscribe((paper)=>{
         this.subjectSet= paper;
         this.subjectDisabled = false;
-        console.log("sibject enabled");
+        console.log("subject enabled");
       });
 
     }
 
-
-
-
-
-
     selectedSubjectEventHandler(event : any, selectedSubject : string){
       this.selectedSubject=event.target.value;
-      // this.setSubject(selectedSubject);
       this.dataService.filterPaperBySubject(selectedSubject).subscribe((paper)=>{
         this.yearSet= paper;
         this.yearDisabled = false;
@@ -85,39 +74,15 @@ export class DashboardComponent implements OnInit {
         this.searchButtonDisable=false;
       });
     }
-    /*
-    selectedLessonEventHandler(event : any){
-      this.selectedLesson=event.target.value;
-      console.log(this.selectedLesson);
-
-      this.dataService.filterPaperByLesson(this.selectedLesson).subscribe((paper)=>{
-        this.paperSet= paper;
-      });
-    }
-    */
+    
 
   ngOnInit() {
+    console.log(sessionStorage.getItem("userID"));
     this.shared.currentMessage.subscribe(message => {
       this.message = message;
-      
     });
   }
-  /* setStream(message: string) {
-    this.shared.setStream(message);
-    console.log(message);
-  }
-  setYear(message: number) {
-    this.shared.setYear(message);
-    console.log(message);
-  }
-  setSubject(message: string) {
-    this.shared.setSubject(message);
-    console.log(message);
-  }
-  setLession(message: string) {
-    this.shared.setLesson(message);
-    console.log(message);
-  } */
+  
   changeMessage(message: any){
     this.shared.changeMessage(message);
     console.log(message);

@@ -8,6 +8,7 @@ import {  HttpClient } from '@angular/common/http';
 export class DataserviceService {
 
   url = 'http://localhost:3000/api';
+
   constructor(private http: HttpClient) {
   }
 
@@ -28,15 +29,16 @@ export class DataserviceService {
     return this.http.get(`${this.url}/papers?filter[where][stream]=${stream}`);
   }
 
+  /*get paper filtered by the selected 'language' */
+  filterPaperByLanguage(language : string){
+    return this.http.get(`${this.url}/papers?filter[where][language]=${language}`);
+  }
+
   /*get paper filtered by the selected 'year' */
   filterPaperByYear(year : number){
     return this.http.get(`${this.url}/papers?filter[where][year]=${year}`);
   }
 
-  /*get paper filtered by the selected 'lesson' */
-  filterPaperByLesson(lesson : string){
-    return this.http.get(`${this.url}/papers?filter[where][lesson]=${lesson}`);
-  }
 
   /*get paper filtered by the selected 'subject' */
   filterPaperBySubject(subject : string){
@@ -48,9 +50,14 @@ export class DataserviceService {
     return this.http.get(`${this.url}/papers?filter[where][stream]=${stream}&filter[where][year]=${year}&filter[where][subject]=${subject}`);
   }
 
-  /*get paper filtered by the selected 'stream,subject,year and lesson' */
-  filterPaperByAllandLesson(stream : string,subject : string,year : number,lesson : string){
-    return this.http.get(`${this.url}/papers?filter[where][stream]=${stream}&filter[where][year]=${year}&filter[where][subject]=${subject}&filter[where][lesson]=${lesson}`);
+  /*get paper filtered by the selected 'stream,subject,year and language' */
+  filterPaperByAllandLanguage(stream : string,subject : string,year : number,language: string){
+    return this.http.get(`${this.url}/papers?filter[where][stream]=${stream}&filter[where][year]=${year}&filter[where][subject]=${subject}&filter[where][language]=${language}`);
+  }
+
+  /*get paper filtered by the selected 'year' */
+  filterPaperByStreamAndLanguage(stream : string, language: string){
+    return this.http.get(`${this.url}/papers?filter[where][stream]=${stream}&filter[where][language]=${language}`);
   }
 
   /*get all the questions in all papers*/
@@ -96,23 +103,6 @@ export class DataserviceService {
 
   /* submit answers for a given paper */
   /* Call the function with studentID,paperID and answers for questions as an Object to submit the answer */
-  submitAnswers(studentID : number,paperID : number,questionResult : Object){
-    const answ = {
-      studentID : studentID,
-      paperID : paperID,
-      questionResult:questionResult
-    }
-
-    return this.http.post(`${this.url}/answers`,answ);
-  }
-  updateAnswers(studentID : number,paperID : number,questionResult : Object){
-    const answ = {
-      studentID : studentID,
-      paperID : paperID,
-      questionResult:questionResult
-    }
-    return this.http.post(`${this.url}/answers/update?filter[where][studentID]=${studentID}&filter[where][paperID]=${paperID}`,answ);
-  }
 
   storeMarkedAnswers(studentID : number,paperID : number,markedAnswers : boolean[]){
     const ans = {
@@ -120,7 +110,15 @@ export class DataserviceService {
       paperID : paperID,
       markedAnswers : markedAnswers
     }
-    return this.http.post(`${this.url}/studentResults`,ans);
+    return this.http.post(`${this.url}/studentAnswers`,ans);
+  }
+
+  userLogin(email : string , password : string){
+    const access = {
+      email: email,
+      password : password
+    }
+    return this.http.post(`${this.url}/Users/login`,access);
   }
 
   /* Add paper as a object */

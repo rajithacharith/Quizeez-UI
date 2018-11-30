@@ -18,48 +18,40 @@ export class DashboardComponent implements OnInit {
   paperSet : any;
   subjectSet: any;
   yearSet : any;
-  LessonSet : any;
+  LanguageSet : any;
 
   selectedStream : string ;
+  selectedLanguage: string ;
   selectedSubject : string ;
   selectedYear : number ;
-  selectedLesson : string ;
+  
   message:any;
+  
 
+  LanguageDisabled : boolean = true ;
   subjectDisabled : boolean = true;
   yearDisabled : boolean = true ; 
   searchButtonDisable : boolean = true;
   constructor( private dataService : DataserviceService, private shared: SharedserviceService,private router:Router) {
 
-
-
-    this.dataService.getPapers().subscribe((paper) => {
-      
-      console.log(paper);
-      this.paperSet = paper;
-      
-    });
-    
-
-
   }
-
-
     selectedStreamEventHandler(event : any,selectedStream : any){
       this.selectedStream=event.target.value;
       console.log((this.selectedStream));
-      this.dataService.filterPaperByStream(this.selectedStream).subscribe((paper)=>{
+      this.LanguageDisabled = false;
+
+    }
+
+    selectedLanguageEventHandler(event : any,selectedLanguage : any){
+      this.selectedLanguage=event.target.value;
+      console.log((this.selectedLanguage));
+      this.dataService.filterPaperByStreamAndLanguage(this.selectedStream,this.selectedLanguage).subscribe((paper)=>{
         this.subjectSet= paper;
         this.subjectDisabled = false;
         console.log("subject enabled");
       });
 
     }
-
-
-
-
-
 
     selectedSubjectEventHandler(event : any, selectedSubject : string){
       this.selectedSubject=event.target.value;
@@ -84,7 +76,6 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.shared.currentMessage.subscribe(message => {
       this.message = message;
-      
     });
   }
   

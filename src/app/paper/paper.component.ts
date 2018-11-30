@@ -77,9 +77,6 @@ export class PaperComponent implements OnInit {
     this.studentAnswers[answerObject.questionNumber] = answerObject.answerNumber;
     console.log('ans:', this.studentAnswers);
     localStorage.setItem('answers', JSON.stringify(this.studentAnswers));
-
-
-
   }
   checkpaper() {
 
@@ -126,6 +123,10 @@ export class PaperComponent implements OnInit {
     if (!(localStorage.getItem('PaperDetails') === null)) {
       console.log('Entered if');
       console.log(localStorage.getItem('PaperDetails'));
+      if (!(localStorage.getItem('answers') === null)){
+        this.studentAnswers = JSON.parse(localStorage.getItem('answers'));
+        console.log(this.studentAnswers);
+      }
       const paperDetails = JSON.parse(localStorage.getItem('PaperDetails')) ;
       console.log(paperDetails);
       this.stream = paperDetails.stream;
@@ -139,10 +140,7 @@ export class PaperComponent implements OnInit {
         console.log(paper);
       });
 
-      if (!(localStorage.getItem('answers') === null)){
-        this.studentAnswers = JSON.parse(localStorage.getItem('answers'));
-        console.log(this.studentAnswers);
-      }
+
       this.dataService.getAnswers().subscribe((answers) => {
         this.answers=answers;
       });
@@ -176,10 +174,13 @@ export class PaperComponent implements OnInit {
         this.dataService.getQuestionFilterByPaperID(this.paperID).subscribe((question)=>{
           this.questionSet = question;
         });
+
         this.setPaperDetails();
 
       }
     }
+
+
 
 
 }

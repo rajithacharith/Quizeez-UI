@@ -112,6 +112,10 @@ export class DataserviceService {
     return this.http.post(`${this.url}/Users/login`,access);
   }
 
+  userLogout(accessToken : string){
+    return this.http.post(`${this.url}/Users/logout`,accessToken);
+  }
+
 
 
 }

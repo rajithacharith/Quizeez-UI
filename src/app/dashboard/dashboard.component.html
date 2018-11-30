@@ -66,16 +66,24 @@
                       <div class="form-group">
                           <label>Stream</label>
                           <select class="form-control" [(ngModel)]="selectedStream" (change)="selectedStreamEventHandler($event)">
-                            <!--<option *ngFor="let paper of paperSet" [value]="paper.stream" >{{paper.stream}}</option> 
-                              hardcoded O/L and A/L instead of this
-                            -->
                             <option value="O/L" (change)="selectedStreamEventHandler($event)">O/L</option>
                             <option value="A/L" (change)="selectedStreamEventHandler($event)">A/L</option>
                           </select>
                         </div>
                   </div>
-                <div class="col-sm-3">
+
+                  <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Language</label>
+                        <select class="form-control" [disabled]="LanguageDisabled" [(ngModel)]="selectedLanguage" (change)="selectedLanguageEventHandler($event)">
+                          <option value="Sinhala" (change)="selectedLanguageEventHandler($event)">Sinhala</option>
+                          <option value="English" (change)="selectedLanguageEventHandler($event)">English</option>
+                          <option value="Tamil" (change)="selectedLanguageEventHandler($event)">Tamil</option>
+                        </select>
+                      </div>
+                </div>
                 
+                  <div class="col-sm-3">
                     <div class="form-group">
                         <label>Subjects</label>
                         <select class="form-control"  [disabled]="subjectDisabled" [(ngModel)]="selectedSubject" (change)="selectedSubjectEventHandler($event,selectedSubject)">
@@ -92,14 +100,7 @@
                         </select>
                       </div>
                 </div>
-                <div class="col-sm-2">
-                    <div class="form-group">
-                        <label>Lesson</label>
-                        <select class="form-control" [disabled]="true" [(ngModel)]="selectedSubject" (change)="selectedLessonEventHandler($event)">
-                          <option *ngFor="let paper of lessonSet" [value]="paper.lesson">{{paper.lesson}}</option>
-                        </select>
-                      </div>
-                </div>
+                
                 <div class="col-sm-3" style="padding:2%">
                     <button type="button" class="btn btn-md btn-primary" [disabled]="searchButtonDisable" (click)='submitHandler()'>Search</button>
                 </div>

@@ -45,28 +45,11 @@
       <label>
         <input type="radio" name="optionsRadio{{singleQuestion.questionID}}" value="{{answer}}" (change)="radioChangeHandle($event,q,i)">{{answer}}
       </label>
-    </div>
   </div>
-
 </div>
-
-  <div class="row" >
-    <div class="col-md-12">
-      <label for="">{{singleQuestion.question}}</label>
-      
-    </div>
-  </div>
-  <div class = "row" >
-    <div class = "col-sm-3">
-      <div class="radio" *ngFor="let answer of singleQuestion.answers; let i=index">
-        <label class="col-md-3">
-          <input type="radio" name="optionsRadio{{singleQuestion.questionID}}"  value="{{answer}}" (change)="radioChangeHandle($event,q,i)">{{answer}}
-        </label>
-      </div>
-    </div>
-  </div>
-
 </div>
+</div>
+  
 <app-loading-spin *ngIf="showSpinner"></app-loading-spin>
 <div class='row'>
   <button type="button" class="btn btn-md btn-primary" *ngIf="!showSpinner" (click)="checkpaper()">Submit</button>

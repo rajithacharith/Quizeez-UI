@@ -34,8 +34,7 @@ export class PaperComponent implements OnInit {
 
   showSpinner : boolean = true ;
 
-  studentAnswers =  [] ;
-
+  
 
   studentAnswers = {};
   message : any;
@@ -89,29 +88,11 @@ export class PaperComponent implements OnInit {
       for(var i = 0;i<this.correctAnswerSet.length;i++) { 
         if(this.studentAnswers[i]==this.correctAnswerSet[i]){
             this.markedans.push(true);
-
-
-    
-  }
-  
-  checkpaper(arr_correctans:string[]){
-
-      
-      var markedans = [];
-
-      for(var i = 0;i<this.studentAnswers.length;i++) {
-        if(this.studentAnswers[i]==arr_correctans[i]){
-            markedans.push(true);
-
         }
         else{
           this.markedans.push(false);
         }
-
-          
-        
-          
-      }  
+      }
       console.log("marked answers")
       console.log(this.markedans);
       console.log(this.correctAnswerSet)
@@ -123,18 +104,7 @@ export class PaperComponent implements OnInit {
 
       
       return this.markedans;
-  }
-
-  
-
-
-
-
-      }
-      console.log(markedans);
-      var mark = markedans
-      return markedans;
-  }
+    }
 
   setPaperDetails(){
     let details = {

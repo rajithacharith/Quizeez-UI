@@ -35,7 +35,7 @@
                   <div class="col-sm-3">
                       <div class="form-group">
                           <label>Stream</label>
-                          <select class="form-control" [(ngModel)]="selectedStream" (change)="selectedStreamEventHandler($event)">
+                          <select class="form-control" [(ngModel)]="stream" (change)="selectedStreamEventHandler($event)">
                             <!--<option *ngFor="let paper of paperSet" [value]="paper.stream" >{{paper.stream}}</option>
                               hardcoded O/L and A/L instead of this
                             -->
@@ -55,7 +55,7 @@
 
                     <div class="form-group">
                         <label>Subjects</label>
-                        <select class="form-control"  [disabled]="subjectDisabled" [(ngModel)]="selectedSubject" (change)="selectedSubjectEventHandler($event,selectedSubject)">
+                        <select class="form-control"  [disabled]="subjectDisabled" [(ngModel)]="subject" (change)="selectedSubjectEventHandler($event,selectedSubject)">
                           <option *ngFor = "let paper of subjectSet" [value]="paper.subject">{{paper.subject}}</option>
                         </select>
                       </div>
@@ -72,7 +72,7 @@
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label>Year</label>
-                        <select class="form-control" [disabled]="yearDisabled" [(ngModel)]="selectedYear" (change)="selectedYearEventHandler($event)">
+                        <select class="form-control" [disabled]="yearDisabled" [(ngModel)]="year" (change)="selectedYearEventHandler($event)">
                           <option *ngFor="let paper of yearSet" [value]="paper.year">{{paper.year}}</option>
                         </select>
                       </div>
@@ -88,7 +88,7 @@
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label>Current Languages</label>
-                        <select class="form-control" [(ngModel)]="selectedSubject" (change)="selectedLessonEventHandler($event)">
+                        <select class="form-control" [(ngModel)]="language" (change)="selectedLessonEventHandler($event)">
                           <option *ngFor="let paper of lessonSet" [value]="paper.lesson">{{paper.lesson}}</option>
                         </select>
                       </div>
@@ -114,12 +114,12 @@
 
   <div class="row" >
     <div class="col-md-12" style="">
-        <div class="panel panel-widget border-right" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;border-style: solid; border-width: 3px; border-color: #1aa3ff;">
+        <div class="panel panel-widget border-right" *ngFor="let singleQuestion of questionSet;let q = index" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;border-style: solid; border-width: 3px; border-color: #1aa3ff;">
           <div class="container">
             <div class="row">
             <div class="form-group col-md-10">
               <label for="exampleInputEmail1">Question</label>
-              <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter question Here">
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter question Here">
             </div>
           </div>
             <div class= "row">
@@ -158,7 +158,7 @@
               <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleInputEmail1">Correct Answer</label>
-                    <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correct Answer">
+                    <input type="text" class="form-control" id="exampleInputEmail1" (click)="addQuestion($event,q)" placeholder="Correct Answer">
                   </div>
                 </div>
               <div class="col-sm-6">
@@ -170,6 +170,65 @@
 
 
         </div>
+
+        <div class="panel panel-widget border-right" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;border-style: solid; border-width: 3px; border-color: #1aa3ff;">
+            <div class="container">
+              <div class="row">
+              <div class="form-group col-md-10">
+                <label for="exampleInputEmail1">Question</label>
+                <input type="text" class="form-control" id="question" aria-describedby="emailHelp" placeholder="Enter question Here">
+              </div>
+            </div>
+              <div class= "row">
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Answer 1</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Answer 1">
+                </div>
+              </div>
+
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Answer 2</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Answer 2">
+                </div>
+              </div>
+
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Answer 3</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Answer 3">
+                </div>
+              </div>
+
+              <div class="col-sm-2">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Answer 4</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Answer 4">
+                </div>
+              </div>
+            </div>
+
+              </div>
+
+              <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">Correct Answer</label>
+                      <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Correct Answer">
+                    </div>
+                  </div>
+                <div class="col-sm-6">
+
+                    <button type="submit" style="margin-top:6%"  (click)="addQuestion($event,question,'new')" class="btn btn-primary mb-2">Add Question</button>
+                </div>
+              </div>
+              <br><br>
+
+
+          </div>
+
+
     </div>
   </div>
 

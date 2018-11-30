@@ -72,6 +72,15 @@ export class DataserviceService {
     return this.http.post(`${this.url}/questions`,ques);
 
   }
+  /*add a question to the paper */
+  addQuestionAsObject(ques: any) {
+
+
+    return this.http.post(`${this.url}/questions`, ques);
+
+  }
+
+
   /*get the questions in a given paper */
   getQuestionFilterByPaperID(paperID : number){
     return this.http.get(`${this.url}/questions?filter[where][paperID]=${paperID}`);
@@ -112,6 +121,11 @@ export class DataserviceService {
       markedAnswers : markedAnswers
     }
     return this.http.post(`${this.url}/studentResults`,ans);
+  }
+
+  /* Add paper as a object */
+  addPaper(paper: any) {
+    return this.http.post(`${this.url}/papers`, paper);
   }
 
 

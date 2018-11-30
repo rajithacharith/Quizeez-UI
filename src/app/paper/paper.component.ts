@@ -15,12 +15,12 @@ import { NgModel } from '@angular/forms';
 
 export class PaperComponent implements OnInit {
   //private storageName = 'paperDetails';
-  public paperSet :any;
-  public stream : string ;
-  public year : number ;
-  public subject : string ;
+  public paperSet: any;
+  public stream: string ;
+  public year: number ;
+  public subject: string ;
 
-  public answers : any;
+  public answers: any;
   //public questionID : any;
   public studentID: number;
   public paperID: number;

@@ -25,6 +25,7 @@ import { ReviewComponent } from './review/review.component';
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 import { RegisterPageComponent } from './register-page/register-page.component';
+import { AdminPaperComponent } from './admin-paper/admin-paper.component';
 
 
 
@@ -41,6 +42,8 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     AdminDashboardComponent
 
     RegisterPageComponent,
+
+    AdminPaperComponent,
   ],
   imports: [
     BrowserModule,

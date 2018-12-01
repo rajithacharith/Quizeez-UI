@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataserviceService } from '../dataservice.service';
-
+import { Router } from "@angular/router";
+import { SharedserviceService } from "../services/sharedservice.service";
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -14,7 +15,7 @@ export class AdminDashboardComponent implements OnInit {
   public newPaperID: number;
   public maxPaperID: number;
   public questionNo: number;
-  public questionSet: any;
+  public questionSet: {};
   public Question: string;
   public Answer0: string;
   public Answer1: string;
@@ -23,7 +24,17 @@ export class AdminDashboardComponent implements OnInit {
   public correctAnswer: number;
   public time: string;
 
-  constructor( private dataService: DataserviceService ) {
+  public addQuestionVisibility : boolean;
+  public noOfQues : string ;
+  public noOfQuesArray: number;
+  public i : number = 0;
+
+  constructor( private dataService: DataserviceService,private router : Router,private shared : SharedserviceService ) {
+    this.addQuestionVisibility = false;
+    this.subject="";
+    this.noOfQuesArray=0;
+
+
     this.questionNo = 0;
     this.questionSet = {};
     let maxPaperID = 0;
@@ -44,6 +55,21 @@ export class AdminDashboardComponent implements OnInit {
 
   ngOnInit() {
 
+
+  }
+
+  createPaperSubmitHandler(){
+    this.noOfQuesArray= parseInt(this.noOfQues);
+    console.log(this.noOfQuesArray);
+
+    const paperDetails = {
+      paperID : this.newPaperID,
+      noOfQuestions: this.noOfQuesArray
+    }
+    this.shared.changeMessage(paperDetails);
+    this.router.navigateByUrl('/add-questions')
+    
+    
 
   }
   addQuestion(event: any, question: string, q: any) {
@@ -77,6 +103,11 @@ export class AdminDashboardComponent implements OnInit {
     };
     this.dataService.addPaper(paper);
     this.submitQuestions();
+  }
+
+  changeMessage(message: any){
+    this.shared.changeMessage(message);
+    console.log(message);
   }
 
 }

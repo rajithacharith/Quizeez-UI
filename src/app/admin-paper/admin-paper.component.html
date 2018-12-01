@@ -1,0 +1,59 @@
+<ng-container *ngIf="questionSet" >
+<div class="panel panel-widget border-right" *ngFor="let question of questionSet | keyvalue; let i= index;" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;border-style: solid; border-width: 3px; border-color: #1aa3ff;">
+  <div class="container">
+    <div class="row">
+    <div class="form-group col-md-10">
+      <label> Question  {{question.value.questionID+1}}</label>
+      <input type="text" class="form-control" #question{{i}} aria-describedby="emailHelp" placeholder="Enter question Here">
+    </div>
+  </div>
+    <div class= "row">
+    <div class="col-sm-2">
+      <div class="form-group">
+        <label>Answer 1</label>
+        <input type="email" class="form-control" id="question{{i}}answer0" aria-describedby="emailHelp" placeholder="Answer 1">
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <div class="form-group">
+        <label>Answer 2</label>
+        <input type="email" class="form-control" id="question{{i}}answer1" aria-describedby="emailHelp" placeholder="Answer 2">
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <div class="form-group">
+        <label>Answer 3</label>
+        <input type="email" class="form-control"  id="question{{i}}answer2" aria-describedby="emailHelp" placeholder="Answer 3">
+      </div>
+    </div>
+
+    <div class="col-sm-2">
+      <div class="form-group">
+        <label>Answer 4</label>
+        <input type="email" class="form-control"  id="question{{i}}answer3" aria-describedby="emailHelp" placeholder="Answer 4">
+      </div>
+    </div>
+  </div>
+
+    </div>
+
+    <div class="row">
+      <div class="col-sm-6">
+          <div class="form-group">
+            <label>Correct Answer</label>
+            <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="Correct Answer">
+          </div>
+        </div>
+      <div class="col-sm-6">
+          <button type="submit" style="margin-top:6%"  (click)="addQuestion($event,question,'new')" class="btn btn-primary mb-2">Add Question</button>
+      </div>
+    </div>
+    <br><br>
+
+
+</div>
+</ng-container>
+
+<button type="button" class="btn btn-primary btn-lg btn-block" (click)="test()">Add Paper</button>

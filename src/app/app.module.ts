@@ -5,7 +5,6 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 
 import { FormsModule } from "@angular/forms";
-import { StorageServiceModule } from "angular-webstorage-service";
 
 
 import { AppComponent } from './app.component';
@@ -38,7 +37,7 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     LoginComponent,
     LoadingSpinComponent,
     ReviewComponent,
-    AdminDashboardComponent
+    AdminDashboardComponent,
 
     RegisterPageComponent,
   ],
@@ -48,7 +47,6 @@ import { RegisterPageComponent } from './register-page/register-page.component';
     FormsModule,
     AppRoutingModule,
     CountdownModule,
-    StorageServiceModule
   ],
   providers: [DataserviceService, SharedserviceService],
   bootstrap: [AppComponent]

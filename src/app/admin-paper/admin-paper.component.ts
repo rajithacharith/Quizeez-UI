@@ -1,11 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedserviceService } from "../services/sharedservice.service";
+import { ArrangedQuestionsFormat } from "../arranged-questions-format";
+
 @Component({
   selector: 'app-admin-paper',
   templateUrl: './admin-paper.component.html',
   styleUrls: ['./admin-paper.component.css']
 })
-export class AdminPaperComponent implements OnInit {
+
+
+
+
+
+export class AdminPaperComponent implements OnInit,ArrangedQuestionsFormat {
 
   public paperID:any;
   public noOfQuestions : number ;
@@ -13,9 +20,22 @@ export class AdminPaperComponent implements OnInit {
   public i : number ;
   public questionSet = {};
   public question0 : any;
-  constructor(private shared : SharedserviceService) { }
+  
+  public questionArray = [] ;
+  public answer0Array = [];
+  public answer1Array = [];
+  public answer2Array = [];
+  public answer3Array = [];
+  public correctAnswerArray = [];
 
+  public arrangedQuestion = {} as ArrangedQuestionsFormat;
+  public setOfArrangedQuestions = {} ;
+  testArr : string [] = [];
+ 
+  constructor(private shared : SharedserviceService) {  }
+  
   ngOnInit() {
+    console.log(this.arrangedQuestion);
     this.shared.currentMessage.subscribe((message)=>{
       this.message = message;
     });
@@ -37,23 +57,29 @@ export class AdminPaperComponent implements OnInit {
   }
 
   test(){
-    for (this.i =0;this.i < this.noOfQuestions;this.i++){
-      const question = {
-        'paperID': this.paperID,
-        'questionID': this.i,
-        'question': `angular.element('question${this.i}').val());`,
-        'answers': [`question${this.i}answer0`,`question${this.i}answer1`,`question${this.i}answer2`,`question${this.i}answer3`],
-        'correctAnswer':'vghvhg'
-      };
-      console.log(question);
-      this.questionSet[this.i] = question;
-    }
+
     console.log("clicked");
-    console.log(this.questionSet);
+    
+    for(let i=0; i<this.questionArray.length; i++){
+      this.arrangedQuestion.paperID = this.paperID;
+      this.arrangedQuestion.questionID= i;
+      this.arrangedQuestion.question= this.questionArray[i];
+      this.arrangedQuestion.correctAnswer=this.correctAnswerArray[i];
+      
+      this.testArr.push(this.answer0Array[i]);
+      this.testArr.push(this.answer1Array[i]);
+      this.testArr.push(this.answer2Array[i]);
+      this.testArr.push(this.answer3Array[i]);
+      this.arrangedQuestion.answers=this.testArr;
+      
+      this.setOfArrangedQuestions[i]=this.arrangedQuestion;
+      this.testArr=[];
+      this.arrangedQuestion={} as ArrangedQuestionsFormat;
+    }
+    
+
+    console.log(this.setOfArrangedQuestions);
   }
  
- 
-
-  
 
 }

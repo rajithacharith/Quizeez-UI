@@ -39,11 +39,9 @@ import { AdminPaperComponent } from './admin-paper/admin-paper.component';
     LoginComponent,
     LoadingSpinComponent,
     ReviewComponent,
-    AdminDashboardComponent
-
+    AdminDashboardComponent,
     RegisterPageComponent,
-
-    AdminPaperComponent,
+    AdminPaperComponent
   ],
   imports: [
     BrowserModule,

@@ -79,10 +79,8 @@ export class DataserviceService {
     return this.http.post(`${this.url}/questions`,ques);
 
   }
-  /*add a question to the paper */
+  /*add a question object to the paper */
   addQuestionAsObject(ques: any) {
-
-
     return this.http.post(`${this.url}/questions`, ques);
 
   }
@@ -128,8 +126,26 @@ export class DataserviceService {
   /* Add paper as a object */
   addPaper(paper: any) {
     return this.http.post(`${this.url}/papers`, paper);
-
   }
+
+  /* Add subject */
+  addSubject(subjectName : string,subjectStream : string){
+    const newSubject = {
+      subjectName : subjectName,
+      stream : subjectStream
+    }
+    return this.http.post(`${this.url}/subjects`, newSubject);
+  }
+
+  getSubjectsByStream(stream : string){
+    return this.http.get(`${this.url}/subjects?filter[where][stream]=${stream}`);
+  }
+
+  getAllSubjects(){
+    return this.http.get(`${this.url}/subjects`);
+  }
+  
+
 
 
 

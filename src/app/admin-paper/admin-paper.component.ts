@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedserviceService } from "../services/sharedservice.service";
 import { ArrangedQuestionsFormat } from "../arranged-questions-format";
-
+import { DataserviceService } from "../dataservice.service";
 @Component({
   selector: 'app-admin-paper',
   templateUrl: './admin-paper.component.html',
@@ -32,7 +32,7 @@ export class AdminPaperComponent implements OnInit,ArrangedQuestionsFormat {
   public setOfArrangedQuestions = {} ;
   testArr : string [] = [];
  
-  constructor(private shared : SharedserviceService) {  }
+  constructor(private shared : SharedserviceService, private dataService : DataserviceService) {  }
   
   ngOnInit() {
     console.log(this.arrangedQuestion);
@@ -64,13 +64,18 @@ export class AdminPaperComponent implements OnInit,ArrangedQuestionsFormat {
       this.arrangedQuestion.paperID = this.paperID;
       this.arrangedQuestion.questionID= i;
       this.arrangedQuestion.question= this.questionArray[i];
-      this.arrangedQuestion.correctAnswer=this.correctAnswerArray[i];
+      this.arrangedQuestion.correctAnswer=parseInt( this.correctAnswerArray[i]);
       
       this.testArr.push(this.answer0Array[i]);
       this.testArr.push(this.answer1Array[i]);
       this.testArr.push(this.answer2Array[i]);
       this.testArr.push(this.answer3Array[i]);
       this.arrangedQuestion.answers=this.testArr;
+
+      this.dataService.addQuestionAsObject(this.arrangedQuestion).subscribe(()=>{
+        console.log("added the question");
+        console.log(this.arrangedQuestion);
+      });
       
       this.setOfArrangedQuestions[i]=this.arrangedQuestion;
       this.testArr=[];

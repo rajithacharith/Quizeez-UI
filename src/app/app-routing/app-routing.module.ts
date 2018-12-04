@@ -35,7 +35,7 @@ const appRoutes: Routes = [
   {
     path: 'paper-list',
     component: PaperListComponent,
-    canActivate: [GuardserviceService]
+    // canActivate: [GuardserviceService]
   },
   {
     path: 'login',
@@ -44,17 +44,16 @@ const appRoutes: Routes = [
   {
     path: 'admin',
     component: AdminDashboardComponent,
-    canActivate: [GuardserviceService]
+    // canActivate: [GuardserviceService]
   },
   {
     path: 'review',
     component: ReviewComponent,
-    canActivate: [GuardserviceService]
+    // canActivate: [GuardserviceService]
   },
   {
     path: 'register',
-    component : RegisterPageComponent,
-    canActivate: [GuardserviceService]
+    component : RegisterPageComponent
   },
   {
     path: 'add-questions',

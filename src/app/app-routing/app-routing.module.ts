@@ -9,7 +9,7 @@ import {LoginComponent} from '../login/login.component';
 import {ReviewComponent} from '../review/review.component';
 import {AdminPaperComponent } from "../admin-paper/admin-paper.component";
 import {AdminDashboardComponent} from '../admin-dashboard/admin-dashboard.component';
-
+import { ViewPaperComponent } from "../view-paper/view-paper.component";
 import { RegisterPageComponent } from "../register-page/register-page.component";
 
 import {  } from 'rxjs';
@@ -54,6 +54,10 @@ const appRoutes: Routes = [
   {
     path : 'subject-list',
     component : SubjectListComponent
+  },
+  {
+    path : 'view-paper',
+    component : ViewPaperComponent
   }
 ];
 

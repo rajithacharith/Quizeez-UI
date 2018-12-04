@@ -1,26 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { DataserviceService } from "../dataservice.service";
 import { Router } from "@angular/router";
-
 @Component({
-  selector: 'app-paper-list',
-  templateUrl: './paper-list.component.html',
-  styleUrls: ['./paper-list.component.css']
+  selector: 'app-subject-list',
+  templateUrl: './subject-list.component.html',
+  styleUrls: ['./subject-list.component.css']
 })
-export class PaperListComponent implements OnInit {
+export class SubjectListComponent implements OnInit {
 
-  public paperSet :any;
+  public subjectSet : any ;
   constructor(private dataService : DataserviceService,private router : Router) { }
 
   ngOnInit() {
-
-    this.dataService.getPapers().subscribe((paper)=>{
-      this.paperSet = paper;
+    this.dataService.getAllSubjects().subscribe((subject)=>{
+      this.subjectSet = subject;
     });
   }
 
   goHome(){
     this.router.navigateByUrl('/admin');
   }
+
 
 }

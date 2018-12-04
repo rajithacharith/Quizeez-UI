@@ -118,14 +118,19 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   createPaperSubmitHandler(){
-    this.noOfQuesArray= parseInt(this.noOfQues);
+    /* if (this.addPaperForm.invalid){
+      return;
+    } */
+    console.log(this.addPaperForm.value);
+    this.noOfQuesArray = parseInt (this.addPaperForm.value.count);
     console.log(this.noOfQuesArray);
 
     const paperDetails = {
       paperID : this.newPaperID,
       noOfQuestions: this.noOfQuesArray,
-      stream : this.createPaperStream
-    }
+
+      stream : this.addPaperForm.value.stream
+    };
     this.shared.changeMessage(paperDetails);
     this.addPaper();
     this.router.navigateByUrl('/add-questions');
@@ -145,12 +150,12 @@ export class AdminDashboardComponent implements OnInit {
 
   addPaper() {
     const paper = {
-      'stream' : this.createPaperStream,
+      'stream' : this.addPaperForm.value.stream,
       'paperID': this.newPaperID,
-      'year': this.createPaperYear,
-      'subject': this.createPaperSubject,
-      'timeDuration': this.createPaperTime,
-      'language' : this.createPaperLanguage
+      'year': this.addPaperForm.value.year,
+      'subject': this.addPaperForm.value.subject,
+      'timeDuration': this.addPaperForm.value.time,
+      'language' : this.addPaperForm.value.language
     };
     console.log(paper);
     this.dataService.addPaper(paper).subscribe(()=>{
@@ -164,6 +169,11 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   addNewSubject(){
+    if (this.addSubjectForm.invalid){
+      return;
+    }
+    this.newSubject = this.addSubjectForm.value.subject;
+    this.subjectStream = this.addSubjectForm.value.stream;
     this.dataService.addSubject(this.newSubject,this.subjectStream).subscribe(()=>{
       console.log("added the subject");
       console.log(this.newSubject);

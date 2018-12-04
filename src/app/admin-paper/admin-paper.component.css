@@ -1,0 +1,4 @@
+input.ng-required{
+  border:1px solid red;
+  border-left: 5px solid red;
+}

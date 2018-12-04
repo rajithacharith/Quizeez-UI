@@ -3,6 +3,8 @@ import { SharedserviceService } from "../services/sharedservice.service";
 import { ArrangedQuestionsFormat } from "../arranged-questions-format";
 import { DataserviceService } from "../dataservice.service";
 import { Router } from "@angular/router";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-admin-paper',
   templateUrl: './admin-paper.component.html',
@@ -138,12 +140,26 @@ export class AdminPaperComponent implements OnInit, ArrangedQuestionsFormat {
   public setOfArrangedQuestions = {} ;
   questionAnswerArray: string [] = [];
 
-  constructor(private shared: SharedserviceService, private dataService: DataserviceService, private router: Router) {  }
+  questionsForm: FormGroup;
+
+  constructor(private shared: SharedserviceService, private dataService: DataserviceService, private router: Router,private formBuilder: FormBuilder) {  }
 
   ngOnInit() {
 
     console.log(this.arrangedQuestion);
-    this.shared.currentMessage.subscribe((message)=>{
+
+    this.questionsForm = this.formBuilder.group({
+      question: [{}, [Validators.required]],
+      answer0: ['', [Validators.required]],
+      answer1: ['', [Validators.required]],
+      answer2: ['', [Validators.required]],
+      answer3: ['', [Validators.required]],
+      answer4: ['', [Validators.required]],
+      correctAnswer: ['', [Validators.required]],
+  });
+
+
+    this.shared.currentMessage.subscribe((message) => {
       this.message = message;
       console.log(this.message);
     });
@@ -151,10 +167,10 @@ export class AdminPaperComponent implements OnInit, ArrangedQuestionsFormat {
     this.noOfQuestions = this.message.noOfQuestions;
     this.paperStream = this.message.stream;
     console.log(this.paperStream);
-    if (this.paperStream == 'A/L') {
+    if (this.paperStream === 'A/L') {
       this.answer5visible = true;
     }
-    if (this.paperStream == 'O/L') {
+    if (this.paperStream === 'O/L') {
       this.answer5visible = false;
     }
 
@@ -173,6 +189,8 @@ export class AdminPaperComponent implements OnInit, ArrangedQuestionsFormat {
   }
 
   addQuestions(){
+
+
 
     console.log("clicked");
 
@@ -205,6 +223,8 @@ export class AdminPaperComponent implements OnInit, ArrangedQuestionsFormat {
     console.log(this.setOfArrangedQuestions);
     this.router.navigateByUrl('/admin');
   }
+
+  get f() { return this.questionsForm.controls; }
 
 
 }

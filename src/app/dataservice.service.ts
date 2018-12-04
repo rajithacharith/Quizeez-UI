@@ -153,6 +153,14 @@ export class DataserviceService {
     return this.http.post(`${this.url}/Users`, User);
   }
 
-
+  getChartData(studentID : number){
+    return this.http.get(`${this.url}/marks?filter[where][studentID]=${studentID}`);
+  }
+  getSubjects(){
+    return this.http.get(`${this.url}/subjects`);
+  }
+  getMarksFilterBySubjectAndStudent(subject : string, studentID : number){
+    return this.http.get(`${this.url}/marks?filter[where][subject]=${subject}&filter[where][studentID]=${studentID}`)
+  }
 
 }

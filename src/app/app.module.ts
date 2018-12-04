@@ -33,6 +33,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 
 
+import { ChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,6 +57,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule,
     CountdownModule,
     ReactiveFormsModule
+    ChartsModule
   ],
   providers: [DataserviceService, SharedserviceService],
   bootstrap: [AppComponent]

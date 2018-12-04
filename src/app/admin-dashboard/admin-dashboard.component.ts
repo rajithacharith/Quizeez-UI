@@ -24,6 +24,9 @@ export class AdminDashboardComponent implements OnInit {
   public correctAnswer: number;
   public time: string;
 
+  public showCreatePaper : boolean = false;
+  public showCreateSubject : boolean = false;
+
   public addQuestionVisibility : boolean;
   public noOfQues : string ;
   public noOfQuesArray: number;
@@ -146,6 +149,7 @@ export class AdminDashboardComponent implements OnInit {
       console.log("added the subject");
       console.log(this.newSubject);
       this.newSubject="";
+      this.showCreateSubject=false;
     });
   }
 
@@ -155,6 +159,14 @@ export class AdminDashboardComponent implements OnInit {
 
   viewSubjects(){
     this.router.navigateByUrl('/subject-list');
+  }
+
+  addPaperComponent(){
+    this.showCreatePaper=true;
+  }
+
+  addSubjectComponent(){
+    this.showCreateSubject=true;
   }
 
 }

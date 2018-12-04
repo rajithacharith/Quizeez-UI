@@ -24,11 +24,11 @@
 </div><!--/.row-->
 </div>
 
-<div class="panel panel-container" style="text-align: left; padding: 10px; border-radius: 10px;">
+<div class="panel panel-container"  style="text-align: left; padding: 10px; border-radius: 10px;">
 
 
-  <div class="row" >
-    <div class="col-md-12 container" style="">
+  <div class="row" *ngIf="showCreatePaper" >
+    <div class="col-md-12 container"  style="">
         <div class="panel panel-widget border-right" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;border-style: solid; border-width: 3px; border-color: #1aa3ff;">
           <div class="container">
               <div class="row" style='margin-left:2%'>
@@ -66,7 +66,7 @@
                 <div class="col-sm-2">
                   <div class="form-group">
                     <label>Time in hours</label>
-                    <input type="number" [(ngModel)]="createPaperTime" class="form-control"  aria-describedby="emailHelp" placeholder="Year" minlength="4" maxlength="4">
+                    <input type="number" [(ngModel)]="createPaperTime" class="form-control"  aria-describedby="emailHelp" placeholder="Time" minlength="4" maxlength="4">
                   </div>
                 </div>  
                 <div class="col-sm-2">
@@ -81,7 +81,7 @@
 
                     <div class="form-group">
                       <label for="exampleInputEmail1">No.of Questions</label>
-                      <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="New Subject" [(ngModel)]="noOfQues" minlength="1" maxlength="3">
+                      <input type="text" class="form-control"  aria-describedby="emailHelp" placeholder="No of Questions" [(ngModel)]="noOfQues" minlength="1" maxlength="3">
                      
                     </div>      
                       
@@ -98,29 +98,29 @@
     </div>
   </div>
 
-  <div class="panel panel-container" style="text-align: left; padding: 10px; border-radius: 10px;">
+  <div class="panel panel-container"  style="text-align: left; padding: 10px; border-radius: 10px;">
 
 
     <div class="row" >
       <div class="col-md-12 container" style="">
-          <div class="panel panel-widget border-right" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;border-style: solid; border-width: 3px; border-color: #1aa3ff;">
-            <div class="container">
+          <div class="panel panel-widget border-right" *ngIf="showCreateSubject" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;border-style: solid; border-width: 3px; border-color: #1aa3ff;">
+            <div class="container" >
                 <div class="row" style='margin-left:2%'> 
                   <div class="col-sm-3">
-                        <div class="form-group">
+                   <div class="form-group">
                           <label for="exampleInputEmail1">New Subject</label>
                           <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="New Subject" [(ngModel)]="newSubject"> 
-                        </div>
+                        </div> 
                   </div>
-
-                  <select class="form-control col-sm-3" [(ngModel)]="subjectStream" >
+                  
+                  <select class="form-control col-sm-3"  ngDefaultControl [(ngModel)]="subjectStream" >
                     <option value="O/L">O/L</option>
                     <option value="A/L">A/L</option>
                   </select>
-  
+
                   
                   <div class="col-sm-3" style="padding:2%">
-                    <button type="button" class="btn btn-md btn-primary"  (click)='addNewSubject()' [(ngModel)]="newSubject">Add Subject</button>
+                    <button type="button" class="btn btn-md btn-primary"  (click)='addNewSubject()' [(ngModel)]="newSubject">Create Subject</button>  
                 </div> 
               </div>    
               </div>
@@ -134,6 +134,14 @@
 
   <div class="col-sm-3" style="padding:2%">
     <button type="button" class="btn btn-md btn-primary"  (click)='viewSubjects()' >View Subjects</button>
+</div> 
+
+<div class="col-sm-3" style="padding:2%">
+  <button type="button" class="btn btn-md btn-primary"  (click)='addPaperComponent()' >Add Paper</button>
+</div>
+
+<div class="col-sm-3" style="padding:2%">
+  <button type="button" class="btn btn-md btn-primary"  (click)='addSubjectComponent()' >Add Subject</button>
 </div> 
   
 

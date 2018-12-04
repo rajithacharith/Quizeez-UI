@@ -101,7 +101,8 @@ export class AdminDashboardComponent implements OnInit {
 
     const paperDetails = {
       paperID : this.newPaperID,
-      noOfQuestions: this.noOfQuesArray
+      noOfQuestions: this.noOfQuesArray,
+      stream : this.createPaperStream
     }
     this.shared.changeMessage(paperDetails);
     this.addPaper();
@@ -117,12 +118,7 @@ export class AdminDashboardComponent implements OnInit {
     }
     console.log(this.shownSubjects);
   }
-  /*
-  addQuestion(event: any, question: string, q: any) {
-      console.log(event, question, q);
-    
-  }
-*/
+  
   
 
   addPaper() {
@@ -151,6 +147,14 @@ export class AdminDashboardComponent implements OnInit {
       console.log(this.newSubject);
       this.newSubject="";
     });
+  }
+
+  viewPapers(){
+    this.router.navigateByUrl('/paper-list');
+  }
+
+  viewSubjects(){
+    this.router.navigateByUrl('/subject-list');
   }
 
 }

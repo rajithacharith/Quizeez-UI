@@ -14,7 +14,6 @@ export class DataserviceService {
 
   /*get all the papers that have been uploaded so far */
   getPapers(){
-
     return this.http.get(`${this.url}/papers`);
   }
 

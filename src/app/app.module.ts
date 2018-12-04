@@ -26,6 +26,7 @@ import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.compo
 
 import { RegisterPageComponent } from './register-page/register-page.component';
 import { AdminPaperComponent } from './admin-paper/admin-paper.component';
+import { SubjectListComponent } from './subject-list/subject-list.component';
 
 
 
@@ -41,7 +42,8 @@ import { AdminPaperComponent } from './admin-paper/admin-paper.component';
     ReviewComponent,
     AdminDashboardComponent,
     RegisterPageComponent,
-    AdminPaperComponent
+    AdminPaperComponent,
+    SubjectListComponent
   ],
   imports: [
     BrowserModule,

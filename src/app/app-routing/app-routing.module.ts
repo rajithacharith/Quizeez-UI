@@ -4,9 +4,10 @@ import { RouterModule, Routes } from '@angular/router';
 import {DashboardComponent} from '../dashboard/dashboard.component';
 import {PaperComponent} from '../paper/paper.component';
 import {PaperListComponent} from '../paper-list/paper-list.component';
+import { SubjectListComponent } from "../subject-list/subject-list.component";
 import {LoginComponent} from '../login/login.component';
 import {ReviewComponent} from '../review/review.component';
-import {  AdminPaperComponent } from "../admin-paper/admin-paper.component";
+import {AdminPaperComponent } from "../admin-paper/admin-paper.component";
 import {AdminDashboardComponent} from '../admin-dashboard/admin-dashboard.component';
 
 import { RegisterPageComponent } from "../register-page/register-page.component";
@@ -49,6 +50,10 @@ const appRoutes: Routes = [
   {
     path: 'add-questions',
     component : AdminPaperComponent
+  },
+  {
+    path : 'subject-list',
+    component : SubjectListComponent
   }
 ];
 

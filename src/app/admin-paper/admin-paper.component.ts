@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SharedserviceService } from "../services/sharedservice.service";
 import { ArrangedQuestionsFormat } from "../arranged-questions-format";
 import { DataserviceService } from "../dataservice.service";
+import { Router } from "@angular/router";
 @Component({
   selector: 'app-admin-paper',
   templateUrl: './admin-paper.component.html',
@@ -20,27 +21,39 @@ export class AdminPaperComponent implements OnInit,ArrangedQuestionsFormat {
   public i : number ;
   public questionSet = {};
   public question0 : any;
-  
+  public paperStream : string ;
   public questionArray = [] ;
   public answer0Array = [];
   public answer1Array = [];
   public answer2Array = [];
   public answer3Array = [];
+  public answer4Array = [];
   public correctAnswerArray = [];
+  public answer5visible: boolean;
 
   public arrangedQuestion = {} as ArrangedQuestionsFormat;
   public setOfArrangedQuestions = {} ;
-  testArr : string [] = [];
+  questionAnswerArray : string [] = [];
  
-  constructor(private shared : SharedserviceService, private dataService : DataserviceService) {  }
+  constructor(private shared : SharedserviceService, private dataService : DataserviceService,private router: Router) {  }
   
   ngOnInit() {
+    
     console.log(this.arrangedQuestion);
     this.shared.currentMessage.subscribe((message)=>{
       this.message = message;
+      console.log(this.message);
     });
     this.paperID = this.message.paperID;
     this.noOfQuestions = this.message.noOfQuestions;
+    this.paperStream = this.message.stream;
+    console.log(this.paperStream);
+    if(this.paperStream=="A/L"){
+      this.answer5visible=true;
+    }
+    if(this.paperStream=="O/L"){
+      this.answer5visible=false;
+    }
 
     for (this.i =0;this.i < this.noOfQuestions;this.i++){
       const question = {
@@ -56,7 +69,7 @@ export class AdminPaperComponent implements OnInit,ArrangedQuestionsFormat {
     console.log(this.questionSet);
   }
 
-  test(){
+  addQuestions(){
 
     console.log("clicked");
     
@@ -66,11 +79,14 @@ export class AdminPaperComponent implements OnInit,ArrangedQuestionsFormat {
       this.arrangedQuestion.question= this.questionArray[i];
       this.arrangedQuestion.correctAnswer=parseInt( this.correctAnswerArray[i]);
       
-      this.testArr.push(this.answer0Array[i]);
-      this.testArr.push(this.answer1Array[i]);
-      this.testArr.push(this.answer2Array[i]);
-      this.testArr.push(this.answer3Array[i]);
-      this.arrangedQuestion.answers=this.testArr;
+      this.questionAnswerArray.push(this.answer0Array[i]);
+      this.questionAnswerArray.push(this.answer1Array[i]);
+      this.questionAnswerArray.push(this.answer2Array[i]);
+      this.questionAnswerArray.push(this.answer3Array[i]);
+      if(this.answer5visible){
+        this.questionAnswerArray.push(this.answer4Array[i]);
+      }
+      this.arrangedQuestion.answers=this.questionAnswerArray;
 
       this.dataService.addQuestionAsObject(this.arrangedQuestion).subscribe(()=>{
         console.log("added the question");
@@ -78,12 +94,13 @@ export class AdminPaperComponent implements OnInit,ArrangedQuestionsFormat {
       });
       
       this.setOfArrangedQuestions[i]=this.arrangedQuestion;
-      this.testArr=[];
+      this.questionAnswerArray=[];
       this.arrangedQuestion={} as ArrangedQuestionsFormat;
     }
     
 
     console.log(this.setOfArrangedQuestions);
+    this.router.navigateByUrl('/admin');
   }
  
 

@@ -1,4 +1,5 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core'
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DataserviceService } from '../dataservice.service';
@@ -17,20 +18,23 @@ export class DashboardComponent implements OnInit {
   lineChart: any;
   public chartData: any;
 
-
+  studentID : any;
   paperSet : any;
   subjectSet: any;
   yearSet : any;
-  LessonSet : any;
+  LanguageSet : any;
 
   selectedStream : string ;
+  selectedLanguage: string ;
   selectedSubject : string ;
   selectedYear : number ;
-  selectedLesson : string ;
+
   message:any;
 
+
+  LanguageDisabled : boolean = true ;
   subjectDisabled : boolean = true;
-  yearDisabled : boolean = true ; 
+  yearDisabled : boolean = true ;
   searchButtonDisable : boolean = true;
   test = [];
   years = [];
@@ -41,7 +45,6 @@ export class DashboardComponent implements OnInit {
   chartDetails = {};
   subjectsMarks : any;
   constructor( private dataService : DataserviceService, private shared: SharedserviceService,private router:Router) {
-
 
 
     this.dataService.getPapers().subscribe((paper) => {
@@ -71,6 +74,9 @@ export class DashboardComponent implements OnInit {
         //console.log(this.objSubject[i].subjectName);
         this.subjects.push(this.objSubject[i].subjectName);
       }
+
+    console.log(sessionStorage.getItem("userID"));
+
 
       //console.log("subjects",this.subjects,this.subjects.length);
     
@@ -144,16 +150,24 @@ export class DashboardComponent implements OnInit {
   }
 
 
-    selectedStreamEventHandler(event : any,selectedStream : any){
+    selectedStreamEventHandler(event : any){
       this.selectedStream=event.target.value;
       console.log((this.selectedStream));
-      this.dataService.filterPaperByStream(this.selectedStream).subscribe((paper)=>{
+      this.LanguageDisabled = false;
+
+    }
+
+    selectedLanguageEventHandler(event : any){
+      this.selectedLanguage=event.target.value;
+      console.log((this.selectedLanguage));
+      this.dataService.filterPaperByStreamAndLanguage(this.selectedStream,this.selectedLanguage).subscribe((paper)=>{
         this.subjectSet= paper;
         this.subjectDisabled = false;
         console.log("subject enabled");
       });
       //this.drawChart();
     }
+
 
     /* createArray(arr){
       for(var i = 0;i<arr.length;i++) { 
@@ -168,33 +182,26 @@ export class DashboardComponent implements OnInit {
     } */
 
 
-
-
     selectedSubjectEventHandler(event : any, selectedSubject : string){
       this.selectedSubject=event.target.value;
-      // this.setSubject(selectedSubject);
       this.dataService.filterPaperBySubject(selectedSubject).subscribe((paper)=>{
         this.yearSet= paper;
         this.yearDisabled = false;
-        console.log("year enabled");
-        
+        console.log('year enabled');
+
       });
       
       //this.addData(this.lineChart,[2020,2021],[14,56]);
     }
 
-    selectedYearEventHandler(event: any, selectedYear: number) {
+    selectedYearEventHandler(event: any) {
       this.selectedYear = event.target.value;
 
-      this.dataService.filterPaperByYear(selectedYear).subscribe((paper) => {
+      this.dataService.filterPaperByYear(this.selectedYear).subscribe((paper) => {
         this.changeMessage(this.yearSet);
         this.searchButtonDisable=false;
       });
     }
-    /*
-    selectedLessonEventHandler(event : any){
-      this.selectedLesson=event.target.value;
-      console.log(this.selectedLesson);
 
       this.dataService.filterPaperByLesson(this.selectedLesson).subscribe((paper)=>{
         this.paperSet= paper;
@@ -222,10 +229,12 @@ export class DashboardComponent implements OnInit {
     
 //     chart.update();
 // }
+
   ngOnInit() {
+    localStorage.clear();
+    console.log(sessionStorage.getItem("userID"));
     this.shared.currentMessage.subscribe(message => {
       this.message = message;
-      
     });
     // if(this.studentMarks.length!=0){
     //   console.log("data loaded")
@@ -239,6 +248,7 @@ export class DashboardComponent implements OnInit {
     
     //this.drawChart(); 
   }
+
   /* ngAfterViewInit(){
     console.log("data not loading")
     console.log("sdsd",this.studentMarks);
@@ -260,11 +270,13 @@ export class DashboardComponent implements OnInit {
     this.shared.setLesson(message);
     console.log(message);
   } */
+
   changeMessage(message: any){
     this.shared.changeMessage(message);
     console.log(message);
   }
   submitHandler() {
+    console.log(this.yearSet);
     this.router.navigateByUrl('/paper');
   }
 }

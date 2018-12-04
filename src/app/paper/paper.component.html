@@ -22,9 +22,8 @@
 <div class="col-xs-6">
 <div class="panel panel-teal panel-widget border-right">
 <div class="row no-padding"><em class=""></em>
-  <countdown class="large" [config]="{leftTime:  10}" (finished)="finishPaper()">$!m!:$!s!</countdown>
-  <!-- <div class="large">1:15:00</div>
-  <div class="text-muted">Remaining</div> -->
+  <countdown *ngIf=!showSpinner class="large" [config]="{leftTime: time}" (finished)="finishPaper()">$!h!:$!m!:$!s!</countdown>
+
 </div>
 </div>
 </div>
@@ -43,13 +42,14 @@
 <div class = "col-md-3">
   <div class="radio" *ngFor="let answer of singleQuestion.answers; let i=index">
       <label>
-        <input type="radio" name="optionsRadio{{singleQuestion.questionID}}" value="{{answer}}" (change)="radioChangeHandle($event,q,i)">{{answer}}
+        <input type="radio"  name="optionsRadio{{singleQuestion.questionID}}" value="{{answer}}" (change)="radioChangeHandle($event,q,i)">{{answer}}
       </label>
   </div>
+  <div *ngIf="this.studentAnswers[q]+1"> Your answer is {{studentAnswers[q]}}</div>
 </div>
 </div>
 </div>
-  
+
 <app-loading-spin *ngIf="showSpinner"></app-loading-spin>
 <div class='row'>
   <button type="button" class="btn btn-md btn-primary" *ngIf="!showSpinner" (click)="checkpaper()">Submit</button>

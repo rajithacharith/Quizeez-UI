@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedserviceService } from '../services/sharedservice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-review',
@@ -7,14 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReviewComponent implements OnInit {
 
-  result : boolean [] = [true,false,true,true,false,false,false,true];
-  year : number =2000;
-  stream : string = "A/L";
-  subject : string = "Physics";
+  questionResults: boolean []  ;
+  year: number ;
+  stream: string ;
+  subject: string ;
+  questionSet: any;
+  message: any;
+  paperID: any;
+  constructor( private shared: SharedserviceService, private router: Router) { }
 
-  constructor() { }
-    
   ngOnInit() {
-  }
+    this.shared.currentMessage.subscribe(message => {
+      this.message = message;
+      console.log('message is');
+      console.log(message);
+    });
 
+    this.questionResults = this.message.questionResults;
+    this.questionSet = this.message.questionSet;
+    this.stream = this.message.stream;
+    this.subject = this.message.subject;
+    this.year = this.message.year;
+    this.paperID = this.message.paperID;
+
+
+    console.log(this.questionSet[0].answers[this.questionSet[0].correctAnswer]);
+  }
+  submitAnswers() {
+    this.router.navigateByUrl('/');
+  }
 }

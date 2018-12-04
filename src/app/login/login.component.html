@@ -1,16 +1,18 @@
 
 
 <div class="container" style="padding:5%; margin-top:5%">
-    <div class="panel panel-container" style='width:60%; margin-left: 23%; border-radius: 10px'>
+    <div class="panel panel-container" style='width:60%; margin-left: 23%; border-radius: 10px; border-style: solid; border-width: 3px; border-color: #1aa3ff;'>
       <div class="wrapper" style='padding: 1%'>
           <form class="form-signin">
             <h2 class="form-signin-heading" style='text-align: center;'>Login</h2>
-            <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
-            <input type="password" class="form-control" name="password" placeholder="Password" required=""/>
-            <button class="btn btn-lg btn-primary" type="submit" style='margin-left:40%; margin-bottom: 5%'>Login</button>
+            <input type="text" class="form-control" name="email" [(ngModel)]="email" placeholder="Email Address" required="" autofocus="" />
+            <input type="password" class="form-control" name="password" [(ngModel)]="password" placeholder="Password" required=""/>
+            <button class="btn btn-lg btn-primary" type="submit" (click)="submit()" style='margin-left:40%; margin-bottom: 5%'>Login</button>
           </form>
-        </div>
-  </div>
+      </div>
+      <div style="margin-left: 26%"><label><a href="/register" >Are you a new user? Register Now</a></label></div>
+
+    </div>
 </div>
 
 

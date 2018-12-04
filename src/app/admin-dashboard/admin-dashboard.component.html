@@ -1,0 +1,187 @@
+<app-student-nav></app-student-nav>
+
+<div class="container main">
+  <div class="row">
+    <ol class="breadcrumb">
+      <li><a href="#">
+        <em class="fa fa-home"></em>
+      </a></li>
+      <li class="active">Add Paper</li>
+      </ol>
+      </div><!--/.row-->
+<div class="panel panel-container" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;border-style: solid; border-width: 3px; border-color: #1aa3ff;">
+<div class="row">
+<div class="col-xs-12">
+<div class="panel panel-teal panel-widget border-right">
+<div class="row no-padding"><em class=""></em>
+  <div class="large">Add Paper</div>
+
+</div>
+</div>
+</div>
+
+
+</div><!--/.row-->
+</div>
+
+<div class="panel panel-container"  style="text-align: left; padding: 10px; border-radius: 10px;">
+  <div class="col-sm-3" style="padding:2%">
+    <button type="button" class="btn btn-md btn-primary"  (click)='viewPapers()' >View Papers</button>
+  </div>
+
+  <div class="col-sm-3" style="padding:2%">
+    <button type="button" class="btn btn-md btn-primary"  (click)='viewSubjects()' >View Subjects</button>
+  </div>
+
+  <div class="col-sm-3" style="padding:2%">
+    <button type="button" class="btn btn-md btn-primary"  (click)='addPaperComponent()' >Add Paper</button>
+  </div>
+
+  <div class="col-sm-3" style="padding:2%">
+    <button type="button" class="btn btn-md btn-primary"  (click)='addSubjectComponent()' >Add Subject</button>
+  </div>
+
+  <div class="row" *ngIf="showCreatePaper" >
+    <div class="col-md-12 container"  style="">
+        <div class="panel panel-widget border-right" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;border-style: solid; border-width: 3px; border-color: #1aa3ff;">
+          <form class="container" [formGroup]="addPaperForm"  (ngSubmit)="createPaperSubmitHandler()">
+              <div class="row" style='margin-left:2%'>
+                  <div class="col-sm-3">
+                      <div class="form-group">
+                          <label>Stream</label>
+                          <select class="form-control" formControlName="stream" [(ngModel)]="createPaperStream" (change)="selectedStreamEventHandler($event)">
+                            <option value="O/L" (change)="selectedStreamEventHandler($event)">O/L</option>
+                            <option value="A/L" (change)="selectedStreamEventHandler($event)">A/L</option>
+                          </select>
+                      </div>
+                      <div *ngIf="f.stream.errors" class="invalid-feedback" style="color: red;">
+                          *Required!
+                      </div>
+
+
+
+                  </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Subjects</label>
+                        <select class="form-control" formControlName="subject" [(ngModel)]="createPaperSubject" >
+                          <option *ngFor="let subject of shownSubjects" value="{{subject}}" >{{subject}}</option>
+                        </select>
+                        <div *ngIf="f.subject.errors" class="invalid-feedback" style="color: red;">
+                            *Required!
+                        </div>
+                      </div>
+                </div>
+
+                <div class="col-sm-2">
+                      <div class="form-group">
+                        <label >Year</label>
+                        <input type="number" minlength="4" maxlength="4" formControlName="year" [(ngModel)]="createPaperYear" class="form-control"  aria-describedby="emailHelp" placeholder="Year" minlength="4" maxlength="4">
+                      </div>
+                      <div *ngIf="f.year.errors" class="invalid-feedback" style="color: red;">
+                          *Required!
+                      </div>
+
+
+
+                </div>
+
+                <div class="col-sm-2">
+                  <div class="form-group">
+                    <label>Time in hours</label>
+                    <input type="number" [(ngModel)]="createPaperTime" formControlName="time" class="form-control"  aria-describedby="emailHelp" placeholder="Time" minlength="4" maxlength="4">
+                  </div>
+                  <div *ngIf="f.time.errors" class="invalid-feedback" style="color: red;">
+                      *Required!
+                  </div>
+                </div>
+              </div>
+              <div class="row" style='margin-left:2%'>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label>Language</label>
+                        <select class="form-control" [(ngModel)]="createPaperLanguage" formControlName="language">
+                          <option value="Sinhala">Sinhala</option>
+                          <option value="English">English</option>
+                          <option value="Tamil">Tamil</option>
+                        </select>
+                    </div>
+                    <div *ngIf="f.language.errors" class="invalid-feedback" style="color: red;">
+                        *Required!
+                    </div>
+                </div>
+                <div class = "col-sm-3">
+
+                    <div class="form-group">
+                      <label for="exampleInputEmail1">No.of Questions</label>
+                      <input type="text" class="form-control" formControlName="count"  aria-describedby="emailHelp" placeholder="No of Questions" [(ngModel)]="noOfQues" minlength="1" maxlength="3">
+
+                    </div>
+
+                    <div *ngIf="f.count.errors" class="invalid-feedback" style="color: red;">
+                        *Required!
+                    </div>
+
+
+
+                </div>
+                <div class="col-sm-3" style="padding:2%">
+                    <button type="submit" class="btn btn-md btn-primary">Create Paper</button>
+                </div>
+              </div>
+            </form>
+
+        </div>
+    </div>
+  </div>
+
+  <div class="panel panel-container"  style="text-align: left; padding: 10px; border-radius: 10px;">
+
+
+    <div class="row" >
+      <div class="col-md-12 container" style="">
+          <div class="panel panel-widget border-right" *ngIf="showCreateSubject" style="text-align: left; background-color: white; border-radius: 10px;border-style: solid; border-width: 3px; border-color: #1aa3ff;">
+            <form class="container" [formGroup]="addSubjectForm" (ngSubmit) = "addNewSubject()">
+                <div class="row" style='margin-left:2%'>
+                  <div class="col-sm-3">
+                   <div class="form-group">
+                          <label for="exampleInputEmail1">New Subject</label>
+                          <input type="text" formControlName="subject" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="New Subject">
+                        </div>
+                        <div *ngIf="g.subject.errors" class="invalid-feedback" style="color: red;">
+                            *Required!
+                        </div>
+                  </div>
+                  <div class="row" >
+                    <div class="col-sm-3" style='margin-left:2%;'>
+                        <label for="exampleInputEmail1">Stream</label>
+                        <select class="form-control col-sm-3" formControlName="stream">
+                            <option value="O/L">O/L</option>
+                            <option value="A/L">A/L</option>
+                        </select>
+                        <div *ngIf="g.stream.errors" class="invalid-feedback" style="color: red;">
+                            *Required!
+                        </div>
+                    </div>
+
+
+
+
+                  <div class="col-sm-3" style="padding:2%">
+                    <button type="submit" class="btn btn-md btn-primary" [(ngModel)]="newSubject">Create Subject</button>
+                </div>
+              </div>
+              </div>
+            </form>
+          </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+

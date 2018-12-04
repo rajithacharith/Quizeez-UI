@@ -50,7 +50,7 @@ const appRoutes: Routes = [
   {
     path: 'review',
     component: ReviewComponent,
-    canActivate: [AdminGuardService]
+    canActivate: [GuardserviceService]
   },
   {
     path: 'register',

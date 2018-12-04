@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core'
-import { Component, OnInit, Inject } from '@angular/core';
+
 import { Router } from '@angular/router';
 
 import { DataserviceService } from '../dataservice.service';
@@ -201,13 +201,10 @@ export class DashboardComponent implements OnInit {
         this.changeMessage(this.yearSet);
         this.searchButtonDisable=false;
       });
-    }
+    
 
-      this.dataService.filterPaperByLesson(this.selectedLesson).subscribe((paper)=>{
-        this.paperSet= paper;
-      });
     }
-    */
+  
    
   // generateDatasets(chartDetails){
   //   //console.log("chsrt",chartDetails);

@@ -33,6 +33,7 @@ export class PaperComponent implements OnInit {
   showSpinner : boolean = true ;
   studentAnswers = {};
   message : any;
+  count : any;
   constructor( private dataService : DataserviceService, private shared : SharedserviceService ,private router:Router) {
 
     this.studentID = sessionStorage.getItem("userID");
@@ -92,7 +93,27 @@ export class PaperComponent implements OnInit {
 
 
       this.dataService.storeMarkedAnswers(this.studentID,this.paperID,this.markedans).subscribe(()=>{
-        console.log('Item recorded!')
+        console.log('Item recorded!');
+        let count = 0;
+        this.markedans.forEach((element)=>{
+          if(element){
+            count+=1;
+          }
+        })
+
+        /* for (let i = 0; i < this.markedans.length; i++) {
+          if (this.markedans[i]){
+              this.count+=1;
+          } else {
+            this.count+=0;
+          }
+        } */
+        console.log("array count",count);
+        this.dataService.storeMarks(this.studentID,this.paperID,count,this.year,this.subject).subscribe(() =>{ 
+            console.log(this.count)
+            console.log('count recorded!');
+            alert("Marks Saved!");
+        })
       });
 
 

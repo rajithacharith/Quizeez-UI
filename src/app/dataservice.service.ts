@@ -109,7 +109,17 @@ export class DataserviceService {
     }
     return this.http.post(`${this.url}/studentAnswers`,ans);
   }
-
+  storeMarks(studentID : number, paperID : number, mark : number, year : number, subject : string){
+    let arrAns = {
+      studentID : studentID,
+      paperID : paperID,
+      marks : mark,
+      year : year,
+      subject : subject
+    }
+    console.log(arrAns);
+    return this.http.post(`${this.url}/marks`,arrAns);
+  }
   userLogin(email : string , password : string){
     const access = {
       email: email,

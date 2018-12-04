@@ -118,9 +118,9 @@ export class AdminDashboardComponent implements OnInit {
   }
 
   createPaperSubmitHandler(){
-    /* if (this.addPaperForm.invalid){
+    if (this.addPaperForm.invalid){
       return;
-    } */
+    }
     console.log(this.addPaperForm.value);
     this.noOfQuesArray = parseInt (this.addPaperForm.value.count);
     console.log(this.noOfQuesArray);

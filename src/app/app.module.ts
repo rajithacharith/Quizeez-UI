@@ -56,7 +56,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     AppRoutingModule,
     CountdownModule,
-    ChartsModule
+    ChartsModule,
     ReactiveFormsModule
   ],
   providers: [DataserviceService, SharedserviceService],

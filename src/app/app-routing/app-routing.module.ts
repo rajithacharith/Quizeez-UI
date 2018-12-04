@@ -6,29 +6,33 @@ import {PaperComponent} from '../paper/paper.component';
 import {PaperListComponent} from '../paper-list/paper-list.component';
 import {LoginComponent} from '../login/login.component';
 import {ReviewComponent} from '../review/review.component';
-
+import {GuardserviceService} from '../services/guardservice.service';
 import {AdminDashboardComponent} from '../admin-dashboard/admin-dashboard.component';
 
-import { RegisterPageComponent } from "../register-page/register-page.component";
+import { RegisterPageComponent } from '../register-page/register-page.component';
 
-import {  } from 'rxjs';
+import { from } from 'rxjs';
 
 const appRoutes: Routes = [
   {
     path: '',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [GuardserviceService]
   },
   {
     path: 'dashboard',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [GuardserviceService]
   },
   {
     path: 'paper',
-    component: PaperComponent
+    component: PaperComponent,
+    canActivate: [GuardserviceService]
   },
   {
     path: 'paper-list',
-    component: PaperListComponent
+    component: PaperListComponent,
+    canActivate: [GuardserviceService]
   },
   {
     path: 'login',
@@ -36,15 +40,18 @@ const appRoutes: Routes = [
   },
   {
     path: 'admin',
-    component: AdminDashboardComponent
+    component: AdminDashboardComponent,
+    canActivate: [GuardserviceService]
   },
   {
     path: 'review',
-    component: ReviewComponent
+    component: ReviewComponent,
+    canActivate: [GuardserviceService]
   },
   {
     path: 'register',
-    component : RegisterPageComponent
+    component : RegisterPageComponent,
+    canActivate: [GuardserviceService]
   }
 ];
 

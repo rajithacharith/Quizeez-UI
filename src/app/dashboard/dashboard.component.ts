@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DataserviceService } from '../dataservice.service';
@@ -32,9 +32,14 @@ export class DashboardComponent implements OnInit {
   subjectDisabled : boolean = true;
   yearDisabled : boolean = true ; 
   searchButtonDisable : boolean = true;
-
+  test = [];
   years = [];
   studentMarks = [];
+  subjects  = [];
+  objSubject : any;
+  arrName : string;
+  chartDetails = {};
+  subjectsMarks : any;
   constructor( private dataService : DataserviceService, private shared: SharedserviceService,private router:Router) {
 
 
@@ -45,18 +50,95 @@ export class DashboardComponent implements OnInit {
       this.paperSet = paper;
       
     });
-    this.dataService.getChartData().subscribe((item) => {
+    
+    /* this.dataService.getChartData(1).subscribe((item) => {
       this.chartData = item;
       console.log('arr',this.chartData);
+      
       for(var i = 0;i<this.chartData.length;i++){
         
         this.studentMarks.push(this.chartData[i].marks);
         this.years.push(this.chartData[i].year)
       }
       console.log("hvhj",this.studentMarks);
+    }); */
+    this.dataService.getSubjects().subscribe((item) => {
+      //console.log('test');
+      //this.chartDetails = {};
+      this.objSubject = item;
+      //console.log('obj subject',this.objSubject);
+      for(let i = 0;i<this.objSubject.length;i++){
+        //console.log(this.objSubject[i].subjectName);
+        this.subjects.push(this.objSubject[i].subjectName);
+      }
+
+      //console.log("subjects",this.subjects,this.subjects.length);
+    
+      for(let i = 0;i<this.subjects.length;i++){
+        
+        
+        this.dataService.getMarksFilterBySubjectAndStudent(this.subjects[i],1).subscribe((item) => {
+          
+          this.subjectsMarks = item;
+          
+          for(let j = 0;j<this.subjectsMarks.length;j++){
+            
+            this.studentMarks.push(this.subjectsMarks[j].marks);
+            
+          }
+          
+          console.log(this.subjects[i],this.studentMarks);
+          this.chartDetails[this.subjects[i]] = this.studentMarks;
+          
+          //console.log("chartDetails",this.chartDetails)
+          const obj = {
+            label : this.subjects[i],
+            data : this.studentMarks,
+            fill : true,
+            lineTension: 0.2,
+            borderColor:"blue",
+            borderWidth:1
+          }
+          console.log(obj);
+          this.test.push(obj);
+          this.lineChart = new Chart('lineChart',{
+            type: 'line',
+            data: {
+              labels: this.years,
+              datasets: this.test,
+            },
+            options: {
+              title:{
+                text:"Line Chart",
+                display:true
+              },
+              scales: {
+                yAxes: [{
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }]
+              }
+            }
+          });
+          //this.lineChart.data = {datasets: this.test}
+          //this.lineChart.data.datasets = this.test;
+          //this.generateDatasets(this.chartDetails);
+          //console.log("linechart",this.lineChart.data.datasets[0])
+          this.studentMarks = [];
+          console.log("test",this.test.length)
+          
+      });
+      
+      //console.log("haha",this.chartDetails);
+      
+     }
+     //console.log(this.chartDetails["Physics"]);
+     
+    
     });
     
-
+    
   }
 
 
@@ -66,12 +148,22 @@ export class DashboardComponent implements OnInit {
       this.dataService.filterPaperByStream(this.selectedStream).subscribe((paper)=>{
         this.subjectSet= paper;
         this.subjectDisabled = false;
-        console.log("sibject enabled");
+        console.log("subject enabled");
       });
-
+      this.drawChart();
     }
 
+    /* createArray(arr){
+      for(var i = 0;i<arr.length;i++) { 
+          this.chartDetails[arr[i]] = [];
+      }
+      
 
+      
+       console.log("chatdetails",this.chartDetails);
+      this.chartDetails["Science"].push("afvasfs");
+      console.log("chatdetails",this.chartDetails); 
+    } */
 
 
 
@@ -85,6 +177,8 @@ export class DashboardComponent implements OnInit {
         console.log("year enabled");
         
       });
+      
+      this.addData(this.lineChart,[2020,2021],[14,56]);
     }
 
     selectedYearEventHandler(event: any, selectedYear: number) {
@@ -105,42 +199,49 @@ export class DashboardComponent implements OnInit {
       });
     }
     */
-
+   
+  generateDatasets(chartDetails){
+    //console.log("chsrt",chartDetails);
+    for(let i = 0;i<this.subjects.length;i++){
+      console.log("marked3",chartDetails);
+        
+        //console.log("marked2",chartDetails)   
+    //chart.data.datasets.push(obj);
+    }
+  }
+  drawChart(){
+    
+    console.log("fuck you ng")
+    
+  }
+  addData(chart, label, data) {
+    chart.data.labels.push(label);
+    chart.data.datasets[0].data = data;
+    
+    chart.update();
+}
   ngOnInit() {
     this.shared.currentMessage.subscribe(message => {
       this.message = message;
       
     });
+    if(this.studentMarks.length!=0){
+      console.log("data loaded")
+      console.log(this.studentMarks);
+      this.lineChart.update();
+      this.drawChart();
+    }
+    else{
+      console.log("data not loaded")
+    } 
     
-    this.lineChart = new Chart('lineChart',{
-      type: 'line',
-      data: {
-        labels: this.years,
-        datasets: [{
-          label: 'Number of items',
-          data: this.studentMarks,
-          fill: true,
-          lineTension: 0.2,
-          borderColor:"blue",
-          borderWidth:1
-        }]
-      },
-      options: {
-        title:{
-          text:"Line Chart",
-          display:true
-        },
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      }
-    });
-    console.log("fuck you ng")
+    //this.drawChart(); 
   }
+  /* ngAfterViewInit(){
+    console.log("data not loading")
+    console.log("sdsd",this.studentMarks);
+    this.drawChart();
+  } */
   /* setStream(message: string) {
     this.shared.setStream(message);
     console.log(message);

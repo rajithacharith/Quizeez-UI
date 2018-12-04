@@ -34,11 +34,11 @@ export class PaperListComponent implements OnInit {
       paperID : event.target.value
     }
     this.shared.changeMessage(message);
-    this.router.navigateByUrl('/view-paper');  
-  }
-    
+    this.router.navigateByUrl('/view-paper');
   }
 
-  
+  }
 
-}
+
+
+

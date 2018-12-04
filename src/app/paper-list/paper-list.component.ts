@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+
 import { DataserviceService } from "../dataservice.service";
 import { Router } from "@angular/router";
 import { SharedserviceService } from "../services/sharedservice.service";
+
 
 @Component({
   selector: 'app-paper-list',
@@ -10,17 +12,19 @@ import { SharedserviceService } from "../services/sharedservice.service";
 })
 export class PaperListComponent implements OnInit {
 
+
   public paperSet :any;
   constructor(private dataService : DataserviceService,private router : Router,private shared : SharedserviceService) { }
 
+
   ngOnInit() {
 
-    this.dataService.getPapers().subscribe((paper)=>{
+    this.dataService.getPapers().subscribe((paper) => {
       this.paperSet = paper;
     });
   }
 
-  goHome(){
+  goHome() {
     this.router.navigateByUrl('/admin');
   }
 

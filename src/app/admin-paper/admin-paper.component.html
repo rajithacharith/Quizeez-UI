@@ -1,58 +1,67 @@
 <ng-container *ngIf="questionSet" >
+<form class = "container" name = "questions"(ngSubmit)="addQuestions()" ngNativeValidate>
 <div class="panel panel-widget border-right" *ngFor="let question of questionSet | keyvalue; let i= index;" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;border-style: solid; border-width: 3px; border-color: #1aa3ff;">
   <div class="container">
     <div class="row">
     <div class="form-group col-md-10">
       <label> Question  {{question.value.questionID+1}}</label>
-      <input type="text" class="form-control"  [(ngModel)]="questionArray[question.value.questionID]"  aria-describedby="emailHelp" placeholder="Enter question Here">
+      <input type="text" ng-required="true" name = "question" class="form-control" id="question{{i}}" [(ngModel)]="questionArray[question.value.questionID]"  aria-describedby="emailHelp" placeholder="Enter question Here" required>
      {{ qtd | json}}
+
     </div>
+
+
   </div>
+
     <div class= "row">
-    <div class="col-sm-2">
-      <div class="form-group">
-        <label>Answer 1</label>
-        <input type="email" class="form-control" id="question{{i}}answer0" [(ngModel)]="answer0Array[question.value.questionID]" aria-describedby="emailHelp" placeholder="Answer 1">
-      </div>
-    </div>
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label>Answer 1</label>
+          <input type="text" ng-required="true" name="answer0" class="form-control" id="question{{i}}answer0" [(ngModel)]="answer0Array[question.value.questionID]" aria-describedby="emailHelp" placeholder="Answer 1" required>
+        </div>
 
-    <div class="col-sm-2">
-      <div class="form-group">
-        <label>Answer 2</label>
-        <input type="email" class="form-control" id="question{{i}}answer1"  [(ngModel)]="answer1Array[question.value.questionID]" aria-describedby="emailHelp" placeholder="Answer 2">
-      </div>
-    </div>
 
-    <div class="col-sm-2">
-      <div class="form-group">
-        <label>Answer 3</label>
-        <input type="email" class="form-control"  id="question{{i}}answer2" [(ngModel)]="answer2Array[question.value.questionID]" aria-describedby="emailHelp" placeholder="Answer 3">
       </div>
-    </div>
 
-    <div class="col-sm-2">
-      <div class="form-group">
-        <label>Answer 4</label>
-        <input type="email" class="form-control"  id="question{{i}}answer3" [(ngModel)]="answer3Array[question.value.questionID]" aria-describedby="emailHelp" placeholder="Answer 4">
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label>Answer 2</label>
+          <input type="email" ng-required="true" name="answer1" class="form-control" id="question{{i}}answer1"  [(ngModel)]="answer1Array[question.value.questionID]" aria-describedby="emailHelp" required placeholder="Answer 2" required>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="col-sm-2" *ngIf="answer5visible">
-    <div class="form-group">
-      <label>Answer 5</label>
-      <input type="email" class="form-control"  id="question{{i}}answer4" [(ngModel)]="answer4Array[question.value.questionID]" aria-describedby="emailHelp" placeholder="Answer 5">
-    </div>
-  </div>
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label>Answer 3</label>
+          <input type="text" ng-required="true" name="answer2" class="form-control"  [(ngModel)]="answer2Array[question.value.questionID]" aria-describedby="emailHelp" required placeholder="Answer 3" required>
+        </div>
+      </div>
+
+      <div class="col-sm-2">
+        <div class="form-group">
+          <label>Answer 4</label>
+          <input type="text" ng-required="true" name="answer3" class="form-control" id="question{{i}}answer3" [(ngModel)]="answer3Array[question.value.questionID]" aria-describedby="emailHelp" required placeholder="Answer 4" required>
+        </div>
+      </div>
+
+
+      <div class="col-sm-2" *ngIf="answer5visible">
+        <div class="form-group">
+          <label>Answer 5</label>
+          <input type="text" ng-required="true" class="form-control" name="answer4"  id="question{{i}}answer4"  [(ngModel)]="answer4Array[question.value.questionID]" aria-describedby="emailHelp" required placeholder="Answer 5" required>
+        </div>
+      </div>
+
 </div>
 
-    
+
+
 
     <div class="row">
       <div class="col-sm-6">
           <div class="form-group">
             <label>Correct Answer</label>
-            <select class="form-control" [(ngModel)]="correctAnswerArray[question.value.questionID]">
+            <select class="form-control" name="correctAnswer" ng-required="true" [(ngModel)]="correctAnswerArray[question.value.questionID]" required>
               <option value=0>Answer 1</option>
               <option value=1>Answer 2</option>
               <option value=2>Answer 3</option>
@@ -62,10 +71,16 @@
           </div>
         </div>
     </div>
+
+  </div>
     <br><br>
 
 
 </div>
+
+<input type="submit" class="btn btn-primary" >
+</form>
+
 </ng-container>
 
-<button type="button" class="btn btn-primary btn-lg btn-block" (click)="addQuestions()">Add Paper</button>
+

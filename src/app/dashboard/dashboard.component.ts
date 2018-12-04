@@ -27,13 +27,13 @@ export class DashboardComponent implements OnInit {
   selectedLanguage: string ;
   selectedSubject : string ;
   selectedYear : number ;
-  
+
   message:any;
-  
+
 
   LanguageDisabled : boolean = true ;
   subjectDisabled : boolean = true;
-  yearDisabled : boolean = true ; 
+  yearDisabled : boolean = true ;
   searchButtonDisable : boolean = true;
   test = [];
   years = [];
@@ -55,17 +55,17 @@ export class DashboardComponent implements OnInit {
       
     });
     
-    /* this.dataService.getChartData(1).subscribe((item) => {
-      this.chartData = item;
-      console.log('arr',this.chartData);
+    //  this.dataService.getChartData(1).subscribe((item) => {
+    //   this.chartData = item;
+    //   //console.log('arr',this.chartData);
       
-      for(var i = 0;i<this.chartData.length;i++){
+    //   for(var i = 0;i<this.chartData.length;i++){
         
-        this.studentMarks.push(this.chartData[i].marks);
-        this.years.push(this.chartData[i].year)
-      }
-      console.log("hvhj",this.studentMarks);
-    }); */
+    //     this.studentMarks.push(this.chartData[i].marks);
+    //     this.years.push(this.chartData[i].year)
+    //   }
+    //   //console.log("hvhj",this.studentMarks);
+    // }); 
     this.dataService.getSubjects().subscribe((item) => {
       //console.log('test');
       //this.chartDetails = {};
@@ -88,9 +88,9 @@ export class DashboardComponent implements OnInit {
           for(let j = 0;j<this.subjectsMarks.length;j++){
             
             this.studentMarks.push(this.subjectsMarks[j].marks);
-            
+            this.years.push(this.subjectsMarks[j].year);
           }
-          
+          this.years.sort();
           console.log(this.subjects[i],this.studentMarks);
           this.chartDetails[this.subjects[i]] = this.studentMarks;
           
@@ -105,11 +105,12 @@ export class DashboardComponent implements OnInit {
           }
           console.log(obj);
           this.test.push(obj);
+          console.log("years",this.years);
           this.lineChart = new Chart('lineChart',{
             type: 'line',
             data: {
               labels: this.years,
-              datasets: this.test,
+              datasets: [obj],
             },
             options: {
               title:{
@@ -130,6 +131,7 @@ export class DashboardComponent implements OnInit {
           //this.generateDatasets(this.chartDetails);
           //console.log("linechart",this.lineChart.data.datasets[0])
           this.studentMarks = [];
+          this.years = [];
           console.log("test",this.test.length)
           
       });
@@ -141,19 +143,19 @@ export class DashboardComponent implements OnInit {
      
     
     });
-    
+    console.log("years",this.years);
     
   }
 
 
-    selectedStreamEventHandler(event : any,selectedStream : any){
+    selectedStreamEventHandler(event : any){
       this.selectedStream=event.target.value;
       console.log((this.selectedStream));
       this.LanguageDisabled = false;
 
     }
 
-    selectedLanguageEventHandler(event : any,selectedLanguage : any){
+    selectedLanguageEventHandler(event : any){
       this.selectedLanguage=event.target.value;
       console.log((this.selectedLanguage));
       this.dataService.filterPaperByStreamAndLanguage(this.selectedStream,this.selectedLanguage).subscribe((paper)=>{
@@ -161,7 +163,7 @@ export class DashboardComponent implements OnInit {
         this.subjectDisabled = false;
         console.log("subject enabled");
       });
-      this.drawChart();
+      //this.drawChart();
     }
 
     /* createArray(arr){
@@ -184,17 +186,17 @@ export class DashboardComponent implements OnInit {
       this.dataService.filterPaperBySubject(selectedSubject).subscribe((paper)=>{
         this.yearSet= paper;
         this.yearDisabled = false;
-        console.log("year enabled");
-        
+        console.log('year enabled');
+
       });
       
-      this.addData(this.lineChart,[2020,2021],[14,56]);
+      //this.addData(this.lineChart,[2020,2021],[14,56]);
     }
 
-    selectedYearEventHandler(event: any, selectedYear: number) {
+    selectedYearEventHandler(event: any) {
       this.selectedYear = event.target.value;
 
-      this.dataService.filterPaperByYear(selectedYear).subscribe((paper) => {
+      this.dataService.filterPaperByYear(this.selectedYear).subscribe((paper) => {
         this.changeMessage(this.yearSet);
         this.searchButtonDisable=false;
       });
@@ -212,40 +214,42 @@ export class DashboardComponent implements OnInit {
     }
     */
    
-  generateDatasets(chartDetails){
-    //console.log("chsrt",chartDetails);
-    for(let i = 0;i<this.subjects.length;i++){
-      console.log("marked3",chartDetails);
+  // generateDatasets(chartDetails){
+  //   //console.log("chsrt",chartDetails);
+  //   for(let i = 0;i<this.subjects.length;i++){
+  //     console.log("marked3",chartDetails);
         
-        //console.log("marked2",chartDetails)   
-    //chart.data.datasets.push(obj);
-    }
-  }
-  drawChart(){
+  //       //console.log("marked2",chartDetails)   
+  //   //chart.data.datasets.push(obj);
+  //   }
+  // }
+  // drawChart(){
     
-    console.log("fuck you ng")
+  //   console.log("fuck you ng")
     
-  }
-  addData(chart, label, data) {
-    chart.data.labels.push(label);
-    chart.data.datasets[0].data = data;
+  // }
+//   addData(chart, label, data) {
+//     chart.data.labels.push(label);
+//     chart.data.datasets[0].data = data;
     
-    chart.update();
-}
+//     chart.update();
+// }
+
   ngOnInit() {
+    localStorage.clear();
     console.log(sessionStorage.getItem("userID"));
     this.shared.currentMessage.subscribe(message => {
       this.message = message;
     });
-    if(this.studentMarks.length!=0){
-      console.log("data loaded")
-      console.log(this.studentMarks);
-      this.lineChart.update();
-      this.drawChart();
-    }
-    else{
-      console.log("data not loaded")
-    } 
+    // if(this.studentMarks.length!=0){
+    //   console.log("data loaded")
+    //   console.log(this.studentMarks);
+    //   this.lineChart.update();
+    //   this.drawChart();
+    // }
+    // else{
+    //   console.log("data not loaded")
+    // } 
     
     //this.drawChart(); 
   }
@@ -276,6 +280,7 @@ export class DashboardComponent implements OnInit {
     console.log(message);
   }
   submitHandler() {
+    console.log(this.yearSet);
     this.router.navigateByUrl('/paper');
   }
 }

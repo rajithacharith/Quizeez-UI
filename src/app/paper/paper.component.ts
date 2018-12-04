@@ -20,7 +20,7 @@ export class PaperComponent implements OnInit {
   public stream: string ;
   public year: number ;
   public subject: string ;
-
+  public time:number;
 
   public answers : any;
   public studentID : any;
@@ -102,10 +102,12 @@ export class PaperComponent implements OnInit {
         year : this.year,
         stream : this.stream,
         subject : this.subject,
-        studentID :this.studentID
-      } 
+        studentID: this.studentID,
+        PaperID: this.paperID
+      };
       console.log(submitDetailsObject);
       this.changeMessage(submitDetailsObject);
+      localStorage.clear();
       this.router.navigateByUrl('/review');
 
     }
@@ -115,13 +117,15 @@ export class PaperComponent implements OnInit {
       'stream' : this.stream,
       'year': this.year ,
       'subject': this.subject,
-      'paperID': this.paperID
+      'paperID': this.paperID,
+      'timeDuration' : this.time / 3600
     };
     localStorage.setItem('PaperDetails', JSON.stringify(details));
   }
 
   finishPaper() {
     console.log('time out');
+    this.checkpaper();
   }
 
   changeMessage(message: any){
@@ -144,6 +148,8 @@ export class PaperComponent implements OnInit {
       this.year = paperDetails.year;
       this.subject = paperDetails.subject;
       this.paperID = paperDetails.paperID;
+      this.time = paperDetails.timeDuration * 3600;
+
 
       this.dataService.filterPaperByAll(this.stream,this.subject,this.year).subscribe((paper) => {
         this.paperSet = paper;
@@ -153,7 +159,7 @@ export class PaperComponent implements OnInit {
 
 
       this.dataService.getAnswers().subscribe((answers) => {
-        this.answers=answers;
+        this.answers = answers;
       });
 
       this.dataService.getQuestionFilterByPaperID(this.paperID).subscribe((question)=>{
@@ -170,6 +176,7 @@ export class PaperComponent implements OnInit {
         this.year = this.message[0].year;
         this.subject = this.message[0].subject;
         this.paperID = this.message[0].paperID;
+        this.time = this.message[0].timeDuration * 3600;
         console.log(this.stream , this.year, this.subject, this.paperID);
 
         this.dataService.filterPaperByAll(this.stream,this.subject,this.year).subscribe((paper) => {
@@ -189,7 +196,10 @@ export class PaperComponent implements OnInit {
         this.setPaperDetails();
 
       }
+      console.log("time" , this.time);
     }
+
+
 
 
 

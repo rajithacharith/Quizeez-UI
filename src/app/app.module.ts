@@ -21,6 +21,9 @@ import { CountdownModule } from 'ngx-countdown';
 import { LoadingSpinComponent } from './ui/loading-spin/loading-spin.component';
 import { ReviewComponent } from './review/review.component';
 
+import { ChartsModule } from 'ng2-charts';
+
+
 import { AdminDashboardComponent } from './admin-dashboard/admin-dashboard.component';
 
 import { RegisterPageComponent } from './register-page/register-page.component';
@@ -32,8 +35,6 @@ import { ViewPaperComponent } from './view-paper/view-paper.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 
-
-import { ChartsModule } from 'ng2-charts';
 @NgModule({
   declarations: [
     AppComponent,
@@ -56,8 +57,8 @@ import { ChartsModule } from 'ng2-charts';
     FormsModule,
     AppRoutingModule,
     CountdownModule,
+    ChartsModule,
     ReactiveFormsModule
-    ChartsModule
   ],
   providers: [DataserviceService, SharedserviceService],
   bootstrap: [AppComponent]

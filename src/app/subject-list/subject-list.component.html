@@ -9,10 +9,10 @@
           <li class="active">Dashboard</li>
           </ol>
           </div><!--/.row-->
-    <div class="panel panel-container">
+    <div class="panel panel-container" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;border-style: solid; border-width: 3px; border-color: #1aa3ff;">
     <div class="row">
     <div class="col-xs-6">
-    <div class="panel panel-teal panel-widget border-right">
+    <div class="panel panel-teal panel-widget border-right" >
     <div class="row no-padding"><em class=""></em>
       <div class="large">Search Results</div>
       <div class="text-muted"></div>
@@ -30,11 +30,11 @@
     </div><!--/.row-->
     </div>
 
-    <div class="panel panel-container" style="text-align: left; padding: 10px; border-radius: 10px;">
+    <div class="panel panel-container" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;border-style: solid; border-width: 3px; border-color: #1aa3ff;">
       <div class="row justify-content-center">
-          <div class= "justify-content-center" style="margin-left: 35%">
-          <div class="list-group" style="width: 50%;">
-              <a href="#" class="list-group-item list-group-item-action" *ngFor="let subject of subjectSet">{{subject.subjectName}} {{subject.stream}}</a>
+          <div class= "justify-content-center" style="margin: 5%">
+          <div class="list-group">
+              <div class="list-group-item list-group-item-action" *ngFor="let subject of subjectSet">{{subject.subjectName}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{subject.stream}}</div>
               </div>
           </div>
     </div>
@@ -43,4 +43,4 @@
 
 <div class="col-sm-3" style="padding:2%">
   <button type="button" class="btn btn-md btn-primary"  (click)='goHome()' >Go to Dashboard</button>
-</div> 
+</div>

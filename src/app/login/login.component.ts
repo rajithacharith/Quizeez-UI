@@ -22,6 +22,12 @@ export class LoginComponent implements OnInit {
 
 
   submit() {
+    if (this.email === 'admin' && this.password === 'quizeez1234') {
+      localStorage.setItem('admin', this.email);
+      sessionStorage.setItem('admin', this.email);
+      this.router.navigateByUrl('/admin');
+
+    }
 
     sessionStorage.setItem('email', this.email);
 

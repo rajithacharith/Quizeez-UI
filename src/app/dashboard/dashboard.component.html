@@ -25,7 +25,7 @@
         <div class="panel panel-teal panel-widget border-right">
           <div class="row no-padding"><em class=""></em>
             <div class="large">120</div>
-            <div class="text-muted">New Papers {{Papers?.subject}}</div> <!-- if an error occurs remove the variabl-->
+            <div class="text-muted">New Papers</div> <!-- if an error occurs remove the variabl-->
           </div>
         </div>
       </div>
@@ -82,7 +82,7 @@
                         </select>
                       </div>
                 </div>
-                
+
                   <div class="col-sm-3">
                     <div class="form-group">
                         <label>Subjects</label>
@@ -91,7 +91,7 @@
                         </select>
                       </div>
                 </div>
-                
+
                 <div class="col-sm-2">
                     <div class="form-group">
                         <label>Year</label>
@@ -100,7 +100,7 @@
                         </select>
                       </div>
                 </div>
-                
+
                 <div class="col-sm-3" style="padding:2%">
                     <button type="button" class="btn btn-md btn-primary" [disabled]="searchButtonDisable" (click)='submitHandler()'>Search</button>
                 </div>
@@ -120,23 +120,6 @@
             <li class="dropdown"><a class="pull-right dropdown-toggle" data-toggle="dropdown" href="#">
               <em class="fa fa-cogs"></em>
             </a>
-              <ul class="dropdown-menu dropdown-menu-right">
-                <li>
-                  <ul class="dropdown-settings">
-                    <li><a href="#">
-                      <em class="fa fa-cog"></em> Settings 1
-                    </a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">
-                      <em class="fa fa-cog"></em> Settings 2
-                    </a></li>
-                    <li class="divider"></li>
-                    <li><a href="#">
-                      <em class="fa fa-cog"></em> Settings 3
-                    </a></li>
-                  </ul>
-                </li>
-              </ul>
             </li>
           </ul>
           <span class="pull-right clickable panel-toggle panel-button-tab-left"><em class="fa fa-toggle-up"></em></span></div>

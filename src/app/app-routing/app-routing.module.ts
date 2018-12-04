@@ -8,7 +8,7 @@ import { SubjectListComponent } from "../subject-list/subject-list.component";
 import {LoginComponent} from '../login/login.component';
 import {ReviewComponent} from '../review/review.component';
 import {GuardserviceService} from '../services/guardservice.service';
-
+import {AdminGuardService} from '../services/admin-guard.service';
 import {AdminPaperComponent } from "../admin-paper/admin-paper.component";
 import {AdminDashboardComponent} from '../admin-dashboard/admin-dashboard.component';
 import { ViewPaperComponent } from "../view-paper/view-paper.component";
@@ -36,7 +36,7 @@ const appRoutes: Routes = [
   {
     path: 'paper-list',
     component: PaperListComponent,
-    // canActivate: [GuardserviceService]
+     canActivate: [AdminGuardService]
   },
   {
     path: 'login',
@@ -45,12 +45,12 @@ const appRoutes: Routes = [
   {
     path: 'admin',
     component: AdminDashboardComponent,
-    // canActivate: [GuardserviceService]
+    canActivate: [AdminGuardService]
   },
   {
     path: 'review',
     component: ReviewComponent,
-    // canActivate: [GuardserviceService]
+    canActivate: [AdminGuardService]
   },
   {
     path: 'register',
@@ -58,15 +58,18 @@ const appRoutes: Routes = [
   },
   {
     path: 'add-questions',
-    component : AdminPaperComponent
+    component : AdminPaperComponent,
+    canActivate: [AdminGuardService]
   },
   {
     path : 'subject-list',
-    component : SubjectListComponent
+    component : SubjectListComponent,
+    canActivate: [AdminGuardService]
   },
   {
     path : 'view-paper',
-    component : ViewPaperComponent
+    component : ViewPaperComponent,
+    canActivate: [AdminGuardService]
   }
 ];
 

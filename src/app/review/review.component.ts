@@ -32,6 +32,7 @@ export class ReviewComponent implements OnInit {
     this.year = this.message.year;
     this.paperID = this.message.paperID;
 
+
     console.log(this.questionSet[0].answers[this.questionSet[0].correctAnswer]);
   }
   submitAnswers() {

@@ -38,14 +38,14 @@ export class DashboardComponent implements OnInit {
   }
 
 
-    selectedStreamEventHandler(event : any,selectedStream : any){
+    selectedStreamEventHandler(event : any){
       this.selectedStream=event.target.value;
       console.log((this.selectedStream));
       this.LanguageDisabled = false;
 
     }
 
-    selectedLanguageEventHandler(event : any,selectedLanguage : any){
+    selectedLanguageEventHandler(event : any){
       this.selectedLanguage=event.target.value;
       console.log((this.selectedLanguage));
       this.dataService.filterPaperByStreamAndLanguage(this.selectedStream,this.selectedLanguage).subscribe((paper)=>{
@@ -66,10 +66,10 @@ export class DashboardComponent implements OnInit {
       });
     }
 
-    selectedYearEventHandler(event: any, selectedYear: number) {
+    selectedYearEventHandler(event: any) {
       this.selectedYear = event.target.value;
 
-      this.dataService.filterPaperByYear(selectedYear).subscribe((paper) => {
+      this.dataService.filterPaperByYear(this.selectedYear).subscribe((paper) => {
         this.changeMessage(this.yearSet);
         this.searchButtonDisable=false;
       });

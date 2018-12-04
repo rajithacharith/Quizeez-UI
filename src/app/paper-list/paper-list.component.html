@@ -9,7 +9,7 @@
           <li class="active">Dashboard</li>
           </ol>
           </div><!--/.row-->
-    <div class="panel panel-container">
+    <div class="panel panel-container" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;border-style: solid; border-width: 3px; border-color: #1aa3ff;">
     <div class="row">
     <div class="col-xs-6">
     <div class="panel panel-teal panel-widget border-right">
@@ -30,11 +30,13 @@
     </div><!--/.row-->
     </div>
 
-    <div class="panel panel-container" style="text-align: left; padding: 10px; border-radius: 10px;">
+    <div class="panel panel-container" style="text-align: left; background-color: white; padding: 10px; border-radius: 10px;border-style: solid; border-width: 3px; border-color: #1aa3ff;">
       <div class="row justify-content-center">
-          <div class= "justify-content-center" style="margin-left: 35%">
-          <div class="list-group" style="width: 50%;">
-              <button (click)="openPaper($event)" value="{{paper.paperID}}" class="list-group-item list-group-item-action" *ngFor="let paper of paperSet">{{paper.subject}} {{paper.year}} {{paper.stream}} {{paper.language}}</button>
+          <div class= "justify-content-center">
+          <div class="list-group container" style="padding:5%">
+            <table class="table">
+              <button (click)="openPaper($event)" value="{{paper.paperID}}" class="list-group-item list-group-item-action" *ngFor="let paper of paperSet">{{paper.subject}} &nbsp;&nbsp;&nbsp;{{paper.year}}&nbsp;&nbsp;&nbsp;{{paper.stream}} &nbsp;&nbsp;&nbsp; {{paper.language}}</button>
+            </table>
               </div>
           </div>
     </div>
@@ -42,6 +44,6 @@
 
 <div class="col-sm-3" style="padding:2%">
   <button type="button" class="btn btn-md btn-primary"  (click)='goHome()' >Go to Dashboard</button>
-</div> 
+</div>
 
 

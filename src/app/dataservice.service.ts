@@ -19,7 +19,7 @@ export class DataserviceService {
 
   /*get the paper by ID*/
   getPaperByID(id : number){
-    return this.http.get(`${this.url}/papers/${id}`);
+    return this.http.get(`${this.url}/papers?filter[where][paperID]=${id}`);
   }
 
 

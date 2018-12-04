@@ -34,7 +34,7 @@
       <div class="row justify-content-center">
           <div class= "justify-content-center" style="margin-left: 35%">
           <div class="list-group" style="width: 50%;">
-              <a href="#" class="list-group-item list-group-item-action" *ngFor="let paper of paperSet">{{paper.subject}} {{paper.year}} {{paper.stream}} {{paper.timeDuration}} {{paper.language}}</a>
+              <button (click)="openPaper($event)" value="{{paper.paperID}}" class="list-group-item list-group-item-action" *ngFor="let paper of paperSet">{{paper.subject}} {{paper.year}} {{paper.stream}} {{paper.language}}</button>
               </div>
           </div>
     </div>

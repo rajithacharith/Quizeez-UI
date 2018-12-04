@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DataserviceService } from '../dataservice.service';
-import { Router } from '@angular/router';
+
+import { DataserviceService } from "../dataservice.service";
+import { Router } from "@angular/router";
+import { SharedserviceService } from "../services/sharedservice.service";
+
 
 @Component({
   selector: 'app-paper-list',
@@ -9,8 +12,10 @@ import { Router } from '@angular/router';
 })
 export class PaperListComponent implements OnInit {
 
-  public paperSet: any;
-  constructor(private dataService: DataserviceService, private router: Router) { }
+
+  public paperSet :any;
+  constructor(private dataService : DataserviceService,private router : Router,private shared : SharedserviceService) { }
+
 
   ngOnInit() {
 
@@ -22,5 +27,18 @@ export class PaperListComponent implements OnInit {
   goHome() {
     this.router.navigateByUrl('/admin');
   }
+
+  openPaper(event: any ){
+    console.log(event.target.value);
+    const message = {
+      paperID : event.target.value
+    }
+    this.shared.changeMessage(message);
+    this.router.navigateByUrl('/view-paper');  
+  }
+    
+  }
+
+  
 
 }

@@ -11,6 +11,7 @@ import {GuardserviceService} from '../services/guardservice.service';
 
 import {AdminPaperComponent } from "../admin-paper/admin-paper.component";
 import {AdminDashboardComponent} from '../admin-dashboard/admin-dashboard.component';
+import { ViewPaperComponent } from "../view-paper/view-paper.component";
 
 import { RegisterPageComponent } from '../register-page/register-page.component';
 
@@ -62,7 +63,10 @@ const appRoutes: Routes = [
   {
     path : 'subject-list',
     component : SubjectListComponent
-
+  },
+  {
+    path : 'view-paper',
+    component : ViewPaperComponent
   }
 ];
 

@@ -1,8 +1,7 @@
-export interface ArrangedQuestionsFormat extends Array<string>{
-        paperID: number,
+export interface ArrangedQuestionsFormat {
+        paperID: number ,
         questionID: number;
         question: string;
-        answers:string[];
-        correctAnswer:number;
-      
+        answers: string[];
+        correctAnswer: number;
 }

@@ -18,7 +18,7 @@
             <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
         </div>
           <br>
-          <input type="password" formControlName="passwordValidation" class="form-control" name="verifyPassword" [(ngModel)]="passwordV" placeholder=" Please enter your password again to verify" required/>
+          <input type="password" formControlName="passwordValidation" class="form-control" name="verifyPassword" placeholder=" Please enter your password again to verify" required/>
           <div *ngIf="notVarified" class="invalid-feedback" style="color: red;">
             Verify your password!
         </div>

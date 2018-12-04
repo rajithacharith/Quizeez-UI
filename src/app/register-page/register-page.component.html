@@ -1,20 +1,32 @@
 
 <div class="container" style="padding:5%; margin-top:5%">
-  <div class="panel panel-container" style='width:60%; margin-left: 23%; border-radius: 10px'>
-    <div class="wrapper" style='padding: 1%'>
-        <form class="form-signin" name="registerForm">
+  <div class="panel panel-container" style='width:60%; margin-left: 23%; border-radius: 10px; border-style: solid; border-width: 3px; border-color: #1aa3ff;'>
+    <div class="wrapper" style='margin; 5%; padding: 5%'>
+        <form class="form-signin" [formGroup]="registerForm" (ngSubmit)="onSubmit()" name="registerForm">
 
           <h2 class="form-signin-heading" style='text-align: center;'>Register</h2>
-          <input type="text" class="form-control" name="email" [(ngModel)]="email" placeholder="Email Address" required="" autofocus="" />
-          <span *ngIf="registerForm.email.$touched && registerForm.email.$invalid">Please enter </span>
-          
-          <input type="password" class="form-control" name="password" [(ngModel)]="password" placeholder="Enter your Password" required minlength="6"/>
+          <input type="text" class="form-control" formControlName="email" name="email" [(ngModel)]="email" placeholder="Email Address" required="" autofocus="" />
+          <!-- <span *ngIf="registerForm.email.$touched && registerForm.email.$invalid">Please enter </span> -->
+          <div *ngIf="f.email.errors" class="invalid-feedback" style="color: red;">
+            <div *ngIf="f.email.errors.required">Email is required</div>
+            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+        </div>
+          <br>
+          <input type="password" formControlName="password" class="form-control"  name="password" [(ngModel)]="password" placeholder="Enter your Password" required minlength="6"/>
+          <div *ngIf="f.password.errors" class="invalid-feedback" style="color: red;">
+            <div *ngIf="f.password.errors.required">Password is required</div>
+            <div *ngIf="f.password.errors.minlength">Password must be at least 6 characters</div>
+        </div>
+          <br>
+          <input type="password" formControlName="passwordValidation" class="form-control" name="verifyPassword" [(ngModel)]="passwordV" placeholder=" Please enter your password again to verify" required/>
+          <div *ngIf="notVarified" class="invalid-feedback" style="color: red;">
+            Verify your password!
+        </div>
+          <br>
 
-          <input type="password" class="form-control" name="verifyPassword" [(ngModel)]="password" placeholder=" Please enter your password again to verify" required/>
-
-          <button class="btn btn-lg btn-primary" type="submit"  style='margin-left:40%; margin-bottom: 5%'>Login</button>
+          <button class="btn btn-lg btn-primary" type="submit"  style='margin-left:35%; margin-bottom: 5%'>Regiser Now</button>
         </form>
     </div>
-   
+
   </div>
 </div>

@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { DataserviceService } from '../dataservice.service';
 import { Router } from "@angular/router";
 import { SharedserviceService } from "../services/sharedservice.service";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -31,7 +33,7 @@ export class AdminDashboardComponent implements OnInit {
   public noOfQues : string ;
   public noOfQuesArray: number;
   public i : number = 0;
-  public newSubject :string ; 
+  public newSubject :string ;
   public subjectStream:string ;
   public availableSubjects: any = {} ;
   public subjectsOL : string[] =[];
@@ -46,10 +48,14 @@ export class AdminDashboardComponent implements OnInit {
   public createPaperYear : number;
   public createPaperTime : number;
 
-  constructor( private dataService: DataserviceService,private router : Router,private shared : SharedserviceService ) {
+  /* Form group and validation */
+  addPaperForm: FormGroup;
+  addSubjectForm: FormGroup;
+
+  constructor( private dataService: DataserviceService,private router : Router,private shared : SharedserviceService,private formBuilder: FormBuilder ) {
     this.addQuestionVisibility = false;
-    this.subject="";
-    this.noOfQuesArray=0;
+    this.subject = '';
+    this.noOfQuesArray = 0;
 
 
     this.questionNo = 0;
@@ -71,6 +77,19 @@ export class AdminDashboardComponent implements OnInit {
    }
 
   ngOnInit() {
+    this.addPaperForm = this.formBuilder.group({
+      stream: ['', [Validators.required]],
+      subject: ['', [Validators.required]],
+      year: ['', [Validators.required]],
+      time: ['', [Validators.required]],
+      language: ['', [Validators.required]],
+      count: ['', [Validators.required]],
+  });
+
+  this.addSubjectForm = this.formBuilder.group({
+    subject: ['', [Validators.required]],
+    stream: ['', [Validators.required]]
+});
 
     this.dataService.getAllSubjects().subscribe((returnedSubjects)=>{
       this.availableSubjects = returnedSubjects;
@@ -80,14 +99,14 @@ export class AdminDashboardComponent implements OnInit {
 
   }
 
-  dividePapersByStream(){
+  dividePapersByStream() {
     console.log(this.availableSubjects);
-    for(let subject of this.availableSubjects){
-      console.log("ran");
-      if(subject.stream === "O/L"){
+    for (let subject of this.availableSubjects){
+      console.log('ran');
+      if (subject.stream === "O/L"){
         this.subjectsOL.push(subject.subjectName);
       }
-      if(subject.stream === "A/L"){
+      if (subject.stream === "A/L"){
         this.subjectsAL.push(subject.subjectName);
       }
     }
@@ -121,8 +140,8 @@ export class AdminDashboardComponent implements OnInit {
     }
     console.log(this.shownSubjects);
   }
-  
-  
+
+
 
   addPaper() {
     const paper = {
@@ -150,6 +169,7 @@ export class AdminDashboardComponent implements OnInit {
       console.log(this.newSubject);
       this.newSubject="";
       this.showCreateSubject=false;
+      alert(this.newSubject + 'Added!');
     });
   }
 
@@ -168,5 +188,8 @@ export class AdminDashboardComponent implements OnInit {
   addSubjectComponent(){
     this.showCreateSubject=true;
   }
+
+  get f() { return this.addPaperForm.controls; }
+  get g() { return this.addSubjectForm.controls; }
 
 }

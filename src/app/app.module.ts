@@ -4,8 +4,7 @@ import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { FormsModule } from "@angular/forms";
-import { StorageServiceModule } from "angular-webstorage-service";
+import { FormsModule } from '@angular/forms';
 
 
 import { AppComponent } from './app.component';
@@ -28,6 +27,9 @@ import { RegisterPageComponent } from './register-page/register-page.component';
 import { AdminPaperComponent } from './admin-paper/admin-paper.component';
 import { SubjectListComponent } from './subject-list/subject-list.component';
 import { ViewPaperComponent } from './view-paper/view-paper.component';
+
+
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -53,7 +55,7 @@ import { ViewPaperComponent } from './view-paper/view-paper.component';
     FormsModule,
     AppRoutingModule,
     CountdownModule,
-    StorageServiceModule
+    ReactiveFormsModule
   ],
   providers: [DataserviceService, SharedserviceService],
   bootstrap: [AppComponent]

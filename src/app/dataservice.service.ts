@@ -143,8 +143,15 @@ export class DataserviceService {
   getAllSubjects(){
     return this.http.get(`${this.url}/subjects`);
   }
-  
 
+  /* Register Users */
+  register(email: string, password: string) {
+    const User = {
+      email : email,
+      password : password
+    };
+    return this.http.post(`${this.url}/Users`, User);
+  }
 
 
 

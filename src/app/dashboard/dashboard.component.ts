@@ -43,6 +43,8 @@ export class DashboardComponent implements OnInit {
   arrName : string;
   chartDetails = {};
   subjectsMarks : any;
+  public paperCount:number;
+  public questionCount: number;
   constructor( private dataService : DataserviceService, private shared: SharedserviceService,private router:Router) {
     console.log(sessionStorage.getItem("userID"));
 
@@ -236,6 +238,7 @@ export class DashboardComponent implements OnInit {
 // }
 
   ngOnInit() {
+    this.getCount();
     localStorage.clear();
     console.log(sessionStorage.getItem("userID"));
     this.shared.currentMessage.subscribe(message => {
@@ -282,5 +285,19 @@ export class DashboardComponent implements OnInit {
   submitHandler() {
     console.log(this.yearSet);
     this.router.navigateByUrl('/paper');
+  }
+
+  getCount(){
+    this.dataService.getPaperCount().subscribe((data)=>{
+      console.log(data);
+      this.paperCount = data.count;
+    });
+
+    this.dataService.getQuestionCount().subscribe((data)=>{
+      this.questionCount = data.count;
+    });
+
+
+    
   }
 }

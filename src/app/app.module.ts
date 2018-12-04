@@ -34,6 +34,7 @@ import { ViewPaperComponent } from './view-paper/view-paper.component';
 
 import { ReactiveFormsModule } from '@angular/forms';
 
+
 @NgModule({
   declarations: [
     AppComponent,

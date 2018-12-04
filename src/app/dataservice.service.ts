@@ -173,4 +173,19 @@ export class DataserviceService {
     return this.http.get(`${this.url}/marks?filter[where][subject]=${subject}&filter[where][studentID]=${studentID}`)
   }
 
+
+
+  // get paper count
+
+  getPaperCount(){
+    console.log(this.url + '/papers/count');
+    return this.http.get(this.url +'/papers/count');
+  }
+
+  getQuestionCount(){
+    console.log(this.url + '/questions/count');
+    return this.http.get(this.url +'/questions/count');
+  }
+
+
 }

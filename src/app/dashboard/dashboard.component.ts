@@ -1,5 +1,4 @@
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core'
-
+import { Component, OnInit, ViewChild, AfterViewInit , Inject} from '@angular/core';
 import { Router } from '@angular/router';
 
 import { DataserviceService } from '../dataservice.service';
@@ -44,7 +43,11 @@ export class DashboardComponent implements OnInit {
   arrName : string;
   chartDetails = {};
   subjectsMarks : any;
+  public paperCount:number;
+  public questionCount: number;
   constructor( private dataService : DataserviceService, private shared: SharedserviceService,private router:Router) {
+    console.log(sessionStorage.getItem("userID"));
+
 
 
     this.dataService.getPapers().subscribe((paper) => {
@@ -74,9 +77,6 @@ export class DashboardComponent implements OnInit {
         //console.log(this.objSubject[i].subjectName);
         this.subjects.push(this.objSubject[i].subjectName);
       }
-
-    console.log(sessionStorage.getItem("userID"));
-
 
       //console.log("subjects",this.subjects,this.subjects.length);
     
@@ -168,7 +168,6 @@ export class DashboardComponent implements OnInit {
       //this.drawChart();
     }
 
-
     /* createArray(arr){
       for(var i = 0;i<arr.length;i++) { 
           this.chartDetails[arr[i]] = [];
@@ -180,6 +179,8 @@ export class DashboardComponent implements OnInit {
       this.chartDetails["Science"].push("afvasfs");
       console.log("chatdetails",this.chartDetails); 
     } */
+
+
 
 
     selectedSubjectEventHandler(event : any, selectedSubject : string){
@@ -201,7 +202,13 @@ export class DashboardComponent implements OnInit {
         this.changeMessage(this.yearSet);
         this.searchButtonDisable=false;
       });
+    }
     
+
+    /*
+    selectedLessonEventHandler(event : any){
+      this.selectedLesson=event.target.value;
+      console.log(this.selectedLesson);
 
     }
   
@@ -228,6 +235,7 @@ export class DashboardComponent implements OnInit {
 // }
 
   ngOnInit() {
+    this.getCount();
     localStorage.clear();
     console.log(sessionStorage.getItem("userID"));
     this.shared.currentMessage.subscribe(message => {
@@ -245,7 +253,7 @@ export class DashboardComponent implements OnInit {
     
     //this.drawChart(); 
   }
-
+  
   /* ngAfterViewInit(){
     console.log("data not loading")
     console.log("sdsd",this.studentMarks);
@@ -267,7 +275,6 @@ export class DashboardComponent implements OnInit {
     this.shared.setLesson(message);
     console.log(message);
   } */
-
   changeMessage(message: any){
     this.shared.changeMessage(message);
     console.log(message);
@@ -275,5 +282,19 @@ export class DashboardComponent implements OnInit {
   submitHandler() {
     console.log(this.yearSet);
     this.router.navigateByUrl('/paper');
+  }
+
+  getCount(){
+    this.dataService.getPaperCount().subscribe((data)=>{
+      console.log(data);
+      this.paperCount = data.count;
+    });
+
+    this.dataService.getQuestionCount().subscribe((data)=>{
+      this.questionCount = data.count;
+    });
+
+
+    
   }
 }

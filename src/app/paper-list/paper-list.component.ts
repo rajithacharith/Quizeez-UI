@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { DataserviceService } from "../dataservice.service";
-import { Router } from "@angular/router";
+import { DataserviceService } from '../dataservice.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-paper-list',
@@ -9,17 +9,17 @@ import { Router } from "@angular/router";
 })
 export class PaperListComponent implements OnInit {
 
-  public paperSet :any;
-  constructor(private dataService : DataserviceService,private router : Router) { }
+  public paperSet: any;
+  constructor(private dataService: DataserviceService, private router: Router) { }
 
   ngOnInit() {
 
-    this.dataService.getPapers().subscribe((paper)=>{
+    this.dataService.getPapers().subscribe((paper) => {
       this.paperSet = paper;
     });
   }
 
-  goHome(){
+  goHome() {
     this.router.navigateByUrl('/admin');
   }
 

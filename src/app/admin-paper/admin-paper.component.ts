@@ -192,7 +192,7 @@ export class AdminPaperComponent implements OnInit, ArrangedQuestionsFormat {
 
 
 
-    console.log("clicked");
+    console.log('clicked');
 
     for(let i=0; i<this.questionArray.length; i++){
       this.arrangedQuestion.paperID = this.paperID;

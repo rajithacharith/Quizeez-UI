@@ -24,13 +24,13 @@ export class DashboardComponent implements OnInit {
   selectedLanguage: string ;
   selectedSubject : string ;
   selectedYear : number ;
-  
+
   message:any;
-  
+
 
   LanguageDisabled : boolean = true ;
   subjectDisabled : boolean = true;
-  yearDisabled : boolean = true ; 
+  yearDisabled : boolean = true ;
   searchButtonDisable : boolean = true;
   constructor( private dataService : DataserviceService, private shared: SharedserviceService,private router:Router) {
     console.log(sessionStorage.getItem("userID"));
@@ -61,8 +61,8 @@ export class DashboardComponent implements OnInit {
       this.dataService.filterPaperBySubject(selectedSubject).subscribe((paper)=>{
         this.yearSet= paper;
         this.yearDisabled = false;
-        console.log("year enabled");
-        
+        console.log('year enabled');
+
       });
     }
 
@@ -74,20 +74,22 @@ export class DashboardComponent implements OnInit {
         this.searchButtonDisable=false;
       });
     }
-    
+
 
   ngOnInit() {
+    localStorage.clear();
     console.log(sessionStorage.getItem("userID"));
     this.shared.currentMessage.subscribe(message => {
       this.message = message;
     });
   }
-  
+
   changeMessage(message: any){
     this.shared.changeMessage(message);
     console.log(message);
   }
   submitHandler() {
+    console.log(this.yearSet);
     this.router.navigateByUrl('/paper');
   }
 }

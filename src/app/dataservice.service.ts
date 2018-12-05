@@ -13,59 +13,59 @@ export class DataserviceService {
   }
 
   /*get all the papers that have been uploaded so far */
-  getPapers(){
+  getPapers() {
     return this.http.get(`${this.url}/papers`);
   }
 
   /*get the paper by ID*/
-  getPaperByID(id : number){
+  getPaperByID(id: number) {
     return this.http.get(`${this.url}/papers?filter[where][paperID]=${id}`);
   }
 
 
   /*get paper filtered by the selected 'stream' */
-  filterPaperByStream(stream : string){
+  filterPaperByStream(stream: string) {
     return this.http.get(`${this.url}/papers?filter[where][stream]=${stream}`);
   }
 
   /*get paper filtered by the selected 'language' */
-  filterPaperByLanguage(language : string){
+  filterPaperByLanguage(language: string) {
     return this.http.get(`${this.url}/papers?filter[where][language]=${language}`);
   }
 
   /*get paper filtered by the selected 'year' */
-  filterPaperByYear(year : number){
+  filterPaperByYear(year: number) {
     return this.http.get(`${this.url}/papers?filter[where][year]=${year}`);
   }
 
 
   /*get paper filtered by the selected 'subject' */
-  filterPaperBySubject(subject : string){
+  filterPaperBySubject(subject: string) {
     return this.http.get(`${this.url}/papers?filter[where][subject]=${subject}`);
   }
 
   /*get paper filtered by the selected 'stream,subject and year' */
-  filterPaperByAll(stream : string,subject : string,year : number){
+  filterPaperByAll(stream: string, subject: string, year: number) {
     return this.http.get(`${this.url}/papers?filter[where][stream]=${stream}&filter[where][year]=${year}&filter[where][subject]=${subject}`);
   }
 
   /*get paper filtered by the selected 'stream,subject,year and language' */
-  filterPaperByAllandLanguage(stream : string,subject : string,year : number,language: string){
+  filterPaperByAllandLanguage(stream: string, subject: string, year: number, language: string) {
     return this.http.get(`${this.url}/papers?filter[where][stream]=${stream}&filter[where][year]=${year}&filter[where][subject]=${subject}&filter[where][language]=${language}`);
   }
 
   /*get paper filtered by the selected 'year' */
-  filterPaperByStreamAndLanguage(stream : string, language: string){
+  filterPaperByStreamAndLanguage(stream: string, language: string) {
     return this.http.get(`${this.url}/papers?filter[where][stream]=${stream}&filter[where][language]=${language}`);
   }
 
   /*get all the questions in all papers*/
-  getQuestions(){
+  getQuestions() {
     return this.http.get(`${this.url}/questions`);
   }
 
   /*add a question to the paper */
-  addQuestion(paperID : number,questionID: number,question :string,answers : string [],correctAnswer : number){
+  addQuestion(paperID: number, questionID: number, question: string, answers: string [], correctAnswer: number) {
 
     const ques = {
       paperID : paperID,
@@ -75,7 +75,7 @@ export class DataserviceService {
       correctAnswer : correctAnswer
     };
 
-    return this.http.post(`${this.url}/questions`,ques);
+    return this.http.post(`${this.url}/questions`, ques);
 
   }
   /*add a question object to the paper */
@@ -86,7 +86,7 @@ export class DataserviceService {
 
 
   /*get the questions in a given paper */
-  getQuestionFilterByPaperID(paperID : number){
+  getQuestionFilterByPaperID(paperID: number) {
     return this.http.get(`${this.url}/questions?filter[where][paperID]=${paperID}`);
   }
   /**get the questions in a given paper filtered by questionID*/
@@ -94,43 +94,43 @@ export class DataserviceService {
     return this.http.get(`${this.url}/questions?filter[where][questionID]=${questionID}`);
   }  */
   /*get all answers given by all students */
-  getAnswers(){
+  getAnswers() {
     return this.http.get(`${this.url}/answers`);
   }
 
   /* submit answers for a given paper */
   /* Call the function with studentID,paperID and answers for questions as an Object to submit the answer */
 
-  storeMarkedAnswers(studentID : number,paperID : number,markedAnswers : boolean[]){
+  storeMarkedAnswers(studentID: number, paperID: number, markedAnswers: boolean[]) {
     const ans = {
       studentID : studentID,
       paperID : paperID,
       markedAnswers : markedAnswers
-    }
-    return this.http.post(`${this.url}/studentAnswers`,ans);
+    };
+    return this.http.post(`${this.url}/studentAnswers`, ans);
   }
-  storeMarks(studentID : number, paperID : number, mark : number, year : number, subject : string){
-    let arrAns = {
+  storeMarks(studentID: number, paperID: number, mark: number, year: number, subject: string) {
+    const arrAns = {
       studentID : studentID,
       paperID : paperID,
       marks : mark,
       year : year,
       subject : subject
-    }
+    };
     console.log(arrAns);
-    return this.http.post(`${this.url}/marks`,arrAns);
+    return this.http.post(`${this.url}/marks`, arrAns);
   }
-  userLogin(email : string , password : string){
+  userLogin(email: string , password: string) {
     const access = {
       email: email,
       password : password
-    }
-    return this.http.post(`${this.url}/Users/login`,access);
+    };
+    return this.http.post(`${this.url}/Users/login`, access);
   }
 
 
-  userLogout(accessToken : string){
-    return this.http.post(`${this.url}/Users/logout`,accessToken);
+  userLogout(accessToken: string) {
+    return this.http.post(`${this.url}/Users/logout`, accessToken);
   }
   /* Add paper as a object */
   addPaper(paper: any) {
@@ -138,19 +138,19 @@ export class DataserviceService {
   }
 
   /* Add subject */
-  addSubject(subjectName : string,subjectStream : string){
+  addSubject(subjectName: string, subjectStream: string) {
     const newSubject = {
       subjectName : subjectName,
       stream : subjectStream
-    }
+    };
     return this.http.post(`${this.url}/subjects`, newSubject);
   }
 
-  getSubjectsByStream(stream : string){
+  getSubjectsByStream(stream: string) {
     return this.http.get(`${this.url}/subjects?filter[where][stream]=${stream}`);
   }
 
-  getAllSubjects(){
+  getAllSubjects() {
     return this.http.get(`${this.url}/subjects`);
   }
 
@@ -163,28 +163,28 @@ export class DataserviceService {
     return this.http.post(`${this.url}/Users`, User);
   }
 
-  getChartData(studentID : number){
+  getChartData(studentID: number) {
     return this.http.get(`${this.url}/marks?filter[where][studentID]=${studentID}`);
   }
-  getSubjects(){
+  getSubjects() {
     return this.http.get(`${this.url}/subjects`);
   }
-  getMarksFilterBySubjectAndStudent(subject : string, studentID : number){
-    return this.http.get(`${this.url}/marks?filter[where][subject]=${subject}&filter[where][studentID]=${studentID}`)
+  getMarksFilterBySubjectAndStudent(subject: string, studentID: number) {
+    return this.http.get(`${this.url}/marks?filter[where][subject]=${subject}&filter[where][studentID]=${studentID}`);
   }
 
 
 
   // get paper count
 
-  getPaperCount(){
+  getPaperCount() {
     console.log(this.url + '/papers/count');
-    return this.http.get(this.url +'/papers/count');
+    return this.http.get(this.url + '/papers/count');
   }
 
-  getQuestionCount(){
+  getQuestionCount() {
     console.log(this.url + '/questions/count');
-    return this.http.get(this.url +'/questions/count');
+    return this.http.get(this.url + '/questions/count');
   }
 
 

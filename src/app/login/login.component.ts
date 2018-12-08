@@ -22,6 +22,9 @@ export class LoginComponent implements OnInit {
 
 
   submit() {
+    if (this.email === '' || this.email === null || this.password === '' || this.password == null) {
+      alert('please enter login credentials');
+    }
     if (this.email === 'admin' && this.password === 'quizeez1234') {
       localStorage.setItem('admin', this.email);
       sessionStorage.setItem('admin', this.email);
@@ -32,13 +35,19 @@ export class LoginComponent implements OnInit {
     sessionStorage.setItem('email', this.email);
 
     this.dataService.userLogin(this.email, this.password).subscribe((data: any) => {
-      this.accessToken = data.id;
-      this.userID = data.userId;
+      if (data) {
+        this.accessToken = data.id;
+        this.userID = data.userId;
 
-      sessionStorage.setItem('accessToken', this.accessToken);
-      sessionStorage.setItem('userID', this.userID);
-      console.log(sessionStorage.getItem('userID'));
-      this.router.navigateByUrl('/');
+        sessionStorage.setItem('accessToken', this.accessToken);
+        sessionStorage.setItem('userID', this.userID);
+        console.log(sessionStorage.getItem('userID'));
+        this.router.navigateByUrl('/');
+      } else {
+        alert('wrong login credentials!');
+      }
+    }, (error: any) => {
+        alert('Wrong login credentials!');
     });
 
   }
